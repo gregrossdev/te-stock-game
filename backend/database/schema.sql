@@ -30,10 +30,10 @@ CREATE TABLE games (
                          end_datetime timestamp NOT NULL,
                          game_status varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (game_status IN ('ACTIVE', 'ARCHIVED')),
                          PRIMARY KEY (game_id),
-                         CONSTRAINT "FK_games.game_organizer"
+                         CONSTRAINT "FK_games.game_organizer"       -- Unsure if game_organizer should reference users.user_id or portfolios.portfolio_id
                              FOREIGN KEY (game_organizer)
                                  REFERENCES users(user_id),
-                         CONSTRAINT "FK_games.game_winner"
+                         CONSTRAINT "FK_games.game_winner"          -- Unsure if game_winner should reference users.user_id or portfolios.portfolio_id
                              FOREIGN KEY (game_winner)
                                  REFERENCES users(user_id)
 );
