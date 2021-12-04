@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*
+=============== 
+Variables
+===============
+*/
+:root {
+
+  --clr-white: #F1EFEF;
+  --clr-black: #181616;
+
+  --pri: 209; 
+  /* primary color */
+  --clr-pri: hsl(var(--pri), 78%, 60%);
+
+  /* primary dark shades */
+  --clr-pri-10: hsl(var(--pri), 4%, 87%);
+  --clr-pri-20: hsl(var(--pri), 77%, 27%);
+  --clr-pri-30: hsl(var(--pri), 72%, 37%);
+  --clr-pri-40: hsl(var(--pri), 63%, 48%);
+  --clr-pri-50: hsl(var(--pri), 63%, 54%);
+
+  /* primary light shades */
+  --clr-pri-60: hsl(var(--pri), 89%, 70%);
+  --clr-pri-70: hsl(var(--pri), 90%, 76%);
+  --clr-pri-80: hsl(var(--pri), 86%, 81%);
+  --clr-pri-90: hsl(var(--pri), 90%, 88%);
+  --clr-pri-100: hsl(var(--pri), 100%, 96%);
+
+
+  --bl: 0;  
+  /* greys */
+  --clr-grey-10: hsl(var(--bl), 4%, 12%);
+  --clr-grey-20: hsl(var(--bl), 4%, 24%);
+  --clr-grey-30: hsl(var(--bl), 4%, 33%);
+  --clr-grey-40: hsl(var(--bl), 4%, 39%);
+  --clr-grey-50: hsl(var(--bl), 4%, 47%);
+  --clr-grey-60: hsl(var(--bl), 4%, 57%);
+  --clr-grey-70: hsl(var(--bl), 4%, 68%);
+  --clr-grey-80: hsl(var(--bl), 4%, 76%);
+  --clr-grey-90: hsl(var(--bl), 4%, 87%);
+  --clr-grey-100: hsl(var(--bl), 4%, 95%);
+
+  --transition: all 0.3s linear;
+
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 87.5%;
+}
+
+@media only screen and (min-width: 576px) {
+  html {
+    font-size: 100%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 112.5%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  html {
+    font-size: 125%;
+  }
+}
+
+
+body {
+  font-family: 'Rubik',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--clr-white);
+  color: var(--clr-black);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+} 
+
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+  color: var(--clr-grey-50);
+}
+
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+#nav {
+  text-align: center;
+}
+
+#login, #register {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: auto;
+  margin-bottom: auto;  
+}
+
+form {
+  display: flex; 
+  flex-direction: column;
+  margin-bottom: 8rem;
+  border: solid 1px var(--clr-grey-30);
+  border-radius: 1em; 
+  padding: 3rem;   
+}
+
+form h2 {
+  font-size: 1.75rem; 
+}
+
+form label {
+  font-size: 1.25rem;
+  margin-bottom: 0.25em;
+}
+
+form input {
+  font-size: 1rem;
+  border-radius: 4px;
+  box-shadow: var(--light-shadow);
+  margin-bottom: 0.75em;
+  padding: 0.5em 8px;
+}
+
+form button {
+  font-size: 1rem;
+  font-weight: 700; 
+  margin-top: 0.5em;
+  margin-bottom: 0.75em;
+  padding: 0.5em 0; 
+}
