@@ -1,5 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/*
+=============== 
+Variables
+===============
+*/
+:root {
+
+  --clr-white: #F1EFEF;
+  --clr-black: #181616;
+
+  --pri: 205; 
+  /* primary color */
+  --clr-pri: hsl(var(--pri), 78%, 60%);
+
+  /* primary dark shades */
+  --clr-pri-10: hsl(var(--pri), 4%, 87%);
+  --clr-pri-20: hsl(var(--pri), 77%, 27%);
+  --clr-pri-30: hsl(var(--pri), 72%, 37%);
+  --clr-pri-40: hsl(var(--pri), 63%, 48%);
+  --clr-pri-50: hsl(var(--pri), 63%, 54%);
+
+  /* primary light shades */
+  --clr-pri-60: hsl(var(--pri), 89%, 70%);
+  --clr-pri-70: hsl(var(--pri), 90%, 76%);
+  --clr-pri-80: hsl(var(--pri), 86%, 81%);
+  --clr-pri-90: hsl(var(--pri), 90%, 88%);
+  --clr-pri-100: hsl(var(--pri), 100%, 96%);
+
+
+  --bl: 0;  
+  /* greys */
+  --clr-grey-10: hsl(var(--bl), 4%, 12%);
+  --clr-grey-20: hsl(var(--bl), 4%, 24%);
+  --clr-grey-30: hsl(var(--bl), 4%, 33%);
+  --clr-grey-40: hsl(var(--bl), 4%, 39%);
+  --clr-grey-50: hsl(var(--bl), 4%, 47%);
+  --clr-grey-60: hsl(var(--bl), 4%, 57%);
+  --clr-grey-70: hsl(var(--bl), 4%, 68%);
+  --clr-grey-80: hsl(var(--bl), 4%, 76%);
+  --clr-grey-90: hsl(var(--bl), 4%, 87%);
+  --clr-grey-100: hsl(var(--bl), 4%, 95%);
+
+  --transition: all 0.3s linear;
+
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+
 
 
 
