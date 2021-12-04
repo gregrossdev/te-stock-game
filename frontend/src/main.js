@@ -6,6 +6,9 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
+// Importing the global css file
+import "@/assets/global.css"
+
 axios.defaults.baseURL = process.env.VUE_APP_REMOTE_API;
 
 new Vue({
