@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.game.Game;
+import com.techelevator.model.game.GameNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class JdbcGameDao implements GameDao {
     public JdbcGameDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    
+
     @Override
     public List<Game> getGames() {
         List<Game> games = new ArrayList<Game>();
@@ -33,21 +34,30 @@ public class JdbcGameDao implements GameDao {
     public Game getGameByGameId(Long gameId) {
         String sql = "SELECT * FROM games WHERE game_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
-        return mapRowToGame(results);
+        if (results.next()) {
+            return mapRowToGame(results);
+        }
+        throw new GameNotFoundException();
     }
 
     @Override
     public Game getGameByGameOrganizer(Long gameOrganizer) {
         String sql = "SELECT * from games WHERE game_organizer = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameOrganizer);
-        return mapRowToGame(results);
+        if (results.next()) {
+            return mapRowToGame(results);
+        }
+        throw new GameNotFoundException();
     }
 
     @Override
     public Game getGameByGameWinner(Long gameWinner) {
         String sql = "SELECT * from games WHERE game_winner = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameWinner);
-        return mapRowToGame(results);
+        if (results.next()) {
+            return mapRowToGame(results);
+        }
+        throw new GameNotFoundException();
     }
 
     @Override
