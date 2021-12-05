@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
-@RequestMapping("/api/portfolios/")
+@RequestMapping("/api/portfolios/") // TODO double-check that this is the URL structure we want.
 public class PortfolioController {
+
+    // TODO fill in, starting with basic CRUD methods.
+
 }
