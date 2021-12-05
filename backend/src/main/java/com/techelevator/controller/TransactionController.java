@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
-@RequestMapping("/api/transactions/")
+@RequestMapping("/api/transactions/") // TODO double-check that this is the URL structure we want.
 public class TransactionController {
+
+    // TODO fill in, starting with basic CRUD methods.
+
 }

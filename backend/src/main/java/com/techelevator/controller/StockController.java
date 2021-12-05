@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @PreAuthorize("isAuthenticated()")
-@RequestMapping("/api/stocks/")
+@RequestMapping("/api/stocks/") // TODO double-check that this is the URL structure we want.
 public class StockController {
+
+    // TODO fill in, starting with basic CRUD methods.
+
 }
