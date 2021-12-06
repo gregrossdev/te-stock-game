@@ -1,10 +1,13 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.stock.Stock;
+import com.techelevator.model.stock.StockNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -16,34 +19,52 @@ public class JdbcStockDao implements StockDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // TODO Fill in all methods below.
-
     @Override
     public List<Stock> getStocks() {
-        return null;
+        List<Stock> stocks = new ArrayList<>();
+        String sql = "SELECT * FROM stocks;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            stocks.add(mapRowToStock(results));
+        }
+        return stocks;
     }
 
     @Override
     public Stock getStockByStockSymbol(String stockSymbol) {
-        return null;
+        String sql = "SELECT * FROM stocks WHERE stock_symbol = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stockSymbol);
+        if (results.next()) {
+            return mapRowToStock(results);
+        }
+        throw new StockNotFoundException();
     }
 
     @Override
     public boolean create(Stock stockToCreate) {
-        return false;
+        String sql = "INSERT INTO stocks (stock_symbol, share_price, quote_datetime) VALUES (?, ?, ?);";
+        return jdbcTemplate.update(sql, stockToCreate.getStockSymbol(), stockToCreate.getSharePrice(),
+                stockToCreate.getQuoteDatetime()) == 1;
     }
 
     @Override
     public boolean update(Stock stockToUpdate) {
-        return false;
+        String sql = "UPDATE stocks SET share_price = ?, quote_datetime = ? WHERE stock_symbol = ?;";
+        return jdbcTemplate.update(sql, stockToUpdate.getSharePrice(), stockToUpdate.getQuoteDatetime(),
+                stockToUpdate.getStockSymbol()) == 1;
     }
 
     @Override
     public boolean delete(String stockSymbolToDelete) {
-        return false;
+        String sql = "DELETE FROM stocks WHERE stock_symbol = ?;";
+        return jdbcTemplate.update(sql, stockSymbolToDelete) == 1;
     }
 
     private Stock mapRowToStock(SqlRowSet results) {
-        return null;
+        Stock stock = new Stock();
+        stock.setStockSymbol(results.getString("stock_symbol"));
+        stock.setSharePrice(results.getBigDecimal("share_price"));
+        stock.setQuoteDatetime(results.getObject("quote_datetime", LocalDateTime.class));
+        return stock;
     }
 }
