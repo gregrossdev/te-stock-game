@@ -21,11 +21,11 @@ public class StockController {
         this.stockDao = stockDao;
     }
 
-    // TODO fill in, starting with basic CRUD methods.
     @RequestMapping(path="", method = RequestMethod.GET)
     public List<Stock> getStocks() {
         return stockDao.getStocks();
     }
+
     @RequestMapping(path="{stockSymbol}", method = RequestMethod.GET)
     public Stock getStockByStockSymbol(@PathVariable String stockSymbol) {
         return stockDao.getStockByStockSymbol(stockSymbol);
