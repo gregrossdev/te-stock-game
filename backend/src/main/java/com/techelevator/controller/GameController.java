@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@PreAuthorize("isAuthenticated()")
+@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api/games/") // TODO double-check that this is the URL structure we want.
 public class GameController {
     private final GameDao gameDao;
@@ -44,6 +44,7 @@ public class GameController {
         return gameDao.create(gameToCreate);
     }
 
+    // TODO Check that this is correct, using the gameId as a path variable even when it's not used in the method.
     @RequestMapping(path="{gameId}", method = RequestMethod.PUT)
     public boolean update(@RequestBody Game gameToUpdate) {
         return gameDao.update(gameToUpdate);
