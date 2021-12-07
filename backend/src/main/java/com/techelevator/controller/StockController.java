@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.List;
+
+@CrossOrigin
 @RestController
-@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api/stocks/") // TODO double-check that this is the URL structure we want.
 public class StockController {
     private final StockDao stockDao;

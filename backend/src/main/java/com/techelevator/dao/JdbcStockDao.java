@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.User;
 import com.techelevator.model.stock.Stock;
 import com.techelevator.model.stock.StockNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,6 +30,7 @@ public class JdbcStockDao implements StockDao {
         }
         return stocks;
     }
+
 
     @Override
     public Stock getStockByStockSymbol(String stockSymbol) {

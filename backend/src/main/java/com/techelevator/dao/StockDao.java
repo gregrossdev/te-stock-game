@@ -15,4 +15,5 @@ public interface StockDao {
     boolean update(Stock stockToUpdate);
 
     boolean delete(String stockSymbolToDelete);
+
 }
