@@ -1,10 +1,12 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.User;
 import com.techelevator.model.stock.Stock;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,8 +22,18 @@ public class JdbcStockDao implements StockDao {
 
     @Override
     public List<Stock> getStocks() {
-        return null;
+        List<Stock> stocks = new ArrayList<>();
+        String sql = "select stock_symbol, share_price from stocks;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while(results.next()) {
+            Stock stock = mapRowToStock(results);
+            stocks.add(stock);
+        }
+
+        return stocks;
     }
+
 
     @Override
     public Stock getStockByStockSymbol(String stockSymbol) {
@@ -44,6 +56,9 @@ public class JdbcStockDao implements StockDao {
     }
 
     private Stock mapRowToStock(SqlRowSet results) {
-        return null;
+        Stock stock = new Stock();
+        stock.setStockSymbol(results.getString("stock_symbol"));
+        stock.setSharePrice(results.getBigDecimal("share_price"));
+        return stock;
     }
 }
