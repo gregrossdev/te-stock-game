@@ -1,5 +1,6 @@
 <template>
   <div id="login">
+    <h1>Welcome to the Virtual Stock Market Game</h1>
     <form class="form-signin" @submit.prevent="login">
       <h2>Sign In</h2>
       <div
@@ -31,7 +32,7 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      <router-link :to="{ name: 'register' }" tag="button">Need an account? Sign up here!</router-link>
       <button type="submit">Sign in</button>
     </form>
   </div>

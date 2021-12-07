@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <h1>Virtual Stock Market Game</h1>
+    <p>Welcome to the Virtual Stock Market Game!</p>
   </div>
 </template>
 
