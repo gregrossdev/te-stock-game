@@ -17,7 +17,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     public JdbcPortfolioDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    
+
     @Override
     public List<Portfolio> getPortfolios() {
         List<Portfolio> portfolios = new ArrayList<>();
