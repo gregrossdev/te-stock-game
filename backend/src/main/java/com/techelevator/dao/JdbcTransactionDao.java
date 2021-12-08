@@ -105,7 +105,7 @@ public class JdbcTransactionDao implements TransactionDao {
         transaction.setTransactionAmount(results.getBigDecimal("transaction_amount"));
         transaction.setTransactionShares(results.getBigDecimal("transaction_shares"));
         transaction.setSharePrice(results.getBigDecimal("share_price"));
-        transaction.setTransactionDatetime(results.getObject("transaction_datetime", LocalDateTime.class));
+//        transaction.setTransactionDatetime(results.getObject("transaction_datetime", LocalDateTime.class));
         transaction.setTransactionStatus(results.getString("transaction_status"));
         transaction.setPortfolioBalance(results.getBigDecimal("portfolio_balance"));
         transaction.setPortfolioValue(results.getBigDecimal("portfolio_value"));
