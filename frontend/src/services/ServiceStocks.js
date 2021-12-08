@@ -8,6 +8,10 @@ export default {
 
 	list() {
 		return http.get(`/api/stocks/`);
+	},
+
+	test(){
+		return http.get('http://localhost:8080/api/stocks/test/endpoint');
 	}
 
 }

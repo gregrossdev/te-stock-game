@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,11 @@ public class JdbcStockDao implements StockDao {
     public boolean delete(String stockSymbolToDelete) {
         String sql = "DELETE FROM stocks WHERE stock_symbol = ?;";
         return jdbcTemplate.update(sql, stockSymbolToDelete) == 1;
+    }
+
+    public boolean testMethodUpdatePrice(BigDecimal priceChange){
+        String sql = "UPDATE stocks SET share_price = ? WHERE stock_symbol = 'SPCE';";
+        return jdbcTemplate.update(sql, priceChange) == 1; //return true if works?
     }
 
     private Stock mapRowToStock(SqlRowSet results) {

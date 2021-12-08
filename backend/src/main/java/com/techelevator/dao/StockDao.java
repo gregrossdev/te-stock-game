@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.stock.Stock;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface StockDao {
@@ -15,5 +16,7 @@ public interface StockDao {
     boolean update(Stock stockToUpdate);
 
     boolean delete(String stockSymbolToDelete);
+
+    boolean testMethodUpdatePrice(BigDecimal price);
 
 }
