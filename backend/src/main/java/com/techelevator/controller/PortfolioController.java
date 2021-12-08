@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api/portfolios/") // TODO double-check that this is the URL structure we want.
 public class PortfolioController {
     private final PortfolioDao portfolioDao;
