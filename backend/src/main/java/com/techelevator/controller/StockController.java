@@ -39,7 +39,7 @@ public class StockController {
         return stockDao.create(stockToCreate);
     }
 
-    @RequestMapping(path="{stockSymbolToUpdate}", method = RequestMethod.PUT)
+    @RequestMapping(path="{stockSymbol}", method = RequestMethod.PUT)
     public boolean update(@RequestBody Stock stockToUpdate) {
         return stockDao.update(stockToUpdate);
     }
