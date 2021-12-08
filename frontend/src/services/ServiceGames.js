@@ -1,19 +1,22 @@
-import axios from 'axios';
+import axios from "axios";
 
 const http = axios.create({
-    baseURL: "http://localhost:8080/api/games/"
+  baseURL: "http://localhost:8080",
 });
 
 export default {
-    list() {
-        return http.get('');
-    },
 
-    getGameByGameId(gameId) {
-        return http.get(`${gameId}`);
-    },
-    
-}
+	
+  list() {
+    return http.get(`/api/games/`);
+  },
+
+  getGameByGameId(gameId) {
+    return http.get(`${gameId}`);
+  },
+
+
+};
 
 //
 // @RequestMapping(path = "organizer/{gameOrganizer}", method = RequestMethod.GET)

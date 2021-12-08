@@ -1,5 +1,7 @@
 <template>
-  <div id="register" class="text-center">
+  <main>
+    <h2>Please register to start playing!!!</h2> 
+    <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h2>Register Account</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
@@ -38,6 +40,8 @@
       </button>
     </form>
   </div>
+
+  </main>
 </template>
 
 <script>
