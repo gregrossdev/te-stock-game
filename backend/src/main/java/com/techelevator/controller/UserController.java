@@ -23,13 +23,13 @@ public class UserController {
         return userDao.findAll();
     }
 
-    @RequestMapping(path="{userId}", method = RequestMethod.GET)
+    @RequestMapping(path="userid/{userId}", method = RequestMethod.GET)
     public User getUserByUserId(@PathVariable Long userId) {
         return userDao.getUserById(userId);
     }
 
-    @RequestMapping(path="", method = RequestMethod.GET)
-    public User getUserByUsername(@RequestParam String username) {
+    @RequestMapping(path="username/{username}", method = RequestMethod.GET)
+    public User getUserByUsername(@PathVariable String username) {
         return userDao.findByUsername(username);
     }
 }
