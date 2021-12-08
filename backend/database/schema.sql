@@ -77,14 +77,14 @@ CREATE TABLE transactions
 ALTER TABLE games
     ADD CONSTRAINT "FK_games.game_organizer" -- Unsure if game_organizer should reference users.user_id or portfolios.portfolio_id
         FOREIGN KEY (game_organizer)
-            REFERENCES portfolios (portfolio_id);
---             REFERENCES users (user_id);
+--             REFERENCES portfolios (portfolio_id);
+            REFERENCES users (user_id);
 
 ALTER TABLE games
     ADD CONSTRAINT "FK_games.game_winner"    -- Unsure if game_winner should reference users.user_id or portfolios.portfolio_id
         FOREIGN KEY (game_winner)
-            REFERENCES portfolios (portfolio_id);
---             REFERENCES users (user_id);
+--             REFERENCES portfolios (portfolio_id);
+            REFERENCES users (user_id);
 
 ALTER TABLE portfolios
     ADD CONSTRAINT "FK_portfolios.user_id"
