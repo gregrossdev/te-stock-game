@@ -28,7 +28,7 @@
     <section class="games"> 
       <article
         v-for="data in dataGames"
-        v-bind:key="data"
+        v-bind:key="data.gameId"
         class="game"
       >
         <h4>{{ data }}</h4>
@@ -144,9 +144,21 @@ section {
   border: 3px solid var(--clr-pri-30);;
 }
 
+.games {
+  border: 3px solid var(--clr-pri-40);;
+}
+
+.portfolios {
+  border: 3px solid var(--clr-pri-50);;
+}
+
+.transactions {
+  border: 3px solid var(--clr-pri-60);;
+}
+
 
 .stock {
-  border: 1px solid var(--clr-grey-90);
+  border: 1px solid var(--clr-grey-70);
   margin-bottom: 1em;
   border-radius: 0.25rem;
   padding: 0.5em;
