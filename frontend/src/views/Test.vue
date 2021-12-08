@@ -58,6 +58,8 @@
       </article>
     </section>
 
+    <button v-on:click="updateSpce()">UPDATE SPCE</button>
+
 
 
   </main>
@@ -72,6 +74,11 @@ import requestTransactions from "@/services/ServiceTransactions";
 
 export default {
   name: "test-data",
+  methods: {
+      updateSpce() {
+        requestStocks.test();
+      }
+  },
   data() {
     return {
       dataStocks: [],
