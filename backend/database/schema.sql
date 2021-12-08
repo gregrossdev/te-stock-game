@@ -24,7 +24,13 @@ CREATE TABLE users
 );
 
 INSERT INTO users (username, password_hash, role)
-VALUES ('user', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER');
+-- ALL PRE-BUILT PASSWORDS ARE 'password'
+VALUES ('user', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
+       ('alex', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
+       ('aubrey', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
+       ('denny', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
+       ('greg', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
+       ('josh', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER');
 INSERT INTO users (username, password_hash, role)
 VALUES ('admin', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_ADMIN');
 
@@ -32,7 +38,7 @@ CREATE TABLE games
 (
     game_id        SERIAL,
     game_organizer int         NOT NULL,
-    game_winner    int,
+    game_winner    int         NULL,
     start_datetime timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     end_datetime   timestamp   NOT NULL CHECK (start_datetime < end_datetime),
     game_status    varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (game_status IN ('ACTIVE', 'ARCHIVED')),
@@ -52,10 +58,18 @@ CREATE TABLE portfolios
 
 CREATE TABLE stocks
 (
-    stock_symbol   varchar(10),
-    share_price    decimal,
-    quote_datetime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    stock_symbol   varchar(10)      NOT NULL,
+    share_price    decimal          NOT NULL,
+    quote_datetime timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (stock_symbol)
+);
+
+CREATE TABLE portfolios_stocks
+(
+    portfolio_id    SERIAL,
+    stock_symbol    varchar(10),
+    total_shares    int,
+    PRIMARY KEY (portfolio_id, stock_symbol)
 );
 
 CREATE TABLE transactions
@@ -75,15 +89,13 @@ CREATE TABLE transactions
 );
 
 ALTER TABLE games
-    ADD CONSTRAINT "FK_games.game_organizer" -- Unsure if game_organizer should reference users.user_id or portfolios.portfolio_id
+    ADD CONSTRAINT "FK_games.game_organizer"
         FOREIGN KEY (game_organizer)
---             REFERENCES portfolios (portfolio_id);
             REFERENCES users (user_id);
 
 ALTER TABLE games
-    ADD CONSTRAINT "FK_games.game_winner"    -- Unsure if game_winner should reference users.user_id or portfolios.portfolio_id
+    ADD CONSTRAINT "FK_games.game_winner"
         FOREIGN KEY (game_winner)
---             REFERENCES portfolios (portfolio_id);
             REFERENCES users (user_id);
 
 ALTER TABLE portfolios
@@ -103,5 +115,76 @@ ALTER TABLE transactions
     ADD CONSTRAINT "FK_transactions.portfolio_id"
         FOREIGN KEY (portfolio_id)
             REFERENCES portfolios (portfolio_id);
+
+ALTER TABLE portfolios_stocks
+    ADD CONSTRAINT "FK_portfolios_stocks.portfolio_id"
+        FOREIGN KEY (portfolio_id)
+            REFERENCES portfolios (portfolio_id);
+ALTER TABLE portfolios_stocks
+    ADD CONSTRAINT "FK_portfolios_stocks.stock_symbol"
+        FOREIGN KEY (stock_symbol)
+            REFERENCES stocks (stock_symbol);
+
+INSERT INTO games (game_id, game_organizer, start_datetime, end_datetime, game_status)
+VALUES (1, 2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
+       (2, 3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
+       (3, 4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
+       (4, 5, '2021-12-01 12:00:00', '2021-12-14 12:00:00', 'ACTIVE'),
+       (5, 6, '2021-12-01 12:00:00', '2021-12-15 12:00:00', 'ACTIVE');
+
+INSERT INTO portfolios (portfolio_id, user_id, game_id, portfolio_status)
+VALUES (1, 2, 1, 'ACTIVE'),
+       (2, 3, 1, 'ACTIVE'),
+       (3, 4, 1, 'ACTIVE'),
+       (4, 5, 1, 'ACTIVE'),
+       (5, 6, 1, 'ACTIVE'),
+       (6, 2, 2, 'ACTIVE'),
+       (7, 3, 2, 'ACTIVE'),
+       (8, 4, 2, 'ACTIVE'),
+       (9, 5, 2, 'ACTIVE'),
+       (10, 6, 2, 'ACTIVE'),
+       (11, 2, 3, 'ACTIVE'),
+       (12, 3, 3, 'ACTIVE'),
+       (13, 4, 3, 'ACTIVE'),
+       (14, 5, 3, 'ACTIVE'),
+       (15, 6, 3, 'ACTIVE'),
+       (16, 5, 4, 'ACTIVE'),
+       (17, 6, 5, 'ACTIVE'),
+       (18, 2, 4, 'PENDING'),
+       (19, 3, 4, 'PENDING'),
+       (20, 4, 4, 'PENDING'),
+       (21, 6, 4, 'PENDING'),
+       (22, 2, 5, 'PENDING'),
+       (23, 3, 5, 'PENDING'),
+       (24, 4, 5, 'PENDING'),
+       (25, 5, 5, 'PENDING');
+
+INSERT INTO stocks (stock_symbol, share_price)
+VALUES  ('SPCE','12.70'),
+        ('AMD','15.50'),
+        ('MP','45.00'),
+        ('MSFT','333.71'),
+        ('IRM','25.70'),
+        ('LCID','65.20'),
+        ('CGC','10.77'),
+        ('AMZN','1005.20'),
+        ('ICLN','43.50'),
+        ('AAPL','99.00'),
+        ('TEST', '100.00');
+
+INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount,
+                          transaction_shares, share_price, transaction_datetime, transaction_status, portfolio_balance, portfolio_value)
+VALUES (1, 'TEST', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000, 100000),
+       (2, 'TEST', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000, 100000),
+       (3, 'TEST', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000, 100000),
+       (4, 'TEST', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000, 100000),
+       (5, 'TEST', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000, 100000);
+
+INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares)
+VALUES (1, 'TEST', 10),
+       (2, 'TEST', 20),
+       (3, 'TEST', 30),
+       (4, 'TEST', 40),
+       (5, 'TEST', 50);
 
 COMMIT TRANSACTION;

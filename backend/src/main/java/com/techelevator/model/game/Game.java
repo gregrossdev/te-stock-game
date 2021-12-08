@@ -1,21 +1,22 @@
 package com.techelevator.model.game;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+// import java.time.LocalDateTime;
 
 public class Game {
 
     private Long gameId;
     private Long gameOrganizer;
     private Long gameWinner;
-    private LocalDateTime startDatetime;
-    private LocalDateTime endDatetime;
+    private Timestamp startDatetime;
+    private Timestamp endDatetime;
     private String gameStatus;
 
     public Game() {
 
     }
 
-    public Game(Long gameId, Long gameOrganizer, Long gameWinner, LocalDateTime startDatetime, LocalDateTime endDatetime, String gameStatus) {
+    public Game(Long gameId, Long gameOrganizer, Long gameWinner, Timestamp startDatetime, Timestamp endDatetime, String gameStatus) {
         this.gameId = gameId;
         this.gameOrganizer = gameOrganizer;
         this.gameWinner = gameWinner;
@@ -48,19 +49,19 @@ public class Game {
         this.gameWinner = gameWinner;
     }
 
-    public LocalDateTime getStartDatetime() {
+    public Timestamp getStartDatetime() {
         return startDatetime;
     }
 
-    public void setStartDatetime(LocalDateTime startDatetime) {
+    public void setStartDatetime(Timestamp startDatetime) {
         this.startDatetime = startDatetime;
     }
 
-    public LocalDateTime getEndDatetime() {
+    public Timestamp getEndDatetime() {
         return endDatetime;
     }
 
-    public void setEndDatetime(LocalDateTime endDatetime) {
+    public void setEndDatetime(Timestamp endDatetime) {
         this.endDatetime = endDatetime;
     }
 
