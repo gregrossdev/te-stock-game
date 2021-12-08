@@ -187,4 +187,10 @@ VALUES (1, 'TEST', 10),
        (4, 'TEST', 40),
        (5, 'TEST', 50);
 
+UPDATE portfolios SET portfolio_balance = portfolio_balance - 1000 WHERE portfolio_id = 1;
+UPDATE portfolios SET portfolio_balance = portfolio_balance - 2000 WHERE portfolio_id = 2;
+UPDATE portfolios SET portfolio_balance = portfolio_balance - 3000 WHERE portfolio_id = 3;
+UPDATE portfolios SET portfolio_balance = portfolio_balance - 4000 WHERE portfolio_id = 4;
+UPDATE portfolios SET portfolio_balance = portfolio_balance - 5000 WHERE portfolio_id = 5;
+
 COMMIT TRANSACTION;
