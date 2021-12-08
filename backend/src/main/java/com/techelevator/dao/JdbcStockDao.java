@@ -66,7 +66,7 @@ public class JdbcStockDao implements StockDao {
         Stock stock = new Stock();
         stock.setStockSymbol(results.getString("stock_symbol"));
         stock.setSharePrice(results.getBigDecimal("share_price"));
-        stock.setQuoteDatetime(results.getObject("quote_datetime", LocalDateTime.class));
+//        stock.setQuoteDatetime(results.getObject("quote_datetime", LocalDateTime.class));
         return stock;
     }
 }
