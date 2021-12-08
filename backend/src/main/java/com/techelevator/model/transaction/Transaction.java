@@ -1,6 +1,7 @@
 package com.techelevator.model.transaction;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Transaction {
@@ -12,7 +13,7 @@ public class Transaction {
     private BigDecimal transactionAmount;
     private BigDecimal transactionShares;
     private BigDecimal sharePrice;
-    private LocalDateTime transactionDatetime;
+    private Timestamp transactionDatetime;
     private String transactionStatus;
     private BigDecimal portfolioBalance;
     private BigDecimal portfolioValue;
@@ -21,7 +22,10 @@ public class Transaction {
 
     }
 
-    public Transaction(Long transactionId, Long portfolioId, String stockSymbol, String transactionType, BigDecimal transactionAmount, BigDecimal transactionShares, BigDecimal sharePrice, LocalDateTime transactionDatetime, String transactionStatus, BigDecimal portfolioBalance, BigDecimal portfolioValue) {
+    public Transaction(Long transactionId, Long portfolioId, String stockSymbol, String transactionType,
+                       BigDecimal transactionAmount, BigDecimal transactionShares, BigDecimal sharePrice,
+                       Timestamp transactionDatetime, String transactionStatus, BigDecimal portfolioBalance,
+                       BigDecimal portfolioValue) {
         this.transactionId = transactionId;
         this.portfolioId = portfolioId;
         this.stockSymbol = stockSymbol;
@@ -91,11 +95,11 @@ public class Transaction {
         this.sharePrice = sharePrice;
     }
 
-    public LocalDateTime getTransactionDatetime() {
+    public Timestamp getTransactionDatetime() {
         return transactionDatetime;
     }
 
-    public void setTransactionDatetime(LocalDateTime transactionDatetime) {
+    public void setTransactionDatetime(Timestamp transactionDatetime) {
         this.transactionDatetime = transactionDatetime;
     }
 
