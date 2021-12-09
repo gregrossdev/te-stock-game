@@ -19,4 +19,5 @@ public interface StockDao {
 
     boolean testMethodUpdatePrice(BigDecimal price);
 
+    boolean testMethodUpdatePriceTwo(BigDecimal price, String ticker);
 }

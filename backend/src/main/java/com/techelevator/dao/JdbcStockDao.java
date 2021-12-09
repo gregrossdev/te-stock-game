@@ -62,10 +62,13 @@ public class JdbcStockDao implements StockDao {
         String sql = "DELETE FROM stocks WHERE stock_symbol = ?;";
         return jdbcTemplate.update(sql, stockSymbolToDelete) == 1;
     }
-
     public boolean testMethodUpdatePrice(BigDecimal priceChange){
         String sql = "UPDATE stocks SET share_price = ? WHERE stock_symbol = 'SPCE';";
         return jdbcTemplate.update(sql, priceChange) == 1; //return true if works?
+    }
+    public boolean testMethodUpdatePriceTwo(BigDecimal price, String ticker){
+        String sql = "UPDATE stocks SET share_price = ? WHERE stock_symbol = ?;";
+        return jdbcTemplate.update(sql, price, ticker) == 1; //return true if works?
     }
 
     private Stock mapRowToStock(SqlRowSet results) {
