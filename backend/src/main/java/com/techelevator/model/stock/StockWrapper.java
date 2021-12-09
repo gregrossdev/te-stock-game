@@ -2,22 +2,21 @@ package com.techelevator.model.stock;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
-public class Stock {
+public class StockWrapper {
 
     private String stockSymbol;
     private BigDecimal sharePrice;
-    private Timestamp quoteDatetime;
+    private Timestamp quoteTimestamp;
 
-    public Stock() {
+    public StockWrapper() {
 
     }
 
-    public Stock(String stockSymbol, BigDecimal sharePrice, Timestamp quoteDatetime) {
+    public StockWrapper(String stockSymbol, BigDecimal sharePrice, Timestamp quoteTimestamp) {
         this.stockSymbol = stockSymbol;
         this.sharePrice = sharePrice;
-        this.quoteDatetime = quoteDatetime;
+        this.quoteTimestamp = quoteTimestamp;
     }
 
     public String getStockSymbol() {
@@ -36,11 +35,11 @@ public class Stock {
         this.sharePrice = sharePrice;
     }
 
-    public Timestamp getQuoteDatetime() {
-        return quoteDatetime;
+    public Timestamp getQuoteTimestamp() {
+        return quoteTimestamp;
     }
 
-    public void setQuoteDatetime(Timestamp quoteDatetime) {
-        this.quoteDatetime = quoteDatetime;
+    public void setQuoteTimestamp(Timestamp quoteTimestamp) {
+        this.quoteTimestamp = quoteTimestamp;
     }
 }

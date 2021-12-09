@@ -4,7 +4,7 @@ TRANSACTION;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS games;
 DROP TABLE IF EXISTS portfolios;
-DROP TABLE IF EXISTS stocks;
+DROP TABLE IF EXISTS stockWrappers;
 DROP TABLE IF EXISTS transactions;
 
 DROP SEQUENCE IF EXISTS seq_user_id;
@@ -39,8 +39,8 @@ CREATE TABLE games
     game_id        SERIAL,
     game_organizer int         NOT NULL,
     game_winner    int         NULL,
-    start_datetime timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    end_datetime   timestamp   NOT NULL CHECK (start_datetime < end_datetime),
+    start_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    end_timestamp   timestamp   NOT NULL CHECK (start_timestamp < end_timestamp),
     game_status    varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (game_status IN ('ACTIVE', 'ARCHIVED')),
     PRIMARY KEY (game_id)
 );
@@ -60,7 +60,7 @@ CREATE TABLE stocks
 (
     stock_symbol   varchar(10)      NOT NULL,
     share_price    decimal          NOT NULL,
-    quote_datetime timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    quote_timestamp timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (stock_symbol)
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE transactions
     transaction_amount   decimal     NOT NULL,
     transaction_shares   decimal     NOT NULL,
     share_price          decimal     NOT NULL,
-    transaction_datetime timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    transaction_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     transaction_status   varchar(10) NOT NULL DEFAULT 'PENDING' CHECK (transaction_status in ('PENDING', 'COMPLETED')),
     portfolio_balance    decimal     NOT NULL,
     portfolio_value      decimal     NOT NULL,
@@ -125,7 +125,7 @@ ALTER TABLE portfolios_stocks
         FOREIGN KEY (stock_symbol)
             REFERENCES stocks (stock_symbol);
 
-INSERT INTO games (game_id, game_organizer, start_datetime, end_datetime, game_status)
+INSERT INTO games (game_id, game_organizer, start_timestamp, end_timestamp, game_status)
 VALUES (1, 2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
        (2, 3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
        (3, 4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
@@ -173,7 +173,7 @@ VALUES  ('SPCE','12.70'),
         ('TEST', '100.00');
 
 INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount,
-                          transaction_shares, share_price, transaction_datetime, transaction_status, portfolio_balance, portfolio_value)
+                          transaction_shares, share_price, transaction_timestamp, transaction_status, portfolio_balance, portfolio_value)
 VALUES (1, 'TEST', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000, 100000),
        (2, 'TEST', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000, 100000),
        (3, 'TEST', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000, 100000),

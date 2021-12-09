@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-// import java.time.LocalDateTime;
+// import java.time.Localtimestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,18 +62,18 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public boolean create(Game gameToCreate) {
-        String sql = "INSERT INTO games (game_organizer, game_winner, start_datetime, end_datetime, game_status) " +
+        String sql = "INSERT INTO games (game_organizer, game_winner, start_timestamp, end_timestamp, game_status) " +
                 "VALUES (?, ?, ?, ?, ?);";
         return jdbcTemplate.update(sql, gameToCreate.getGameOrganizer(), gameToCreate.getGameWinner(),
-                gameToCreate.getStartDatetime(), gameToCreate.getEndDatetime(), gameToCreate.getGameStatus()) == 1;
+                gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp(), gameToCreate.getGameStatus()) == 1;
     }
 
     @Override
     public boolean update(Game gameToUpdate) {
-        String sql = "UPDATE games SET game_organizer = ?, game_winner = ?, start_datetime = ?, end_datetime = ?, " +
+        String sql = "UPDATE games SET game_organizer = ?, game_winner = ?, start_timestamp = ?, end_timestamp = ?, " +
                 "game_status = ? WHERE game_id = ?;";
         return jdbcTemplate.update(sql, gameToUpdate.getGameOrganizer(), gameToUpdate.getGameWinner(),
-                gameToUpdate.getStartDatetime(), gameToUpdate.getEndDatetime(), gameToUpdate.getGameStatus(),
+                gameToUpdate.getStartTimestamp(), gameToUpdate.getEndTimestamp(), gameToUpdate.getGameStatus(),
                 gameToUpdate.getGameId()) == 1;
     }
 
@@ -88,8 +88,8 @@ public class JdbcGameDao implements GameDao {
         game.setGameId(results.getLong("game_id"));
         game.setGameOrganizer(results.getLong("game_organizer"));
         game.setGameWinner(results.getLong("game_winner"));
-        game.setStartDatetime(results.getTimestamp("start_datetime"));
-        game.setEndDatetime(results.getTimestamp("end_datetime"));
+        game.setStartTimestamp(results.getTimestamp("start_timestamp"));
+        game.setEndTimestamp(results.getTimestamp("end_timestamp"));
         game.setGameStatus(results.getString("game_status"));
         return game;
     }

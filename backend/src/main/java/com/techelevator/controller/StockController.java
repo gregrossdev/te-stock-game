@@ -1,15 +1,9 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.StockDao;
-import com.techelevator.model.stock.Stock;
-import com.techelevator.model.stock.StockNotFoundException;
+import com.techelevator.model.stock.StockWrapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import java.util.List;
 
@@ -24,24 +18,24 @@ public class StockController {
     }
 
     @RequestMapping(path="", method = RequestMethod.GET)
-    public List<Stock> getStocks() {
+    public List<StockWrapper> getStocks() {
         return stockDao.getStocks();
     }
 
     @RequestMapping(path="{stockSymbol}", method = RequestMethod.GET)
-    public Stock getStockByStockSymbol(@PathVariable String stockSymbol) {
+    public StockWrapper getStockByStockSymbol(@PathVariable String stockSymbol) {
         return stockDao.getStockByStockSymbol(stockSymbol);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="", method = RequestMethod.POST)
-    public boolean create(Stock stockToCreate) {
-        return stockDao.create(stockToCreate);
+    public boolean create(StockWrapper stockWrapperToCreate) {
+        return stockDao.create(stockWrapperToCreate);
     }
 
     @RequestMapping(path="{stockSymbol}", method = RequestMethod.PUT)
-    public boolean update(@RequestBody Stock stockToUpdate) {
-        return stockDao.update(stockToUpdate);
+    public boolean update(@RequestBody StockWrapper stockWrapperToUpdate) {
+        return stockDao.update(stockWrapperToUpdate);
     }
 
     @RequestMapping(path="{stockSymbolToDelete}", method = RequestMethod.DELETE)

@@ -1,14 +1,12 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.User;
-import com.techelevator.model.stock.Stock;
+import com.techelevator.model.stock.StockWrapper;
 import com.techelevator.model.stock.StockNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,19 +20,19 @@ public class JdbcStockDao implements StockDao {
     }
 
     @Override
-    public List<Stock> getStocks() {
-        List<Stock> stocks = new ArrayList<>();
+    public List<StockWrapper> getStocks() {
+        List<StockWrapper> stockWrappers = new ArrayList<>();
         String sql = "SELECT * FROM stocks;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
-            stocks.add(mapRowToStock(results));
+            stockWrappers.add(mapRowToStock(results));
         }
-        return stocks;
+        return stockWrappers;
     }
 
 
     @Override
-    public Stock getStockByStockSymbol(String stockSymbol) {
+    public StockWrapper getStockByStockSymbol(String stockSymbol) {
         String sql = "SELECT * FROM stocks WHERE stock_symbol = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stockSymbol);
         if (results.next()) {
@@ -44,17 +42,17 @@ public class JdbcStockDao implements StockDao {
     }
 
     @Override
-    public boolean create(Stock stockToCreate) {
-        String sql = "INSERT INTO stocks (stock_symbol, share_price, quote_datetime) VALUES (?, ?, ?);";
-        return jdbcTemplate.update(sql, stockToCreate.getStockSymbol(), stockToCreate.getSharePrice(),
-                stockToCreate.getQuoteDatetime()) == 1;
+    public boolean create(StockWrapper stockWrapperToCreate) {
+        String sql = "INSERT INTO stocks (stock_symbol, share_price, quote_timestamp) VALUES (?, ?, ?);";
+        return jdbcTemplate.update(sql, stockWrapperToCreate.getStockSymbol(), stockWrapperToCreate.getSharePrice(),
+                stockWrapperToCreate.getQuoteTimestamp()) == 1;
     }
 
     @Override
-    public boolean update(Stock stockToUpdate) {
-        String sql = "UPDATE stocks SET share_price = ?, quote_datetime = ? WHERE stock_symbol = ?;";
-        return jdbcTemplate.update(sql, stockToUpdate.getSharePrice(), stockToUpdate.getQuoteDatetime(),
-                stockToUpdate.getStockSymbol()) == 1;
+    public boolean update(StockWrapper stockWrapperToUpdate) {
+        String sql = "UPDATE stocks SET share_price = ?, quote_timestamp = ? WHERE stock_symbol = ?;";
+        return jdbcTemplate.update(sql, stockWrapperToUpdate.getSharePrice(), stockWrapperToUpdate.getQuoteTimestamp(),
+                stockWrapperToUpdate.getStockSymbol()) == 1;
     }
 
     @Override
@@ -71,11 +69,11 @@ public class JdbcStockDao implements StockDao {
         return jdbcTemplate.update(sql, price, ticker) == 1; //return true if works?
     }
 
-    private Stock mapRowToStock(SqlRowSet results) {
-        Stock stock = new Stock();
-        stock.setStockSymbol(results.getString("stock_symbol"));
-        stock.setSharePrice(results.getBigDecimal("share_price"));
-        stock.setQuoteDatetime(results.getTimestamp("quote_datetime"));
-        return stock;
+    private StockWrapper mapRowToStock(SqlRowSet results) {
+        StockWrapper stockWrapper = new StockWrapper();
+        stockWrapper.setStockSymbol(results.getString("stock_symbol"));
+        stockWrapper.setSharePrice(results.getBigDecimal("share_price"));
+        stockWrapper.setQuoteTimestamp(results.getTimestamp("quote_timestamp"));
+        return stockWrapper;
     }
 }

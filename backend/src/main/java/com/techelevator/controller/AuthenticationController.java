@@ -35,6 +35,8 @@ public class AuthenticationController {
         this.userDao = userDao;
     }
 
+    // TODO call StockAPIController from "login" endpoint to start the stock update cycle.
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDTO loginDto) {
 

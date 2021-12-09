@@ -8,20 +8,20 @@ public class Game {
     private Long gameId;
     private Long gameOrganizer;
     private Long gameWinner;
-    private Timestamp startDatetime;
-    private Timestamp endDatetime;
+    private Timestamp startTimestamp;
+    private Timestamp endTimestamp;
     private String gameStatus;
 
     public Game() {
 
     }
 
-    public Game(Long gameId, Long gameOrganizer, Long gameWinner, Timestamp startDatetime, Timestamp endDatetime, String gameStatus) {
+    public Game(Long gameId, Long gameOrganizer, Long gameWinner, Timestamp startTimestamp, Timestamp endTimestamp, String gameStatus) {
         this.gameId = gameId;
         this.gameOrganizer = gameOrganizer;
         this.gameWinner = gameWinner;
-        this.startDatetime = startDatetime;
-        this.endDatetime = endDatetime;
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
         this.gameStatus = gameStatus;
     }
 
@@ -49,20 +49,20 @@ public class Game {
         this.gameWinner = gameWinner;
     }
 
-    public Timestamp getStartDatetime() {
-        return startDatetime;
+    public Timestamp getStartTimestamp() {
+        return startTimestamp;
     }
 
-    public void setStartDatetime(Timestamp startDatetime) {
-        this.startDatetime = startDatetime;
+    public void setStartTimestamp(Timestamp startTimestamp) {
+        this.startTimestamp = startTimestamp;
     }
 
-    public Timestamp getEndDatetime() {
-        return endDatetime;
+    public Timestamp getEndTimestamp() {
+        return endTimestamp;
     }
 
-    public void setEndDatetime(Timestamp endDatetime) {
-        this.endDatetime = endDatetime;
+    public void setEndTimestamp(Timestamp endTimestamp) {
+        this.endTimestamp = endTimestamp;
     }
 
     public String getGameStatus() {
