@@ -2,7 +2,6 @@ package com.techelevator.model.transaction;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class Transaction {
 
@@ -13,7 +12,7 @@ public class Transaction {
     private BigDecimal transactionAmount;
     private BigDecimal transactionShares;
     private BigDecimal sharePrice;
-    private Timestamp transactionDatetime;
+    private Timestamp transactionTimestamp;
     private String transactionStatus;
     private BigDecimal portfolioBalance;
     private BigDecimal portfolioValue;
@@ -24,7 +23,7 @@ public class Transaction {
 
     public Transaction(Long transactionId, Long portfolioId, String stockSymbol, String transactionType,
                        BigDecimal transactionAmount, BigDecimal transactionShares, BigDecimal sharePrice,
-                       Timestamp transactionDatetime, String transactionStatus, BigDecimal portfolioBalance,
+                       Timestamp transactionTimestamp, String transactionStatus, BigDecimal portfolioBalance,
                        BigDecimal portfolioValue) {
         this.transactionId = transactionId;
         this.portfolioId = portfolioId;
@@ -33,7 +32,7 @@ public class Transaction {
         this.transactionAmount = transactionAmount;
         this.transactionShares = transactionShares;
         this.sharePrice = sharePrice;
-        this.transactionDatetime = transactionDatetime;
+        this.transactionTimestamp = transactionTimestamp;
         this.transactionStatus = transactionStatus;
         this.portfolioBalance = portfolioBalance;
         this.portfolioValue = portfolioValue;
@@ -95,12 +94,12 @@ public class Transaction {
         this.sharePrice = sharePrice;
     }
 
-    public Timestamp getTransactionDatetime() {
-        return transactionDatetime;
+    public Timestamp getTransactionTimestamp() {
+        return transactionTimestamp;
     }
 
-    public void setTransactionDatetime(Timestamp transactionDatetime) {
-        this.transactionDatetime = transactionDatetime;
+    public void setTransactionTimestamp(Timestamp transactionTimestamp) {
+        this.transactionTimestamp = transactionTimestamp;
     }
 
     public String getTransactionStatus() {

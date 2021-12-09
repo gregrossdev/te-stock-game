@@ -66,12 +66,12 @@ public class JdbcTransactionDao implements TransactionDao {
     @Override
     public boolean create(Transaction transactionToCreate) {
         String sql = "INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount, " +
-                "transaction_shares, share_price, transaction_datetime, transaction_status, portfolio_balance, " +
+                "transaction_shares, share_price, transaction_timestamp, transaction_status, portfolio_balance, " +
                 "portfolio_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         return jdbcTemplate.update(sql, transactionToCreate.getPortfolioId(), transactionToCreate.getStockSymbol(),
                 transactionToCreate.getTransactionType(), transactionToCreate.getTransactionAmount(),
                 transactionToCreate.getTransactionShares(), transactionToCreate.getSharePrice(),
-                transactionToCreate.getTransactionDatetime(), transactionToCreate.getTransactionStatus(),
+                transactionToCreate.getTransactionTimestamp(), transactionToCreate.getTransactionStatus(),
                 transactionToCreate.getPortfolioBalance(), transactionToCreate.getPortfolioValue()) == 1;
     }
 
@@ -79,12 +79,12 @@ public class JdbcTransactionDao implements TransactionDao {
     public boolean update(Transaction transactionToUpdate) {
         String sql =
                 "UPDATE transactions SET portfolio_id = ?, stock_symbol = ?, transaction_type = ?, transaction_amount = ?, " +
-                "transaction_shares = ?, share_price = ?, transaction_datetime = ?, transaction_status = ?, portfolio_balance = ?, " +
+                "transaction_shares = ?, share_price = ?, transaction_timestamp = ?, transaction_status = ?, portfolio_balance = ?, " +
                 "portfolio_value = ? WHERE transaction_id = ?;";
         return jdbcTemplate.update(sql, transactionToUpdate.getPortfolioId(), transactionToUpdate.getStockSymbol(),
                 transactionToUpdate.getTransactionType(), transactionToUpdate.getTransactionAmount(),
                 transactionToUpdate.getTransactionShares(), transactionToUpdate.getSharePrice(),
-                transactionToUpdate.getTransactionDatetime(), transactionToUpdate.getTransactionStatus(),
+                transactionToUpdate.getTransactionTimestamp(), transactionToUpdate.getTransactionStatus(),
                 transactionToUpdate.getPortfolioBalance(), transactionToUpdate.getPortfolioValue(),
                 transactionToUpdate.getTransactionId()) == 1;
     }
@@ -104,7 +104,7 @@ public class JdbcTransactionDao implements TransactionDao {
         transaction.setTransactionAmount(results.getBigDecimal("transaction_amount"));
         transaction.setTransactionShares(results.getBigDecimal("transaction_shares"));
         transaction.setSharePrice(results.getBigDecimal("share_price"));
-        transaction.setTransactionDatetime(results.getTimestamp("transaction_datetime"));
+        transaction.setTransactionTimestamp(results.getTimestamp("transaction_timestamp"));
         transaction.setTransactionStatus(results.getString("transaction_status"));
         transaction.setPortfolioBalance(results.getBigDecimal("portfolio_balance"));
         transaction.setPortfolioValue(results.getBigDecimal("portfolio_value"));
