@@ -11,6 +11,7 @@ import yahoofinance.YahooFinance;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -19,7 +20,10 @@ public class StockAPIController {
 
     private StockDao stockDao;
 
-    public StockAPIController(StockDao stockDao) {
+    String[] stockSymbols = new String[]{"SPCE", "AMD", "MP", "AMD", "MSFT", "IRM", "LCID", "CGC", "AMZN", "AAPL"};
+    Map<String, Stock> stocks = YahooFinance.get(stockSymbols, false);
+
+    public StockAPIController(StockDao stockDao) throws IOException {
         this.stockDao = stockDao;
     }
 
@@ -42,4 +46,23 @@ public class StockAPIController {
         stockDao.testMethodUpdatePrice(price);
         return 0;
     }
+    @RequestMapping(path="endpoint2", method = RequestMethod.GET)
+    public void updateAllStocksEveryXMin() throws IOException, InterruptedException {
+        //Why am I updating one at a time? I should create a method to update them all
+
+        while(true){
+            for(String stockSymbol : stocks.keySet()){
+//            System.out.println(stockSymbol); prints stock symbol use to get actual stock
+                Stock tempStock = stocks.get(stockSymbol);
+                BigDecimal updatedPrice = tempStock.getQuote().getPrice();
+                stockDao.testMethodUpdatePriceTwo(updatedPrice, stockSymbol);
+
+            }
+            System.out.println("Check back in 5 minutes for an updated price!");
+            Thread.sleep(300000);
+        }
+
+
+    }
+
 }
