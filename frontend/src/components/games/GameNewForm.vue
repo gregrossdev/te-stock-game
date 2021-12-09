@@ -1,19 +1,6 @@
 <template>
   <form v-on:submit.prevent="saveGame">
-    <input
-      type="text"
-      placeholder="gameOrganizer"
-      v-model="game.gameOrganizer"
-    />
-    <input type="text" placeholder="gameWinner" v-model="game.gameWinner" />
-    <input
-      type="text"
-      placeholder="startDatetime"
-      v-model="game.startDatetime"
-    />
-    <input type="text" placeholder="endDatetime" v-model="game.endDatetime" />
-    <input type="text" placeholder="gameStatus" v-model="game.gameStatus" />
-    <button>Save</button>
+    <button>New Game</button>
   </form>
 </template>
 
@@ -43,7 +30,7 @@ export default {
         endDatetime: "",
         gameStatus: "",
       };
-      this.$router.push({ name: "test" });
+      // this.$router.push({ name: "test" });
     },
   },
 };

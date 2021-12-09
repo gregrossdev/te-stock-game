@@ -5,7 +5,7 @@
         <!-- game.game_id -->
         <h2>Game 1</h2>
         <!-- for loop based on portfolio -->
-        <p>Rank: 08/25</p>
+        <p>Rank: 01/25</p>
         <!-- portfolio.portfolio_value -->
         <h3>Money: $756</h3>
         <img src="https://source.unsplash.com/300x150/?coins" alt="stocks" />
@@ -28,6 +28,22 @@
               <td>Alex Deise</td>
               <td>$4000000</td>
             </tr>
+            <tr>
+              <td>Josh Steele</td>
+              <td>$3700000</td>
+            </tr>
+            <tr>
+              <td>Aubrey Strauss</td>
+              <td>$3500000</td>
+            </tr>
+            <tr>
+              <td>Denny Walter</td>
+              <td>$3350000</td>
+            </tr>
+            <tr>
+              <td>Greg Ross</td>
+              <td>-$20</td>
+            </tr>
           </table>
         </div>
       </main>
@@ -37,7 +53,7 @@
         <!-- game.game_id -->
         <h2>Game 1</h2>
         <!-- for loop based on portfolio -->
-        <p>Rank: 08/25</p>
+        <p>Rank: 01/25</p>
         <!-- portfolio.portfolio_value -->
         <h3>Money: $756</h3>
         <img src="https://source.unsplash.com/300x150/?cash" alt="stocks" />
@@ -60,6 +76,22 @@
               <td>Alex Deise</td>
               <td>$4000000</td>
             </tr>
+            <tr>
+              <td>Josh Steele</td>
+              <td>$3700000</td>
+            </tr>
+            <tr>
+              <td>Aubrey Strauss</td>
+              <td>$3500000</td>
+            </tr>
+            <tr>
+              <td>Denny Walter</td>
+              <td>$3350000</td>
+            </tr>
+            <tr>
+              <td>Greg Ross</td>
+              <td>-$20</td>
+            </tr>
           </table>
         </div>
       </main>
@@ -69,7 +101,7 @@
         <!-- game.game_id -->
         <h2>Game 1</h2>
         <!-- for loop based on portfolio -->
-        <p>Rank: 08/25</p>
+        <p>Rank: 01/25</p>
         <!-- portfolio.portfolio_value -->
         <h3>Money: $756</h3>
         <img src="https://source.unsplash.com/300x150/?money" alt="stocks" />
@@ -91,6 +123,22 @@
             <tr>
               <td>Alex Deise</td>
               <td>$4000000</td>
+            </tr>
+            <tr>
+              <td>Josh Steele</td>
+              <td>$3700000</td>
+            </tr>
+            <tr>
+              <td>Aubrey Strauss</td>
+              <td>$3500000</td>
+            </tr>
+            <tr>
+              <td>Denny Walter</td>
+              <td>$3350000</td>
+            </tr>
+            <tr>
+              <td>Greg Ross</td>
+              <td>-$20</td>
             </tr>
           </table>
         </div>
@@ -148,7 +196,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 //         <!-- game.game_id -->
 //         <h2>game.game_id</h2>
 //         <!-- for loop based on portfolio -->
-//         <p>Rank: 08/25</p>
+//         <p>Rank: 01/25</p>
 //         <!-- portfolio.portfolio_value -->
 //         <h3>portfolio.portfolio_value</h3>
 //         <img src="https://source.unsplash.com/300x150/?stocks" alt="stocks" />
