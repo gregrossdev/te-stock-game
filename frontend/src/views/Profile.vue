@@ -1,12 +1,23 @@
 <template>
   <main class="profile">
-    <h1>Virtual Stock Market Game</h1>
-    <p>Welcome to the Virtual Stock Market Game!</p>
+    <nav>username
+      
+    </nav>
+    <!-- <header>
+      <h1>Virtual Stock Market Game</h1>
+      <p>Welcome to the Virtual Stock Market Game!</p>
+    </header> -->
+    <section>
+      Active Games
+    </section>
+    <section>
+      Portfolio  
+    </section>
   </main>
 </template>
 
 <script>
 export default {
-  name: "profile"
+  name: "profile",
 };
 </script>
