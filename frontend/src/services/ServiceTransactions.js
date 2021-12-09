@@ -10,80 +10,39 @@ export default {
 		return http.get("");
 	}
 
-
-// 	@Override
+// 	@RequestMapping(path="", method = RequestMethod.GET)
 // 	public List<Transaction> getTransactions() {
-// 	List<Transaction> transactions = new ArrayList<>();
-// 	String sql = "SELECT * FROM transactions;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-// 	while (results.next()) {
-// 		transactions.add(mapRowToTransaction(results));
-// 	}
-// 	return transactions;
+// 	return transactionDao.getTransactions();
 // }
 //
-// @Override
-// public Transaction getTransactionByTransactionId(Long transactionId) {
-// 	String sql = "SELECT * FROM transactions WHERE transaction_id = ?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, transactionId);
-// 	if (results.next()) {
-// 		return mapRowToTransaction(results);
-// 	}
-// 	throw new TransactionNotFoundException();
+// @RequestMapping(path="{transactionId}", method = RequestMethod.GET)
+// public Transaction getTransactionByTransactionId(@PathVariable Long transactionId) {
+// 	return transactionDao.getTransactionByTransactionId(transactionId);
 // }
 //
-// @Override
-// public List<Transaction> getTransactionsByPortfolioId(Long portfolioId) {
-// 	List<Transaction> transactions = new ArrayList<>();
-// 	String sql = "SELECT * FROM transactions WHERE portfolio_id = ?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId);
-// 	while (results.next()) {
-// 		transactions.add(mapRowToTransaction(results));
-// 	}
-// 	return transactions;
+// @RequestMapping(path="portfolio/{portfolioId}", method = RequestMethod.GET)
+// public List<Transaction> getTransactionsByPortfolioId(@PathVariable Long portfolioId) {
+// 	return transactionDao.getTransactionsByPortfolioId(portfolioId);
 // }
 //
-// @Override
-// public List<Transaction> getTransactionsByStockSymbol(String stockSymbol) {
-// 	List<Transaction> transactions = new ArrayList<>();
-// 	String sql = "SELECT * FROM transactions WHERE stock_symbol = ?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stockSymbol);
-// 	while (results.next()) {
-// 		transactions.add(mapRowToTransaction(results));
-// 	}
-// 	return transactions;
+// @RequestMapping(path="stock/{stockSymbol}", method = RequestMethod.GET)
+// public List<Transaction> getTransactionsByStockSymbol(@PathVariable String stockSymbol) {
+// 	return transactionDao.getTransactionsByStockSymbol(stockSymbol);
 // }
 //
-// @Override
-// public boolean create(Transaction transactionToCreate) {
-// 	String sql = "INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount, " +
-// 		"transaction_shares, share_price, transaction_timestamp, transaction_status, portfolio_balance, " +
-// 		"portfolio_value) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-// 	return jdbcTemplate.update(sql, transactionToCreate.getPortfolioId(), transactionToCreate.getStockSymbol(),
-// 		transactionToCreate.getTransactionType(), transactionToCreate.getTransactionAmount(),
-// 		transactionToCreate.getTransactionShares(), transactionToCreate.getSharePrice(),
-// 		transactionToCreate.getTransactionTimestamp(), transactionToCreate.getTransactionStatus(),
-// 		transactionToCreate.getPortfolioBalance(), transactionToCreate.getPortfolioValue()) == 1;
+// @RequestMapping(path="", method = RequestMethod.POST)
+// public boolean create(@RequestBody Transaction transactionToCreate) {
+// 	return transactionDao.create(transactionToCreate);
 // }
 //
-// @Override
-// public boolean update(Transaction transactionToUpdate) {
-// 	String sql =
-// 		"UPDATE transactions SET portfolio_id = ?, stock_symbol = ?, transaction_type = ?, transaction_amount = ?, " +
-// 		"transaction_shares = ?, share_price = ?, transaction_timestamp = ?, transaction_status = ?, portfolio_balance = ?, " +
-// 		"portfolio_value = ? WHERE transaction_id = ?;";
-// 	return jdbcTemplate.update(sql, transactionToUpdate.getPortfolioId(), transactionToUpdate.getStockSymbol(),
-// 		transactionToUpdate.getTransactionType(), transactionToUpdate.getTransactionAmount(),
-// 		transactionToUpdate.getTransactionShares(), transactionToUpdate.getSharePrice(),
-// 		transactionToUpdate.getTransactionTimestamp(), transactionToUpdate.getTransactionStatus(),
-// 		transactionToUpdate.getPortfolioBalance(), transactionToUpdate.getPortfolioValue(),
-// 		transactionToUpdate.getTransactionId()) == 1;
+// @RequestMapping(path="{transactionId}", method = RequestMethod.PUT)
+// public boolean update(@RequestBody Transaction transactionToUpdate) {
+// 	return transactionDao.update(transactionToUpdate);
 // }
 //
-// @Override
-// public boolean delete(Long transactionIdToDelete) {
-// 	String sql = "DELETE FROM transactions WHERE transaction_id = ?;";
-// 	return jdbcTemplate.update(sql, transactionIdToDelete) == 1;
+// @RequestMapping(path="{transactionIdToDelete}", method = RequestMethod.DELETE)
+// public boolean delete(@PathVariable Long transactionIdToDelete) {
+// 	return transactionDao.delete(transactionIdToDelete);
 // }
 
 }

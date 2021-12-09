@@ -33,4 +33,5 @@ export default {
   delete(gameIdToDelete) {
     return http.delete(`${gameIdToDelete}`);
   }
+
 };

@@ -14,54 +14,30 @@ export default {
 		return http.get('test/endpoint');
 	}
 
-// 	@Override
+// 	@RequestMapping(path="", method = RequestMethod.GET)
 // 	public List<StockWrapper> getStocks() {
-// 	List<StockWrapper> stockWrappers = new ArrayList<>();
-// 	String sql = "SELECT * FROM stocks;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-// 	while (results.next()) {
-// 		stockWrappers.add(mapRowToStock(results));
-// 	}
-// 	return stockWrappers;
+// 	return stockDao.getStocks();
 // }
 //
-//
-// @Override
-// public StockWrapper getStockByStockSymbol(String stockSymbol) {
-// 	String sql = "SELECT * FROM stocks WHERE stock_symbol = ?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, stockSymbol);
-// 	if (results.next()) {
-// 		return mapRowToStock(results);
-// 	}
-// 	throw new StockNotFoundException();
+// @RequestMapping(path="{stockSymbol}", method = RequestMethod.GET)
+// public StockWrapper getStockByStockSymbol(@PathVariable String stockSymbol) {
+// 	return stockDao.getStockByStockSymbol(stockSymbol);
 // }
 //
-// @Override
+// @ResponseStatus(HttpStatus.CREATED)
+// @RequestMapping(path="", method = RequestMethod.POST)
 // public boolean create(StockWrapper stockWrapperToCreate) {
-// 	String sql = "INSERT INTO stocks (stock_symbol, share_price, quote_timestamp) VALUES (?, ?, ?);";
-// 	return jdbcTemplate.update(sql, stockWrapperToCreate.getStockSymbol(), stockWrapperToCreate.getSharePrice(),
-// 		stockWrapperToCreate.getQuoteTimestamp()) == 1;
+// 	return stockDao.create(stockWrapperToCreate);
 // }
 //
-// @Override
-// public boolean update(StockWrapper stockWrapperToUpdate) {
-// 	String sql = "UPDATE stocks SET share_price = ?, quote_timestamp = ? WHERE stock_symbol = ?;";
-// 	return jdbcTemplate.update(sql, stockWrapperToUpdate.getSharePrice(), stockWrapperToUpdate.getQuoteTimestamp(),
-// 		stockWrapperToUpdate.getStockSymbol()) == 1;
+// @RequestMapping(path="{stockSymbol}", method = RequestMethod.PUT)
+// public boolean update(@RequestBody StockWrapper stockWrapperToUpdate) {
+// 	return stockDao.update(stockWrapperToUpdate);
 // }
 //
-// @Override
-// public boolean delete(String stockSymbolToDelete) {
-// 	String sql = "DELETE FROM stocks WHERE stock_symbol = ?;";
-// 	return jdbcTemplate.update(sql, stockSymbolToDelete) == 1;
-// }
-// public boolean testMethodUpdatePrice(BigDecimal priceChange){
-// 	String sql = "UPDATE stocks SET share_price = ? WHERE stock_symbol = 'SPCE';";
-// 	return jdbcTemplate.update(sql, priceChange) == 1; //return true if works?
-// }
-// public boolean testMethodUpdatePriceTwo(BigDecimal price, String ticker){
-// 	String sql = "UPDATE stocks SET share_price = ? WHERE stock_symbol = ?;";
-// 	return jdbcTemplate.update(sql, price, ticker) == 1; //return true if works?
+// @RequestMapping(path="{stockSymbolToDelete}", method = RequestMethod.DELETE)
+// public boolean delete(@PathVariable String stockSymbolToDelete) {
+// 	return stockDao.delete(stockSymbolToDelete);
 // }
 
 }

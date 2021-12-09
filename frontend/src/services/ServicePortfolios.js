@@ -10,71 +10,41 @@ export default {
 		return http.get("");
 	}
 
-// 	@Override
-// 	public List<Portfolio> getPortfolios() {
-// 	List<Portfolio> portfolios = new ArrayList<>();
-// 	String sql = "SELECT * FROM portfolios;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-// 	while (results.next()) {
-// 		portfolios.add(mapRowToPortfolio(results));
-// 	}
-// 	return portfolios;
+// @RequestMapping(path="", method = RequestMethod.GET)
+// public List<Portfolio> getPortfolios() {
+// return portfolioDao.getPortfolios();
 // }
 //
-// @Override
-// public Portfolio getPortfolioByPortfolioId(Long portfolioId) {
-// 	String sql = "SELECT * FROM portfolios WHERE portfolio_id =?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId);
-// 	if (results.next()) {
-// 		return mapRowToPortfolio(results);
-// 	}
-// 	throw new PortfolioNotFoundException();
+// @RequestMapping(path="{portfolioId}", method = RequestMethod.GET)
+// public Portfolio getPortfolioByPortfolioId(@PathVariable Long portfolioId) {
+// 	return portfolioDao.getPortfolioByPortfolioId(portfolioId);
 // }
 //
-// @Override
-// public List<Portfolio> getPortfoliosByUserId(Long userId) {
-// 	List<Portfolio> portfolios = new ArrayList<>();
-// 	String sql = "SELECT * FROM portfolios WHERE user_id = ?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-// 	while (results.next()) {
-// 		portfolios.add(mapRowToPortfolio(results));
-// 	}
-// 	return portfolios;
+// @RequestMapping(path="user/{userId}", method = RequestMethod.GET)
+// public List<Portfolio> getPortfoliosByUserId(@PathVariable Long userId) {
+// 	return portfolioDao.getPortfoliosByUserId(userId);
 // }
 //
-// @Override
-// public List<Portfolio> getPortfoliosByGameId(Long gameId) {
-// 	List<Portfolio> portfolios = new ArrayList<>();
-// 	String sql = "SELECT * FROM portfolios WHERE game_id = ?;";
-// 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
-// 	while (results.next()) {
-// 		portfolios.add(mapRowToPortfolio(results));
-// 	}
-// 	return portfolios;
+// @RequestMapping(path="game/{gameId}", method = RequestMethod.GET)
+// public List<Portfolio> getPortfoliosByGameId(@PathVariable Long gameId) {
+// 	return portfolioDao.getPortfoliosByGameId(gameId);
 // }
 //
-// @Override
-// public boolean create(Portfolio portfolioToCreate) {
-// 	String sql = "INSERT INTO portfolios (user_id, game_id, portfolio_balance, portfolio_value, portfolio_status) " +
-// 		"VALUES (?, ?, ?, ?, ?);";
-// 	return jdbcTemplate.update(sql, portfolioToCreate.getUserId(), portfolioToCreate.getGameId(),
-// 		portfolioToCreate.getPortfolioBalance(), portfolioToCreate.getPortfolioValue(),
-// 		portfolioToCreate.getPortfolioStatus()) == 1;
+// @ResponseStatus(HttpStatus.CREATED)
+// @RequestMapping(path="", method = RequestMethod.POST)
+// public boolean create(@RequestBody Portfolio portfolioToCreate) {
+// 	return portfolioDao.create(portfolioToCreate);
 // }
 //
-// @Override
-// public boolean update(Portfolio portfolioToUpdate) {
-// 	String sql = "UPDATE portfolios SET user_id = ?, game_id = ?, portfolio_balance = ?, portfolio_value = ?, " +
-// 		"portfolio_status = ? WHERE portfolio_id =?;";
-// 	return jdbcTemplate.update(sql, portfolioToUpdate.getUserId(), portfolioToUpdate.getGameId(),
-// 		portfolioToUpdate.getPortfolioBalance(), portfolioToUpdate.getPortfolioValue(),
-// 		portfolioToUpdate.getPortfolioStatus()) == 1;
+// // TODO Check that this is correct, using the portfolioId as a path variable even when it's not used in the method.
+// @RequestMapping(path="{portfolioId}", method = RequestMethod.PUT)
+// public boolean update(@RequestBody Portfolio portfolioToUpdate) {
+// 	return portfolioDao.update(portfolioToUpdate);
 // }
 //
-// @Override
-// public boolean delete(Long portfolioIdToDelete) {
-// 	String sql = "DELETE FROM portfolios WHERE portfolio_id = ?;";
-// 	return jdbcTemplate.update(sql, portfolioIdToDelete) == 1;
+// @RequestMapping(path="{portfolioIdToDelete}", method = RequestMethod.DELETE)
+// public boolean delete(@PathVariable Long portfolioIdToDelete) {
+// 	return portfolioDao.delete(portfolioIdToDelete);
 // }
 
 }
