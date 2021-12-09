@@ -73,7 +73,7 @@ public class JdbcStockDao implements StockDao {
         StockWrapper stockWrapper = new StockWrapper();
         stockWrapper.setStockSymbol(results.getString("stock_symbol"));
         stockWrapper.setSharePrice(results.getBigDecimal("share_price"));
-        stockWrapper.setQuoteTimestamp(results.getTimestamp("quote_timestamp"));
+//        stockWrapper.setQuoteTimestamp(results.getTimestamp("quote_timestamp"));
         return stockWrapper;
     }
 }
