@@ -71,7 +71,8 @@
       </article>
     </section>
 
-    <button v-on:click="updateSpce()">UPDATE SPCE</button>
+    
+    <!-- <button v-on:click="updateSpce()">UPDATE SPCE</button> -->
   </main>
 </template>
 

@@ -9,20 +9,26 @@
         <h4>{{ data }}</h4>
       </article> 
     </section>
-    <section></section>
+    <section>
+      <stocks /> 
+    </section>
   </main>
 </template>
+
 
 <script>
 import GameCard from "../components/games/GameCard.vue";
 import GameNewForm from "../components/games/GameNewForm.vue";
 
+import Stocks from "../components/stocks/Stocks.vue";
 
 export default {
   name: "profile",
   components: {
     GameCard,
-    GameNewForm
+    GameNewForm, 
+    Stocks,
   },
 };
+
 </script>
