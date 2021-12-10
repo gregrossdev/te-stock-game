@@ -21,6 +21,8 @@ export default new Vuex.Store({
     token: currentToken || "",
     user: currentUser || {},
     games: [],
+
+    // stocks: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -45,5 +47,7 @@ export default new Vuex.Store({
     SAVE_GAME(state, game) {
       state.games.push(game);
     },
+
+    // SET STOCKS
   },
 });

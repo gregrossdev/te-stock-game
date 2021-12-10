@@ -22,6 +22,14 @@ export default {
       this.dataStocks = response.data;
     });
   },
+
+  // methods: {
+  //   getTopics() {
+  //     topicService.list().then(response => {
+  //       this.$store.commit("SET_TOPICS", response.data);
+  //     });
+  //   },
+
 };
 </script>
 
