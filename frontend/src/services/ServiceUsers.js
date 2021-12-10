@@ -8,21 +8,14 @@ export default {
 
 	list() {
 		return http.get("");
-	}
+	},
 
-// 	@RequestMapping(path="", method = RequestMethod.GET)
-// 	public List<User> getUsers() {
-// 	return userDao.findAll();
-// }
-//
-// @RequestMapping(path="userid/{userId}", method = RequestMethod.GET)
-// public User getUserByUserId(@PathVariable Long userId) {
-// 	return userDao.getUserById(userId);
-// }
-//
-// @RequestMapping(path="username/{username}", method = RequestMethod.GET)
-// public User getUserByUsername(@PathVariable String username) {
-// 	return userDao.findByUsername(username);
-// }
+	getUserByUserId(userId) {
+		return http.get(`userid/${userId}`);
+	},
+
+	getUserByUsername(username) {
+		return http.get(`username/${username}`);
+	}
 
 }
