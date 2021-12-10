@@ -2,8 +2,7 @@
   <main>
     <h1>Test Data</h1>
     <hr />
-    <br />
-    <h3>Users</h3>
+    <h2>Users</h2>
     <section class="users">
       <article v-for="data in dataUsers" v-bind:key="data.id" class="user">
         <h4>{{ data.username }}</h4>
@@ -12,7 +11,6 @@
     <hr />
     
     <h2>Stocks</h2>
-    <h3>Stocks</h3>
     <section class="stocks">
       <article
         v-for="data in dataStocks"
@@ -23,18 +21,30 @@
         <h4>{{ data.sharePrice }}</h4>
       </article>
     </section>
-    <h3>Games</h3>
+    <hr />
+
+    <h2>Games</h2>
     <section class="games">
       <article v-for="data in dataGames" v-bind:key="data.gameId" class="game">
         <h4>{{ data }}</h4>
       </article>
+
+      <h3>Post method</h3>
+      <game-new-form />
+      <article v-for="data in $store.state.games" v-bind:key="data.gameId" class="game">
+        <h4>{{ data }}</h4>
+      </article> 
+
+
+
+
+
     </section>
 
 
 
 
     <hr />
-    <h3>Portfoios</h3>
     <h3>Portfolios</h3>
     <section class="portfolios">
       <article
@@ -45,6 +55,11 @@
         <h4>{{ data }}</h4>
       </article>
     </section>
+
+
+
+
+    <hr />
     <h3>Transactions</h3>
     <section class="transactions">
       <article
@@ -67,9 +82,13 @@ import requestUsers from "@/services/ServiceUsers";
 import requestGames from "@/services/ServiceGames";
 import requestPortfolios from "@/services/ServicePortfolios";
 import requestTransactions from "@/services/ServiceTransactions";
+import GameNewForm from "@/components/games/GameNewForm"; 
 
-export default { 
+export default {
   name: "test-data",
+  components: {
+      GameNewForm
+  },
   methods: {
     updateSpce() {
       requestStocks.test();
@@ -114,6 +133,10 @@ main {
   margin-top: 2rem;
 }
 
+hr {
+  margin-bottom: 4rem;
+}
+
 h3 {
   font-size: 1.75rem;
   color: var(--clr-grey-10);
@@ -133,6 +156,7 @@ section {
   gap: 1rem;
   margin-bottom: 1rem;
 }
+
 
 .users h4 {
   text-transform: lowercase;

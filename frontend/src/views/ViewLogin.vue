@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h2>Welcome to the Virtual Stock Market Game</h2>
+    <h2 class="page-title">Welcome to the Virtual Stock Market Game</h2>
     <div id="login">
       <form class="form-signin" @submit.prevent="login">
         <h2>Sign In</h2>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import ServiceAuth from "../services/ServiceAuth";
 
 export default {
   name: "login",
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     login() {
-      authService
+      ServiceAuth
         .login(this.user)
         .then((response) => {
           if (response.status == 200) {

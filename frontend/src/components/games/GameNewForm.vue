@@ -43,7 +43,7 @@ export default {
         endTimestamp: "",
         gameStatus: "",
       };
-      this.$router.push({ name: "test" });
+      // this.$router.push({ name: "profile" });
     },
   },
 };
