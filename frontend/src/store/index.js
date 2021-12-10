@@ -21,8 +21,23 @@ export default new Vuex.Store({
     token: currentToken || "",
     user: currentUser || {},
     games: [],
-
-    // stocks: []
+    portfolios: [],
+    stocks: [],
+    transactions: [],
+    activeGame: {
+      gameId: null,
+      gameOrganizer: null,
+      gameStartTimestamp: null,
+      gameEndTimestamp: null
+    },
+    activePortfolio: {
+      portfolioId: null,
+      userId: null,
+      gameId: null,
+      portfolioBalance: null,
+      portfolioValue: null,
+      portfolioStocks: []
+    }
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
