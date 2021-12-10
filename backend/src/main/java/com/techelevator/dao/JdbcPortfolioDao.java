@@ -55,8 +55,14 @@ public class JdbcPortfolioDao implements PortfolioDao {
         List<Portfolio> portfolios = new ArrayList<>();
         String sql = "SELECT * FROM portfolios WHERE game_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
+
+        // calculate the portfolio value
+
         while (results.next()) {
             portfolios.add(mapRowToPortfolio(results));
+
+            // call the setter to set the portfolio value
+
         }
         return portfolios;
     }
