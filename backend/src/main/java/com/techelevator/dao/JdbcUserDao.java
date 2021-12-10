@@ -1,9 +1,6 @@
 package com.techelevator.dao;
 
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -12,13 +9,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.techelevator.model.User;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Component
 public class JdbcUserDao implements UserDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public JdbcUserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -29,16 +28,16 @@ public class JdbcUserDao implements UserDao {
         return jdbcTemplate.queryForObject("select user_id from users where username = ?", int.class, username);
     }
 
-	@Override
-	public User getUserById(Long userId) {
-		String sql = "SELECT * FROM users WHERE user_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-		if(results.next()) {
-			return mapRowToUser(results);
-		} else {
-			throw new RuntimeException("userId "+userId+" was not found.");
-		}
-	}
+    @Override
+    public User getUserById(Long userId) {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            return mapRowToUser(results);
+        } else {
+            throw new RuntimeException("userId " + userId + " was not found.");
+        }
+    }
 
     @Override
     public List<User> findAll() {
@@ -46,7 +45,7 @@ public class JdbcUserDao implements UserDao {
         String sql = "select * from users";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
+        while (results.next()) {
             User user = mapRowToUser(results);
             users.add(user);
         }
@@ -57,7 +56,7 @@ public class JdbcUserDao implements UserDao {
     @Override
     public User findByUsername(String username) throws UsernameNotFoundException {
         for (User user : this.findAll()) {
-            if( user.getUsername().toLowerCase().equals(username.toLowerCase())) {
+            if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
         }

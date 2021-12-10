@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-// import java.time.Localtimestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class JdbcGameDao implements GameDao {
         List<Game> games = new ArrayList<Game>();
         String sql = "SELECT * FROM games;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
+        while (results.next()) {
             Game game = mapRowToGame(results);
             games.add(game);
         }

@@ -1,5 +1,5 @@
 BEGIN
-TRANSACTION;
+    TRANSACTION;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS games;
@@ -36,55 +36,55 @@ VALUES ('admin', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC',
 
 CREATE TABLE games
 (
-    game_id        SERIAL,
-    game_organizer int         NOT NULL,
-    game_winner    int         NULL,
+    game_id         SERIAL,
+    game_organizer  int         NOT NULL,
+    game_winner     int         NULL,
     start_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     end_timestamp   timestamp   NOT NULL CHECK (start_timestamp < end_timestamp),
-    game_status    varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (game_status IN ('ACTIVE', 'ARCHIVED')),
+    game_status     varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (game_status IN ('ACTIVE', 'ARCHIVED')),
     PRIMARY KEY (game_id)
 );
 
 CREATE TABLE portfolios
 (
-    portfolio_id      SERIAL,
-    user_id           int         NOT NULL,
-    game_id           int         NOT NULL,
-    portfolio_balance decimal     NOT NULL DEFAULT 100000.00,
-    portfolio_value   decimal     NOT NULL DEFAULT 100000.00,
-    portfolio_status  varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (portfolio_status IN ('PENDING', 'ACTIVE', 'ARCHIVED')),
+    portfolio_id           SERIAL,
+    user_id                int         NOT NULL,
+    game_id                int         NOT NULL,
+    portfolio_cash         decimal     NOT NULL DEFAULT 100000.00,
+    portfolio_stocks_value decimal     NOT NULL DEFAULT 0,
+    portfolio_total_value  decimal     NOT NULL DEFAULT 100000.00,
+    portfolio_status       varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (portfolio_status IN ('PENDING', 'ACTIVE', 'ARCHIVED')),
     PRIMARY KEY (portfolio_id)
 );
 
 CREATE TABLE stocks
 (
-    stock_symbol   varchar(10)      NOT NULL,
-    share_price    decimal          NOT NULL,
-    quote_timestamp timestamp        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    stock_symbol    varchar(10) NOT NULL,
+    share_price     decimal     NOT NULL,
+    quote_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (stock_symbol)
 );
 
 CREATE TABLE portfolios_stocks
 (
-    portfolio_id    SERIAL,
-    stock_symbol    varchar(10),
-    total_shares    int,
+    portfolio_id SERIAL,
+    stock_symbol varchar(10),
+    total_shares int,
     PRIMARY KEY (portfolio_id, stock_symbol)
 );
 
 CREATE TABLE transactions
 (
-    transaction_id       SERIAL,
-    portfolio_id         int         NOT NULL,
-    stock_symbol         varchar(10) NOT NULL,
-    transaction_type     varchar(10) NOT NULL CHECK (transaction_type in ('BUY', 'SELL')),
-    transaction_amount   decimal     NOT NULL,
-    transaction_shares   decimal     NOT NULL,
-    share_price          decimal     NOT NULL,
-    transaction_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    transaction_status   varchar(10) NOT NULL DEFAULT 'PENDING' CHECK (transaction_status in ('PENDING', 'COMPLETED')),
-    portfolio_balance    decimal     NOT NULL,
-    portfolio_value      decimal     NOT NULL,
+    transaction_id                   SERIAL,
+    portfolio_id                     int         NOT NULL,
+    stock_symbol                     varchar(10) NOT NULL,
+    transaction_type                 varchar(10) NOT NULL CHECK (transaction_type in ('BUY', 'SELL')),
+    transaction_amount               decimal     NOT NULL,
+    transaction_shares               decimal     NOT NULL,
+    share_price                      decimal     NOT NULL,
+    transaction_timestamp            timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    transaction_status               varchar(10) NOT NULL DEFAULT 'PENDING' CHECK (transaction_status in ('PENDING', 'COMPLETED')),
+    portfolio_cash_after_transaction decimal     NOT NULL,
     PRIMARY KEY (transaction_id)
 );
 
@@ -160,25 +160,26 @@ VALUES (1, 2, 1, 'ACTIVE'),
        (25, 5, 5, 'PENDING');
 
 INSERT INTO stocks (stock_symbol, share_price)
-VALUES  ('SPCE','12.70'),
-        ('AMD','15.50'),
-        ('MP','45.00'),
-        ('MSFT','333.71'),
-        ('IRM','25.70'),
-        ('LCID','65.20'),
-        ('CGC','10.77'),
-        ('AMZN','1005.20'),
-        ('ICLN','43.50'),
-        ('AAPL','99.00'),
-        ('TEST', '100.00');
+VALUES ('SPCE', '12.70'),
+       ('AMD', '15.50'),
+       ('MP', '45.00'),
+       ('MSFT', '333.71'),
+       ('IRM', '25.70'),
+       ('LCID', '65.20'),
+       ('CGC', '10.77'),
+       ('AMZN', '1005.20'),
+       ('ICLN', '43.50'),
+       ('AAPL', '99.00'),
+       ('TEST', '100.00');
 
 INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount,
-                          transaction_shares, share_price, transaction_timestamp, transaction_status, portfolio_balance, portfolio_value)
-VALUES (1, 'TEST', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000, 100000),
-       (2, 'TEST', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000, 100000),
-       (3, 'TEST', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000, 100000),
-       (4, 'TEST', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000, 100000),
-       (5, 'TEST', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000, 100000);
+                          transaction_shares, share_price, transaction_timestamp, transaction_status,
+                          portfolio_cash_after_transaction)
+VALUES (1, 'TEST', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000),
+       (2, 'TEST', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000),
+       (3, 'TEST', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000),
+       (4, 'TEST', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000),
+       (5, 'TEST', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000);
 
 INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares)
 VALUES (1, 'TEST', 10),
@@ -187,10 +188,20 @@ VALUES (1, 'TEST', 10),
        (4, 'TEST', 40),
        (5, 'TEST', 50);
 
-UPDATE portfolios SET portfolio_balance = portfolio_balance - 1000 WHERE portfolio_id = 1;
-UPDATE portfolios SET portfolio_balance = portfolio_balance - 2000 WHERE portfolio_id = 2;
-UPDATE portfolios SET portfolio_balance = portfolio_balance - 3000 WHERE portfolio_id = 3;
-UPDATE portfolios SET portfolio_balance = portfolio_balance - 4000 WHERE portfolio_id = 4;
-UPDATE portfolios SET portfolio_balance = portfolio_balance - 5000 WHERE portfolio_id = 5;
+UPDATE portfolios
+SET portfolio_cash = portfolio_cash - 1000
+WHERE portfolio_id = 1;
+UPDATE portfolios
+SET portfolio_cash = portfolio_cash - 2000
+WHERE portfolio_id = 2;
+UPDATE portfolios
+SET portfolio_cash = portfolio_cash - 3000
+WHERE portfolio_id = 3;
+UPDATE portfolios
+SET portfolio_cash = portfolio_cash - 4000
+WHERE portfolio_id = 4;
+UPDATE portfolios
+SET portfolio_cash = portfolio_cash - 5000
+WHERE portfolio_id = 5;
 
 COMMIT TRANSACTION;

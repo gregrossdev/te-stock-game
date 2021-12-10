@@ -7,20 +7,22 @@ public class Portfolio {
     private Long portfolioId;
     private Long userId;
     private Long gameId;
-    private BigDecimal portfolioBalance;
-    private BigDecimal portfolioValue;
+    private BigDecimal portfolioCash;
+    private BigDecimal portfolioStocksValue;
+    private BigDecimal portfolioTotalValue;
     private String portfolioStatus;
 
     public Portfolio() {
 
     }
 
-    public Portfolio(Long portfolioId, Long userId, Long gameId, BigDecimal portfolioBalance, BigDecimal portfolioValue, String portfolioStatus) {
+    public Portfolio(Long portfolioId, Long userId, Long gameId, BigDecimal portfolioCash, BigDecimal portfolioStocksValue, BigDecimal portfolioTotalValue, String portfolioStatus) {
         this.portfolioId = portfolioId;
         this.userId = userId;
         this.gameId = gameId;
-        this.portfolioBalance = portfolioBalance;
-        this.portfolioValue = portfolioValue;
+        this.portfolioCash = portfolioCash;
+        this.portfolioStocksValue = portfolioStocksValue;
+        this.portfolioTotalValue = portfolioTotalValue;
         this.portfolioStatus = portfolioStatus;
     }
 
@@ -48,20 +50,28 @@ public class Portfolio {
         this.gameId = gameId;
     }
 
-    public BigDecimal getPortfolioBalance() {
-        return portfolioBalance;
+    public BigDecimal getPortfolioCash() {
+        return portfolioCash;
     }
 
-    public void setPortfolioBalance(BigDecimal portfolioBalance) {
-        this.portfolioBalance = portfolioBalance;
+    public void setPortfolioCash(BigDecimal portfolioCash) {
+        this.portfolioCash = portfolioCash;
     }
 
-    public BigDecimal getPortfolioValue() {
-        return portfolioValue;
+    public BigDecimal getPortfolioStocksValue() {
+        return portfolioStocksValue;
     }
 
-    public void setPortfolioValue(BigDecimal portfolioValue) {
-        this.portfolioValue = portfolioValue;
+    public void setPortfolioStocksValue(BigDecimal portfolioStocksValue) {
+        this.portfolioStocksValue = portfolioStocksValue;
+    }
+
+    public BigDecimal getPortfolioTotalValue() {
+        return portfolioTotalValue;
+    }
+
+    public void setPortfolioTotalValue(BigDecimal portfolioTotalValue) {
+        this.portfolioTotalValue = portfolioTotalValue;
     }
 
     public String getPortfolioStatus() {

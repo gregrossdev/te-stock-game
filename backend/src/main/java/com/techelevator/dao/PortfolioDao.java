@@ -18,6 +18,8 @@ public interface PortfolioDao {
 
     boolean update(Portfolio portfolioToUpdate);
 
+    void updatePortfolioTotalValues();
+
     boolean delete(Long portfolioIdToDelete);
 
 }
