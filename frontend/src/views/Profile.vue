@@ -1,5 +1,7 @@
 <template>
   <main class="profile">
+    <nav class="profile-nav-bar">username Profile</nav>
+    <button v-on:click="createGame()">Create New Game</button>
     <nav>username</nav>
     <!-- <header>
       <h1>Virtual Stock Market Game</h1>
@@ -8,8 +10,21 @@
     <section>
       <game-card />
       Active Games
+
+    <article class="game-card">
+      Game Card #
+    </article>
+
     </section>
+
     <section>
+      Portfolio
+    <nav class="stocksearch-nav-bar">Search Stocks</nav>
+
+    Stock Cards
+
+    </section>
+
       <stocks />
     </section>
     <section></section>
@@ -28,3 +43,21 @@ export default {
     Stocks,
 }}
 </script>
+
+<style scoped>
+
+main {
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.profile-nav-bar {
+  background-color: blue 
+}
+
+.profile {
+  border: 3px solid var(--clr-pri-40);
+}
+
+</style>

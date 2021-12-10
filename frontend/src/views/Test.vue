@@ -9,6 +9,9 @@
         <h4>{{ data.username }}</h4>
       </article>
     </section>
+    <hr />
+    
+    <h2>Stocks</h2>
     <h3>Stocks</h3>
     <section class="stocks">
       <article
@@ -26,6 +29,12 @@
         <h4>{{ data }}</h4>
       </article>
     </section>
+
+
+
+
+    <hr />
+    <h3>Portfoios</h3>
     <h3>Portfolios</h3>
     <section class="portfolios">
       <article
