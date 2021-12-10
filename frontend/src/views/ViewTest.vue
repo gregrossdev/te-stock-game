@@ -9,7 +9,7 @@
       </article>
     </section>
     <hr />
-
+    
     <h2>Stocks</h2>
     <section class="stocks">
       <article
