@@ -9,7 +9,7 @@
       </article>
     </section>
     <hr />
-
+    
     <h2>Stocks</h2>
     <section class="stocks">
       <article
@@ -45,7 +45,7 @@
 
 
     <hr />
-    <h3>Portfolios</h3>
+    <h3>Portfoios</h3>
     <section class="portfolios">
       <article
         v-for="data in dataPortfolios"
