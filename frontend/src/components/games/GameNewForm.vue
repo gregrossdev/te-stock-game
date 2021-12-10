@@ -8,10 +8,10 @@
     <input type="text" placeholder="gameWinner" v-model="game.gameWinner" />
     <input
       type="text"
-      placeholder="startDatetime"
-      v-model="game.startDatetime"
+      placeholder="startTimestamp"
+      v-model="game.startTimestamp"
     />
-    <input type="text" placeholder="endDatetime" v-model="game.endDatetime" />
+    <input type="text" placeholder="endTimestamp" v-model="game.endTimestamp" />
     <input type="text" placeholder="gameStatus" v-model="game.gameStatus" />
     <button>Save</button>
   </form>
@@ -26,8 +26,8 @@ export default {
         gameId: "",
         gameOrganizer: "",
         gameWinner: "",
-        startDatetime: "",
-        endDatetime: "",
+        startTimestamp: "",
+        endTimestamp: "",
         gameStatus: "",
       },
     };
@@ -39,8 +39,8 @@ export default {
         gameId: "",
         gameOrganizer: "",
         gameWinner: "",
-        startDatetime: "",
-        endDatetime: "",
+        startTimestamp: "",
+        endTimestamp: "",
         gameStatus: "",
       };
       this.$router.push({ name: "test" });
