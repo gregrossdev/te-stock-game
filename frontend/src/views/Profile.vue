@@ -2,11 +2,13 @@
   <main class="profile">
     <nav class="profile-nav-bar">username Profile</nav>
     <button v-on:click="createGame()">Create New Game</button>
+    <nav>username</nav>
     <!-- <header>
       <h1>Virtual Stock Market Game</h1>
       <p>Welcome to the Virtual Stock Market Game!</p>
     </header> -->
     <section>
+      <game-card />
       Active Games
 
     <article class="game-card">
@@ -23,13 +25,23 @@
 
     </section>
 
+      <stocks />
+    </section>
+    <section></section>
   </main>
 </template>
 
+
 <script>
+import GameCard from "../components/games/GameCard.vue";
+import Stocks from "../components/stocks/Stocks.vue";
+
 export default {
   name: "profile",
-};
+  components: {
+    GameCard,
+    Stocks,
+}}
 </script>
 
 <style scoped>

@@ -28,7 +28,7 @@ public class StockAPIController {
     }
 
 
-//
+
 //    @RequestMapping(path="endpoint", method = RequestMethod.PUT)
 //    public boolean testMethod() throws IOException {
 //        Stock testStock = YahooFinance.get("SPCE");
@@ -55,7 +55,9 @@ public class StockAPIController {
 //            System.out.println(stockSymbol); prints stock symbol use to get actual stock
                 Stock tempStock = stocks.get(stockSymbol);
                 BigDecimal updatedPrice = tempStock.getQuote().getPrice();
+
                 stockDao.testMethodUpdatePriceTwo(updatedPrice, stockSymbol);
+
 
             }
             System.out.println("Check back in 5 minutes for an updated price!");

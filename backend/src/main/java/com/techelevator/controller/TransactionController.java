@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 @RequestMapping("/api/transactions/") // TODO double-check that this is the URL structure we want.
 public class TransactionController {
     private final TransactionDao transactionDao;
