@@ -1,19 +1,21 @@
 <template>
   <div>
       <p>test</p>
-      <stocks />
+      <stock-list />
   </div>
 </template>
 
 <script>
-import Stocks from '../components/stocks/Stocks.vue'
+import StockList from '../components/stocks/StockList.vue'
 export default {
     name: "stocklist",
-    components: { Stocks },
+    components: { StockList },
 
 }
 </script>
 
 <style>
+
+
 
 </style>

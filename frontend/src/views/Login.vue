@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h2>Welcome to the Virtual Stock Market Game</h2>
+    <h2 class="page-title">Welcome to the Virtual Stock Market Game</h2>
     <div id="login">
       <form class="form-signin" @submit.prevent="login">
         <h2>Sign In</h2>

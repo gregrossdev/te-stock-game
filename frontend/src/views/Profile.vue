@@ -10,7 +10,7 @@
       </article> 
     </section>
     <section>
-      <stocks /> 
+      <stock-list /> 
     </section>
   </main>
 </template>
@@ -20,15 +20,21 @@
 import GameCard from "../components/games/GameCard.vue";
 import GameNewForm from "../components/games/GameNewForm.vue";
 
-import Stocks from "../components/stocks/Stocks.vue";
+import StockList from "../components/stocks/StockList.vue";
 
 export default {
   name: "profile",
   components: {
     GameCard,
     GameNewForm, 
-    Stocks,
+    StockList,
   },
 };
 
 </script>
+
+<style scope> 
+  section {
+    margin-bottom: 4rem; 
+  }
+</style>

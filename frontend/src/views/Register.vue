@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h2>Please register to start playing!!!</h2> 
+    <h2 class="page-title">Please register to start playing!!!</h2> 
     <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h2>Register Account</h2>
