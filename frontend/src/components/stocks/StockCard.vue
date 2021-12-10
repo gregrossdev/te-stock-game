@@ -18,7 +18,7 @@
 import requestStocks from "@/services/ServiceStocks";
 
 export default {
-  name: "stock-list",
+  name: "stock-card",
   data() {
     return {
       dataStocks: [],
