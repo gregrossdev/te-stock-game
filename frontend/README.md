@@ -135,9 +135,9 @@ export default new Vuex.Store({
 
 When you reach the `/login` route, you'll see a bare login page. This is intentional. It's up to you to style this page to fit within your application.
 
-When you fill in a username and password and click the "Sign In" button, the method `login()` is called. The `login()` method uses the `/src/services/AuthService.js` to send a `POST` request to your API's `/login` route.
+When you fill in a username and password and click the "Sign In" button, the method `login()` is called. The `login()` method uses the `/src/services/ServiceAuth.js` to send a `POST` request to your API's `/login` route.
 
-If you look at `AuthService`, you'll notice that there's no base URL set for Axios:
+If you look at `ServiceAuth`, you'll notice that there's no base URL set for Axios:
 
 ```js
 import axios from 'axios';
@@ -162,7 +162,7 @@ If you get a successful response (200), it contains the authentication token and
 
 ```js
 login() {
-  authService
+  ServiceAuth
     .login(this.user)
     .then(response => {
       if (response.status == 200) {
@@ -226,13 +226,13 @@ mutations: {
 
 When you reach the `/register` route, you'll see a bare registration page. Like the login page, this is intentional. You'll need to style this page to fit within your application.
 
-When you fill in a username, password, confirm the password role, and click the "Create Account" button, the method `register()` is called. This calls the `register()` method in `/src/services/AuthService.js`. This passes  your user details to your back-end application's REST API to create a new user:
+When you fill in a username, password, confirm the password role, and click the "Create Account" button, the method `register()` is called. This calls the `register()` method in `/src/services/ServiceAuth.js`. This passes  your user details to your back-end application's REST API to create a new user:
 
 ```js
 methods: {
 register() {
   // ...
-  authService
+  ServiceAuth
     .register(this.user)
     .then(response => {
       if (response.status == 201) {

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import ServiceAuth from "../services/ServiceAuth";
 
 export default {
   name: "login",
@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     login() {
-      authService
+      ServiceAuth
         .login(this.user)
         .then((response) => {
           if (response.status == 200) {

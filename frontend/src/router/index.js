@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Profile from '../views/Profile.vue'
-import Login from '../views/Login.vue'
-import Logout from '../views/Logout.vue'
-import Register from '../views/Register.vue'
-import Test from '../views/Test.vue'
 import store from '../store/index'
-import Stocks from '../views/Stocks.vue'
+import ViewProfile from '../views/ViewProfile.vue'
+import ViewLogin from '../views/ViewLogin.vue'
+import ViewLogout from '../views/ViewLogout.vue'
+import ViewRegister from '../views/ViewRegister.vue'
+import ViewTest from '../views/ViewTest.vue'
+import ViewStocks from '../views/ViewStocks.vue'
 
 Vue.use(Router)
 
@@ -26,7 +26,7 @@ const router = new Router({
     {
       path: '/',
       name: 'profile',
-      component: Profile,
+      component: ViewProfile,
       meta: {
         requiresAuth: true
       }
@@ -34,7 +34,7 @@ const router = new Router({
     {
       path: "/login",
       name: "login",
-      component: Login,
+      component: ViewLogin,
       meta: {
         requiresAuth: false
       }
@@ -42,7 +42,7 @@ const router = new Router({
     {
       path: "/logout",
       name: "logout",
-      component: Logout,
+      component: ViewLogout,
       meta: {
         requiresAuth: false
       }
@@ -50,7 +50,7 @@ const router = new Router({
     {
       path: "/register",
       name: "register",
-      component: Register,
+      component: ViewRegister,
       meta: {
         requiresAuth: false
       }
@@ -58,7 +58,7 @@ const router = new Router({
     {
       path: "/test",
       name: "test",
-      component: Test,
+      component: ViewTest,
       meta: {
         requiresAuth: false
       }
@@ -66,7 +66,7 @@ const router = new Router({
     {
       path: '/stocks',
       name: 'stocks',
-      component: Stocks,
+      component: ViewStocks,
       meta: {
         requiresAuth: true
       }
