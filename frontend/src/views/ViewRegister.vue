@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h2>Please register to start playing!!!</h2> 
+    <h2 class="page-title">Please register to start playing!!!</h2> 
     <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h2>Register Account</h2>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import authService from '../services/AuthService';
+import ServiceAuth from '../services/ServiceAuth';
 
 export default {
   name: 'register',
@@ -67,7 +67,7 @@ export default {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
-        authService
+        ServiceAuth
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
