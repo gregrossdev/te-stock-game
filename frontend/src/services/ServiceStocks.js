@@ -12,32 +12,21 @@ export default {
 
 	test(){
 		return http.get('test/endpoint');
+	},
+
+	getStockByStockSymbol(stockSymbol) {
+		return http.get(`${stockSymbol}`);
+	},
+
+	create(stockToCreate) {
+		return http.post("", stockToCreate);
+	},
+
+	update(stockToUpdate) {
+		return http.put(`${stockToUpdate.stockSymbol}`, stockToUpdate);
+	},
+
+	delete(stockSymbolToDelete) {
+		return http.delete(`${stockSymbolToDelete}`);
 	}
-
-// 	@RequestMapping(path="", method = RequestMethod.GET)
-// 	public List<StockWrapper> getStocks() {
-// 	return stockDao.getStocks();
-// }
-//
-// @RequestMapping(path="{stockSymbol}", method = RequestMethod.GET)
-// public StockWrapper getStockByStockSymbol(@PathVariable String stockSymbol) {
-// 	return stockDao.getStockByStockSymbol(stockSymbol);
-// }
-//
-// @ResponseStatus(HttpStatus.CREATED)
-// @RequestMapping(path="", method = RequestMethod.POST)
-// public boolean create(StockWrapper stockWrapperToCreate) {
-// 	return stockDao.create(stockWrapperToCreate);
-// }
-//
-// @RequestMapping(path="{stockSymbol}", method = RequestMethod.PUT)
-// public boolean update(@RequestBody StockWrapper stockWrapperToUpdate) {
-// 	return stockDao.update(stockWrapperToUpdate);
-// }
-//
-// @RequestMapping(path="{stockSymbolToDelete}", method = RequestMethod.DELETE)
-// public boolean delete(@PathVariable String stockSymbolToDelete) {
-// 	return stockDao.delete(stockSymbolToDelete);
-// }
-
 }
