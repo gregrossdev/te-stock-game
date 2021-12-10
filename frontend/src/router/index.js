@@ -7,6 +7,9 @@ import ViewLogout from '../views/ViewLogout.vue'
 import ViewRegister from '../views/ViewRegister.vue'
 import ViewTest from '../views/ViewTest.vue'
 import ViewStocks from '../views/ViewStocks.vue'
+import ViewGame from "@/views/ViewGame";
+import ViewNewGame from "@/views/ViewNewGame";
+import ViewNewTransaction from "@/views/ViewNewTransaction";
 
 Vue.use(Router)
 
@@ -67,6 +70,30 @@ const router = new Router({
       path: '/stocks',
       name: 'stocks',
       component: ViewStocks,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/game/:gameId/portfolio/:portfolioId',
+      name: 'ViewGame',
+      component: ViewGame,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/new-game',
+      name: 'ViewNewGame',
+      component: ViewNewGame,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/game/:gameId/portfolio/:portfolioId/new-transaction',
+      name: 'ViewNewTransaction',
+      component: ViewNewTransaction,
       meta: {
         requiresAuth: true
       }
