@@ -6,7 +6,7 @@ const http = axios.create({
 
 export default {
 
-	getPortfolios() {
+	list() {
 		return http.get("");
 	},
 
@@ -33,5 +33,5 @@ export default {
 	delete(portfolioIdToDelete) {
 		return http.delete(`${portfolioIdToDelete}`);
 	}
-	
+
 }
