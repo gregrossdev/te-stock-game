@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/stocks/") // TODO double-check that this is the URL structure we want.
+@RequestMapping("/api/stocks/")
 public class StockController {
     private final StockDao stockDao;
 
@@ -17,28 +17,28 @@ public class StockController {
         this.stockDao = stockDao;
     }
 
-    @RequestMapping(path="", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<StockWrapper> getStocks() {
         return stockDao.getStocks();
     }
 
-    @RequestMapping(path="{stockSymbol}", method = RequestMethod.GET)
+    @RequestMapping(path = "{stockSymbol}", method = RequestMethod.GET)
     public StockWrapper getStockByStockSymbol(@PathVariable String stockSymbol) {
         return stockDao.getStockByStockSymbol(stockSymbol);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path="", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public boolean create(StockWrapper stockWrapperToCreate) {
         return stockDao.create(stockWrapperToCreate);
     }
 
-    @RequestMapping(path="{stockSymbol}", method = RequestMethod.PUT)
+    @RequestMapping(path = "{stockSymbol}", method = RequestMethod.PUT)
     public boolean update(@RequestBody StockWrapper stockWrapperToUpdate) {
         return stockDao.update(stockWrapperToUpdate);
     }
 
-    @RequestMapping(path="{stockSymbolToDelete}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "{stockSymbolToDelete}", method = RequestMethod.DELETE)
     public boolean delete(@PathVariable String stockSymbolToDelete) {
         return stockDao.delete(stockSymbolToDelete);
     }

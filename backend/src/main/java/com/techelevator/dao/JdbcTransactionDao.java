@@ -72,20 +72,20 @@ public class JdbcTransactionDao implements TransactionDao {
                 transactionToCreate.getTransactionType(), transactionToCreate.getTransactionAmount(),
                 transactionToCreate.getTransactionShares(), transactionToCreate.getSharePrice(),
                 transactionToCreate.getTransactionTimestamp(), transactionToCreate.getTransactionStatus(),
-                transactionToCreate.getPortfolioBalance(), transactionToCreate.getPortfolioValue()) == 1;
+                transactionToCreate.getPortfolioCashAfterTransaction(), transactionToCreate.getPortfolioValue()) == 1;
     }
 
     @Override
     public boolean update(Transaction transactionToUpdate) {
         String sql =
                 "UPDATE transactions SET portfolio_id = ?, stock_symbol = ?, transaction_type = ?, transaction_amount = ?, " +
-                "transaction_shares = ?, share_price = ?, transaction_timestamp = ?, transaction_status = ?, portfolio_balance = ?, " +
-                "portfolio_value = ? WHERE transaction_id = ?;";
+                        "transaction_shares = ?, share_price = ?, transaction_timestamp = ?, transaction_status = ?, portfolio_balance = ?, " +
+                        "portfolio_value = ? WHERE transaction_id = ?;";
         return jdbcTemplate.update(sql, transactionToUpdate.getPortfolioId(), transactionToUpdate.getStockSymbol(),
                 transactionToUpdate.getTransactionType(), transactionToUpdate.getTransactionAmount(),
                 transactionToUpdate.getTransactionShares(), transactionToUpdate.getSharePrice(),
                 transactionToUpdate.getTransactionTimestamp(), transactionToUpdate.getTransactionStatus(),
-                transactionToUpdate.getPortfolioBalance(), transactionToUpdate.getPortfolioValue(),
+                transactionToUpdate.getPortfolioCashAfterTransaction(), transactionToUpdate.getPortfolioValue(),
                 transactionToUpdate.getTransactionId()) == 1;
     }
 
@@ -106,8 +106,8 @@ public class JdbcTransactionDao implements TransactionDao {
         transaction.setSharePrice(results.getBigDecimal("share_price"));
         transaction.setTransactionTimestamp(results.getTimestamp("transaction_timestamp"));
         transaction.setTransactionStatus(results.getString("transaction_status"));
-        transaction.setPortfolioBalance(results.getBigDecimal("portfolio_balance"));
-        transaction.setPortfolioValue(results.getBigDecimal("portfolio_value"));
+        transaction.setPortfolioCashAfterTransaction(results.getBigDecimal("portfolio_cash_after_transaction"));
+        transaction.setPortfolioValue(results.getBigDecimal("portfolio_total_value"));
         return transaction;
     }
 }

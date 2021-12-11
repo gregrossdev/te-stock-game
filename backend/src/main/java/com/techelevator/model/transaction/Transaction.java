@@ -14,8 +14,7 @@ public class Transaction {
     private BigDecimal sharePrice;
     private Timestamp transactionTimestamp;
     private String transactionStatus;
-    private BigDecimal portfolioBalance;
-    private BigDecimal portfolioValue;
+    private BigDecimal portfolioCashAfterTransaction;
 
     public Transaction() {
 
@@ -23,8 +22,7 @@ public class Transaction {
 
     public Transaction(Long transactionId, Long portfolioId, String stockSymbol, String transactionType,
                        BigDecimal transactionAmount, BigDecimal transactionShares, BigDecimal sharePrice,
-                       Timestamp transactionTimestamp, String transactionStatus, BigDecimal portfolioBalance,
-                       BigDecimal portfolioValue) {
+                       Timestamp transactionTimestamp, String transactionStatus, BigDecimal portfolioCashAfterTransaction) {
         this.transactionId = transactionId;
         this.portfolioId = portfolioId;
         this.stockSymbol = stockSymbol;
@@ -34,8 +32,7 @@ public class Transaction {
         this.sharePrice = sharePrice;
         this.transactionTimestamp = transactionTimestamp;
         this.transactionStatus = transactionStatus;
-        this.portfolioBalance = portfolioBalance;
-        this.portfolioValue = portfolioValue;
+        this.portfolioCashAfterTransaction = portfolioCashAfterTransaction;
     }
 
     public Long getTransactionId() {
@@ -110,19 +107,12 @@ public class Transaction {
         this.transactionStatus = transactionStatus;
     }
 
-    public BigDecimal getPortfolioBalance() {
-        return portfolioBalance;
+    public BigDecimal getPortfolioCashAfterTransaction() {
+        return portfolioCashAfterTransaction;
     }
 
-    public void setPortfolioBalance(BigDecimal portfolioBalance) {
-        this.portfolioBalance = portfolioBalance;
+    public void setPortfolioCashAfterTransaction(BigDecimal portfolioCashAfterTransaction) {
+        this.portfolioCashAfterTransaction = portfolioCashAfterTransaction;
     }
 
-    public BigDecimal getPortfolioValue() {
-        return portfolioValue;
-    }
-
-    public void setPortfolioValue(BigDecimal portfolioValue) {
-        this.portfolioValue = portfolioValue;
-    }
 }
