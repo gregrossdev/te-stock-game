@@ -123,7 +123,8 @@ public class JdbcPortfolioDao implements PortfolioDao {
         portfolio.setPortfolioId(results.getLong("portfolio_id"));
         portfolio.setUserId(results.getLong("user_id"));
         portfolio.setGameId(results.getLong("game_id"));
-        portfolio.setPortfolioCash(results.getBigDecimal("portfolio_cash_after_transaction"));
+        portfolio.setPortfolioCash(results.getBigDecimal("portfolio_cash"));
+        portfolio.setPortfolioStocksValue(results.getBigDecimal("portfolio_stocks_value"));
         portfolio.setPortfolioTotalValue(results.getBigDecimal("portfolio_total_value"));
         portfolio.setPortfolioStatus(results.getString("portfolio_status"));
         return portfolio;

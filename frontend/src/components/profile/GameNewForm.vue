@@ -18,7 +18,7 @@ export default {
     return {
       game: {
         gameId: "",
-        gameOrganizer: this.$store.state.user.id,
+        gameOrganizer: "",
         gameWinner: "",
         startTimestamp: "",
         endTimestamp: "",

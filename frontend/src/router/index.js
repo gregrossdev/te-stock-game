@@ -1,14 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/index'
-import ViewProfile from '../views/ViewProfile.vue'
 import ViewLogin from '../views/ViewLogin.vue'
 import ViewLogout from '../views/ViewLogout.vue'
 import ViewRegister from '../views/ViewRegister.vue'
+
 import ViewTest from '../views/ViewTest.vue'
+
+import ViewAllGames from "@/views/ViewAllGames";
+import ViewAllUsers from "@/views/ViewAllUsers";
+import ViewAllStocks from '../views/ViewAllStocks.vue'
+import ViewAllPortfolios from '../views/ViewAllPortfolios.vue'
+import ViewAllTransactions from '../views/ViewAllTransactions.vue'
+
 import ViewStocks from '../views/ViewStocks.vue'
-import ViewGame from "@/views/ViewGame";
+
 import ViewNewGame from "@/views/ViewNewGame";
+import ViewProfile from '../views/ViewProfile.vue'
+import ViewGame from "@/views/ViewGame";
 import ViewNewTransaction from "@/views/ViewNewTransaction";
 
 Vue.use(Router)
@@ -68,7 +77,7 @@ const router = new Router({
     },
     {
       path: '/stocks',
-      name: 'stocks',
+      name: 'ViewStocks',
       component: ViewStocks,
       meta: {
         requiresAuth: true
@@ -94,6 +103,46 @@ const router = new Router({
       path: '/game/:gameId/portfolio/:portfolioId/new-transaction',
       name: 'ViewNewTransaction',
       component: ViewNewTransaction,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/allgames',
+      name: 'ViewAllGames',
+      component: ViewAllGames,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/allstocks',
+      name: 'ViewAllStocks',
+      component: ViewAllStocks,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/allportfolios',
+      name: 'ViewAllPortfolios',
+      component: ViewAllPortfolios,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/alltransactions',
+      name: 'ViewAllTransactions',
+      component: ViewAllTransactions,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/allusers',
+      name: 'ViewAllUsers',
+      component: ViewAllUsers,
       meta: {
         requiresAuth: true
       }

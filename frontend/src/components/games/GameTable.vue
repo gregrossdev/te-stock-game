@@ -46,34 +46,17 @@ export default {
 </script>
 
 <style scoped>
-section {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-article {
-  border: 1px solid var(--clr-grey-30);
-  padding: 0.25em;
-  border-radius: 0.25em;
-}
-
-article > * {
-  overflow-wrap: break-word;
+table {
+  margin-bottom: 1em; 
 }
 
 table tr {
   text-align: left;
 }
 
-table th {
-  margin-left: 10em;
-}
-
 th,
 td {
-  padding: 0 15px 0 0;
+  padding: 0 1em 0 0;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }

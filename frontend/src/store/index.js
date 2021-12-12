@@ -20,6 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || "",
     user: currentUser || {},
+    users: [], 
     games: [],
     portfolios: [],
     stocks: [],
@@ -57,12 +58,38 @@ export default new Vuex.Store({
       axios.defaults.headers.common = {};
     },
     /*
+     * Users
+     */
+    SET_USERS(state, data) {
+      state.users = data;
+    },
+    /*
+     * Stocks
+     */
+    SET_STOCKS(state, data) {
+      state.stocks = data;
+    },
+    /*
      * GAMES
      */
+    SET_GAMES(state, data) {
+      state.games = data;
+    },
     SAVE_GAME(state, game) {
       state.games.push(game);
     },
-
-    // SET STOCKS
+    /*
+     * Portfolios
+     */
+    SET_PORTFOLIOS(state, data) {
+      state.portfolios = data;
+    },
+    /*
+     * Transactions
+     */
+    SET_TRANSACTIONS(state, data) {
+      state.transactions = data;
+    },
+    
   },
 });

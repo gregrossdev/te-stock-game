@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .stocks {
   padding: 1rem;
   display: flex;
