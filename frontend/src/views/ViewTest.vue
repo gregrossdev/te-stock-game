@@ -1,16 +1,16 @@
 <template>
   <main>
     <h1>Test Data</h1>
-    <hr />
+    <!-- <hr />
     <h2>Users</h2>
     <section class="users">
       <article v-for="data in dataUsers" v-bind:key="data.id" class="user">
-        <h4>{{ data.username }}</h4>
+        <h4>{{ data }}</h4>
       </article>
     </section>
-    <hr />
+    <hr /> -->
     
-    <h2>Stocks</h2>
+    <!-- <h2>Stocks</h2>
     <section class="stocks">
       <article
         v-for="data in dataStocks"
@@ -21,9 +21,9 @@
         <h4>{{ data.sharePrice }}</h4>
       </article>
     </section>
-    <hr />
+    <hr /> -->
 
-    <h2>Games</h2>
+    <!-- <h2>Games</h2>
     <section class="games">
       <article v-for="data in dataGames" v-bind:key="data.gameId" class="game">
         <h4>{{ data }}</h4>
@@ -39,12 +39,12 @@
 
 
 
-    </section>
+    </section> -->
 
 
 
 
-    <hr />
+    <!-- <hr />
     <h3>Portfolios</h3>
     <section class="portfolios">
       <article
@@ -69,7 +69,7 @@
       >
         <h4>{{ data }}</h4>
       </article>
-    </section>
+    </section> -->
 
     
     <!-- <button v-on:click="updateSpce()">UPDATE SPCE</button> -->
@@ -77,48 +77,47 @@
 </template>
 
 <script>
-import requestStocks from "@/services/ServiceStocks";
-import requestUsers from "@/services/ServiceUsers";
-import requestGames from "@/services/ServiceGames";
-import requestPortfolios from "@/services/ServicePortfolios";
-import requestTransactions from "@/services/ServiceTransactions";
-import GameNewForm from "@/components/games/GameNewForm"; 
+// import requestStocks from "@/services/ServiceStocks";
+// import requestUsers from "@/services/ServiceUsers";
+// import requestGames from "@/services/ServiceGames";
+// import requestPortfolios from "@/services/ServicePortfolios";
+// import requestTransactions from "@/services/ServiceTransactions";
 
 export default {
   name: "test-data",
   components: {
-      GameNewForm
+      
   },
   methods: {
-    updateSpce() {
-      requestStocks.test();
-    },
+    // updateSpce() {
+    //   requestStocks.test();
+    // },
   },
   data() {
     return {
-      dataStocks: [],
-      dataUsers: [],
-      dataGames: [],
-      dataPortfolios: [],
-      dataTransactions: [],
+      // dataStocks: [],
+      // dataUsers: [],
+      // dataGames: [],
+      // dataPortfolios: [],
+      // dataTransactions: [],
     };
   },
   created() {
-    requestStocks.list().then((response) => {
-      this.dataStocks = response.data;
-    });
-    requestUsers.list().then((response) => {
-      this.dataUsers = response.data;
-    });
-    requestGames.list().then((response) => {
-      this.dataGames = response.data;
-    });
-    requestPortfolios.list().then((response) => {
-      this.dataPortfolios = response.data;
-    });
-    requestTransactions.list().then((response) => {
-      this.dataTransactions = response.data;
-    });
+    // requestStocks.list().then((response) => {
+    //   this.dataStocks = response.data;
+    // });
+    // requestUsers.list().then((response) => {
+    //   this.dataUsers = response.data;
+    // });
+    // requestGames.list().then((response) => {
+    //   this.dataGames = response.data;
+    // });
+    // requestPortfolios.list().then((response) => {
+    //   this.dataPortfolios = response.data;
+    // });
+    // requestTransactions.list().then((response) => {
+    //   this.dataTransactions = response.data;
+    // });
   },
 };
 </script>
