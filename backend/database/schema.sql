@@ -169,24 +169,23 @@ VALUES ('SPCE', '12.70'),
        ('CGC', '10.77'),
        ('AMZN', '1005.20'),
        ('ICLN', '43.50'),
-       ('AAPL', '99.00'),
-       ('TEST', '100.00');
+       ('AAPL', '100.00');
 
 INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount,
                           transaction_shares, share_price, transaction_timestamp, transaction_status,
                           portfolio_cash_after_transaction)
-VALUES (1, 'TEST', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000),
-       (2, 'TEST', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000),
-       (3, 'TEST', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000),
-       (4, 'TEST', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000),
-       (5, 'TEST', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000);
+VALUES (1, 'AAPL', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000),
+       (2, 'AAPL', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000),
+       (3, 'AAPL', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000),
+       (4, 'AAPL', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000),
+       (5, 'AAPL', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000);
 
 INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares)
-VALUES (1, 'TEST', 10),
-       (2, 'TEST', 20),
-       (3, 'TEST', 30),
-       (4, 'TEST', 40),
-       (5, 'TEST', 50);
+VALUES (1, 'AAPL', 10),
+       (2, 'AAPL', 20),
+       (3, 'AAPL', 30),
+       (4, 'AAPL', 40),
+       (5, 'AAPL', 50);
 
 UPDATE portfolios
 SET portfolio_cash = portfolio_cash - 1000

@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @CrossOrigin
@@ -50,6 +51,7 @@ public class AuthenticationController {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
         return new ResponseEntity<>(new LoginResponse(jwt, user), httpHeaders, HttpStatus.OK);
     }
 
