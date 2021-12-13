@@ -66,7 +66,8 @@ public class JdbcTransactionDao implements TransactionDao {
     @Override
     public boolean create(Transaction transactionToCreate) {
         String sql = "INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount, " +
-                "transaction_shares, share_price, transaction_timestamp, transaction_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                "transaction_shares, share_price, transaction_timestamp, transaction_status, portfolio_cash_after_transaction) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         return jdbcTemplate.update(sql, transactionToCreate.getPortfolioId(), transactionToCreate.getStockSymbol(),
                 transactionToCreate.getTransactionType(), transactionToCreate.getTransactionAmount(),
                 transactionToCreate.getTransactionShares(), transactionToCreate.getSharePrice(),
