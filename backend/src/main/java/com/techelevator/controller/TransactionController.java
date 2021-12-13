@@ -1,9 +1,12 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.PortfolioDao;
 import com.techelevator.dao.TransactionDao;
+import com.techelevator.model.portfolio.Portfolio;
 import com.techelevator.model.transaction.Transaction;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin
@@ -12,9 +15,11 @@ import java.util.List;
 @RequestMapping("/api/transactions/")
 public class TransactionController {
     private final TransactionDao transactionDao;
+    private final PortfolioDao portfolioDao;
 
-    public TransactionController(TransactionDao transactionDao) {
+    public TransactionController(TransactionDao transactionDao, PortfolioDao portfolioDao) {
         this.transactionDao = transactionDao;
+        this.portfolioDao = portfolioDao;
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
@@ -39,6 +44,20 @@ public class TransactionController {
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public boolean create(@RequestBody Transaction transactionToCreate) {
+        Long portfolioId = transactionToCreate.getPortfolioId();
+        String transactionType = transactionToCreate.getTransactionType();
+        BigDecimal transactionAmount = transactionToCreate.getTransactionAmount();
+
+        Portfolio portfolio = portfolioDao.getPortfolioByPortfolioId(portfolioId);
+        BigDecimal portfolioCash = portfolio.getPortfolioCash();
+
+        if (transactionType.equalsIgnoreCase("BUY") && portfolioCash.compareTo(transactionAmount) >= 0) {
+            portfolio.setPortfolioCash(portfolioCash.subtract(transactionAmount));
+            portfolioDao.update(portfolio);
+        }
+
+
+
         return transactionDao.create(transactionToCreate);
     }
 
