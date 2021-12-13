@@ -170,23 +170,23 @@ VALUES ('SPCE', '12.70'),
        ('AMZN', '1005.20'),
        ('ICLN', '43.50'),
        ('AAPL', '99.00'),
-       ('TEST', '100.00');
+       ('RKLB', '100.00');
 
 INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount,
                           transaction_shares, share_price, transaction_timestamp, transaction_status,
                           portfolio_cash_after_transaction)
-VALUES (1, 'TEST', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000),
-       (2, 'TEST', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000),
-       (3, 'TEST', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000),
-       (4, 'TEST', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000),
-       (5, 'TEST', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000);
+VALUES (1, 'RKLB', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000),
+       (2, 'RKLB', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000),
+       (3, 'RKLB', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000),
+       (4, 'RKLB', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000),
+       (5, 'RKLB', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000);
 
 INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares)
-VALUES (1, 'TEST', 10),
-       (2, 'TEST', 20),
-       (3, 'TEST', 30),
-       (4, 'TEST', 40),
-       (5, 'TEST', 50);
+VALUES (1, 'RKLB', 10),
+       (2, 'RKLB', 20),
+       (3, 'RKLB', 30),
+       (4, 'RKLB', 40),
+       (5, 'RKLB', 50);
 
 UPDATE portfolios
 SET portfolio_cash = portfolio_cash - 1000
