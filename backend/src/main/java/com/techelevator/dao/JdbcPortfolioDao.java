@@ -6,8 +6,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class JdbcPortfolioDao implements PortfolioDao {
@@ -71,8 +74,10 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public boolean update(Portfolio portfolioToUpdate) {
-        String sql = "UPDATE portfolios SET user_id = ?, game_id = ?, portfolio_cash = ?, portfolio_stocks_value = ?, portfolio_total_value = ?, " +
-                "portfolio_status = ? WHERE portfolio_id =?;";
+        String sql = "UPDATE portfolios " +
+                        "SET user_id = ?, game_id = ?, portfolio_cash = ?, portfolio_stocks_value = ?, portfolio_total_value = ?, " +
+                            "portfolio_status = ? " +
+                        "WHERE portfolio_id =?;";
         return jdbcTemplate.update(sql, portfolioToUpdate.getUserId(), portfolioToUpdate.getGameId(),
                 portfolioToUpdate.getPortfolioCash(), portfolioToUpdate.getPortfolioStocksValue(), portfolioToUpdate.getPortfolioTotalValue(),
                 portfolioToUpdate.getPortfolioStatus()) == 1;
@@ -82,34 +87,38 @@ public class JdbcPortfolioDao implements PortfolioDao {
     @Override
     public void updatePortfolioTotalValues() {
 
-        // Set all active portfolios' portfolio_stocks_value to 0.
-        String zeroPortfolioStocksValueSql = "UPDATE portfolios SET portfolio_stocks_value = 0 WHERE portfolio_status = 'ACTIVE';";
-        jdbcTemplate.update(zeroPortfolioStocksValueSql);
-
-        // Get all the rows from portfolios_stocks that apply to active portfolios.
-        String sql = "SELECT * from portfolios_stocks " +
-                "JOIN portfolios ON portfolios_stocks.portfolio_id = portfolios.portfolio_id " +
-                "WHERE portfolios.portfolio_status = 'ACTIVE';";
+        String sql = "SELECT portfolios.portfolio_id, portfolios.portfolio_cash, portfolios.portfolio_stocks_value, " +
+                        "portfolios.portfolio_total_value, portfolios_stocks.stock_symbol, portfolios_stocks.total_shares, " +
+                        "stocks.share_price " +
+                    "FROM portfolios_stocks " +
+                    "JOIN portfolios ON portfolios_stocks.portfolio_id = portfolios.portfolio_id " +
+                    "JOIN stocks ON portfolios_stocks.stock_symbol = stocks.stock_symbol " +
+                    "WHERE portfolios.portfolio_status = 'ACTIVE';";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
-        // Loop through the rows in portfolios_stocks, adding (total_shares * share_price) to portfolio_stocks_value.
+        Map<Long, BigDecimal> portfolioStocksValueMap = new HashMap<>();
+
         while (results.next()) {
-            Long portfolioId = results.getLong("portfolios_stocks.portfolio_id");
-            String stockSymbol = results.getString("portfolios_stocks.stock_symbol");
+            Long portfolioId = results.getLong("portfolio_id");
+            BigDecimal totalShares = results.getBigDecimal("total_shares");
+            BigDecimal stockValue = results.getBigDecimal("share_price");
 
-            String updateSql = "UPDATE portfolios " +
-                    "SET portfolio_stocks_value = portfolio_stocks_value + (portfolios_stocks.total_shares * stocks.share_price) " +
-                    "FROM portfolios_stocks " +
-                    "JOIN stocks ON portfolios_stocks.stock_symbol = stocks.stock_symbol " +
-                    "WHERE portfolios.portfolio_id = portfolios_stocks.portfolio_id " +
-                    "AND portfolios.portfolio_id = ? AND portfolios_stocks.stock_symbol = ?;";
-
-            jdbcTemplate.update(updateSql, portfolioId, stockSymbol);
+            if (portfolioStocksValueMap.get(portfolioId) == null) {
+                portfolioStocksValueMap.put(portfolioId, (stockValue.multiply(totalShares)));
+            } else {
+                portfolioStocksValueMap.put(portfolioId, (portfolioStocksValueMap.get(portfolioId).add(stockValue.multiply(totalShares))));
+            }
         }
 
-        String calculatePortfolioTotalValueSql = "UPDATE portfolios SET portfolio_total_value = portfolio_cash + portfolio_stocks_value " +
-                "WHERE portfolio_status = 'ACTIVE';";
-        jdbcTemplate.update(calculatePortfolioTotalValueSql);
+        for (Map.Entry<Long, BigDecimal> entry : portfolioStocksValueMap.entrySet()) {
+            Long portfolioId = entry.getKey();
+            BigDecimal portfolioStocksValue = entry.getValue();
+            String updateSql = "UPDATE portfolios " +
+                                "SET portfolio_stocks_value = ?, " +
+                                    "portfolio_total_value = portfolio_cash + ? " +
+                                "WHERE portfolio_id = ?;";
+            jdbcTemplate.update(updateSql, portfolioStocksValue, portfolioStocksValue, portfolioId);
+        }
     }
 
     @Override
