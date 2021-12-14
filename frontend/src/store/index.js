@@ -26,15 +26,15 @@ export default new Vuex.Store({
     stocks: [],
     transactions: [],
     activeGame: {
-      gameId: null,
-      gameOrganizer: null,
+      gameId: 1,
+      gameOrganizer: 2,
       gameStartTimestamp: null,
       gameEndTimestamp: null
     },
     activePortfolio: {
-      portfolioId: null,
-      userId: null,
-      gameId: null,
+      portfolioId: 1,
+      userId: 2,
+      gameId: 1,
       portfolioBalance: null,
       portfolioValue: null,
       portfolioStocks: []
@@ -78,11 +78,17 @@ export default new Vuex.Store({
     SAVE_GAME(state, game) {
       state.games.push(game);
     },
+    SET_ACTIVE_GAME(state, data) {
+      state.activeGame = data;
+    },
     /*
      * Portfolios
      */
     SET_PORTFOLIOS(state, data) {
       state.portfolios = data;
+    },
+    SET_ACTIVE_PORTFOLIO(state, data) {
+      state.activePortfolio = data;
     },
     /*
      * Transactions
