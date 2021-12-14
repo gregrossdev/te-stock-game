@@ -10,6 +10,8 @@ public interface GameDao {
 
     Game getGameByGameId(Long gameId);
 
+    List<Game> getGamesByUserId(Long userId);
+
     Game getGameByGameOrganizer(Long gameOrganizer);
 
     Game getGameByGameWinner(Long gameWinner);
