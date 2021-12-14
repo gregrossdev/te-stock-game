@@ -5,12 +5,12 @@
     <div class="stocks">
       <article
         class="stock"
-        v-for="data in dataStocks"
-        v-bind:key="data.stockSymbol"
+        v-for="stock in this.$store.state.stocks"
+        v-bind:key="stock.stockSymbol"
       >
-      <input class="hidden" type="text" placeholder="stockSymbol" v-model="data.stockSymbol"/>
-        <h5>{{ data.stockSymbol }} - ${{ data.sharePrice }}</h5>
-        <transaction-new-form v-model="data.stockSymbol"/> <!-- I don;'t think this is working the way I want it to - also very backwards component building I know sorry! -->
+      <input class="hidden" type="text" :value="stock.stockSymbol"/>
+        <h5>{{ stock.stockSymbol }} - ${{ stock.sharePrice }}</h5>
+        <transaction-new-form v-bind:stockSymbol="stock.stockSymbol" v-bind:sharePrice="stock.sharePrice" v-model="stock.stockSymbol"/> <!-- I don;'t think this is working the way I want it to - also very backwards component building I know sorry! -->
       </article>
     </div>
   </div>
@@ -30,14 +30,10 @@ export default {
   components:{
     TransactionNewForm,
   },
-  data() {
-    return {
-      dataStocks: [],
-    };
-  },
+
   created() {
     requestStocks.list().then((response) => {
-      this.dataStocks = response.data;
+      this.$store.commit("SET_STOCKS", response.data);
     });
   },
 };
@@ -69,13 +65,13 @@ export default {
 
 
 
-// <section class="stocks">
-//       <article
-//         v-for="data in dataStocks"
-//         v-bind:key="data.sharePrice"
-//         class="stock"
-//       >
-//         <h4>{{ data.stockSymbol }}</h4>
-//         <h4>{{ data.sharePrice }}</h4>
-//       </article>
-//     </section>
+<!--// <section class="stocks">-->
+<!--//       <article-->
+<!--//         v-for="data in dataStocks"-->
+<!--//         v-bind:key="data.sharePrice"-->
+<!--//         class="stock"-->
+<!--//       >-->
+<!--//         <h4>{{ data.stockSymbol }}</h4>-->
+<!--//         <h4>{{ data.sharePrice }}</h4>-->
+<!--//       </article>-->
+<!--//     </section>-->
