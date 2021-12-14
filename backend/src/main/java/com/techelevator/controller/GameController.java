@@ -29,6 +29,11 @@ public class GameController {
         return gameDao.getGameByGameId(gameId);
     }
 
+    @RequestMapping(path="user/{userId}", method = RequestMethod.GET)
+    public List<Game> getGamesByUserId(@PathVariable Long userId) {
+        return gameDao.getGamesByUserId(userId);
+    }
+
     @RequestMapping(path = "organizer/{gameOrganizer}", method = RequestMethod.GET)
     public Game getGameByGameOrganizer(@PathVariable Long gameOrganizer) {
         return gameDao.getGameByGameOrganizer(gameOrganizer);

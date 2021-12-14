@@ -40,6 +40,18 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
+    public List<Game> getGamesByUserId(Long userId) {
+        List<Game> gamesByUserId = new ArrayList<>();
+        String sql = "SELECT * FROM games JOIN portfolios ON games.game_id = portfolios.game_id WHERE portfolios.user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()) {
+            Game game = mapRowToGame(results);
+            gamesByUserId.add(game);
+        }
+        return gamesByUserId;
+    }
+
+    @Override
     public Game getGameByGameOrganizer(Long gameOrganizer) {
         String sql = "SELECT * from games WHERE game_organizer = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameOrganizer);

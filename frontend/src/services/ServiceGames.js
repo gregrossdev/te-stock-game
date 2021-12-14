@@ -14,6 +14,10 @@ export default {
     return http.get(`${gameId}`);
   },
 
+  getGamesByUserId(userId) {
+    return http.get(`user/${userId}`);
+  },
+
   getGameByGameOrganizer(gameOrganizer) {
     return http.get(`organizer/${gameOrganizer}`);
   },
