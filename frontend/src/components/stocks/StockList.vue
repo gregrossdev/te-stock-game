@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Current stocks available for purchase</h1>
-    <h2>Stock Ticker - Stock Price</h2>
+    <h2>Current stocks available for purchase</h2>
+    <h3>Stock Ticker - Stock Price</h3>
     <div class="stocks">
       <article v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock">
         <input :value="stock.stockSymbol" class="hidden" type="text"/>

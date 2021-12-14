@@ -1,6 +1,7 @@
 <template>
-  <div>
-
+  <div class="game-card">
+    <h3>Game #{{ this.gameId }}</h3>
+    <img src="https://source.unsplash.com/300x150/?stocks" alt="stocks" />
   </div>
 </template>
 
@@ -75,6 +76,13 @@ td {
 
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+.game-card {
+  border: 1px solid var(--clr-grey-70);
+  margin-bottom: 1em;
+  border-radius: 0.25rem;
+  padding: 0.5em;
+  width: 12rem;
 }
 </style>
 
