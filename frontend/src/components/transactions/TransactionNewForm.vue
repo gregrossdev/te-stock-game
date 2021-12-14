@@ -1,7 +1,7 @@
 <template>
   <div>
       <form v-on:submit.prevent="saveTransaction2" class="transaction-form">
-        <input class="hidden" type="text" placeholder="stockSymbol" v-model="transaction.stockSymbol"/>
+        <input class="" type="text" placeholder="stockSymbol" v-model="transaction.stockSymbol"/>
         <input list="transactionType" name="transactionType" v-model="transaction.transactionType"/>
           <datalist id="transactionType" autocomplete="off">
             <option value="BUY"></option>
@@ -22,19 +22,19 @@ export default {
     return {
       transaction: {
         // portfolioId: this.$store.state.activePortfolio.portfolioId,
-        portfolioId: 1,
-        stockSymbol: "",
-        transactionType: "",
+        portfolioId: 1, //NEED TO FIX THIS
+        stockSymbol: "", //this.$attrs prints it but cant get it to fill
+        transactionType: "", //filled from transactionType datalist
         // transactionAmount: null, 
         // transactionShares: null,
-         transactionAmount: 200, 
-        transactionShares: 20,
+        transactionAmount: 200, //back end calc?? or front end? price * shares amnt?
+        transactionShares: null, 
         // sharePrice: this.$store.state.stocks.find(stock => stock.stockSymbol === this.stockSymbol).sharePrice,
-        sharePrice: 50,
+        sharePrice: 50, //NEED TO FIX THIS - SEEMS EASY??? INFO IS THERE.
         //idk if this is what we need - we can just do the timestamp on back end?
         // transactionTimestamp: "2021-12-13 20:05:32",
-        transactionStatus:"COMPLETED",
-        portfolioCashAfterTransaction: 80085,
+        transactionStatus:"COMPLETED", //should this be completed or pending til we confirm back end?
+        portfolioCashAfterTransaction: 80085, //can be calculated on back end????
       }
 
 // EXAMPLE OF JSON RETURN OBJECT FROM SERVER:
@@ -69,7 +69,7 @@ export default {
     saveTransaction2(){
       // console.log(this.transaction.stockSymbol);
       // console.log(this.transaction.stockPrice);
-      // console.log(this.transaction.transactionShares);
+      console.log(this.transaction.transactionShares);
       console.log(this.$attrs) //this.$attrs allows me to grab the stocksymbol from the parent stockList when it is made in vfor loop
       serviceTransactions.create(this.transaction);
 
