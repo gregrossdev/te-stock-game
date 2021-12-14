@@ -10,6 +10,7 @@
     </div>
 
     <button>Save</button>
+
   </form>
 </template>
 
@@ -25,8 +26,7 @@ export default {
         gameOrganizer: this.$store.state.user.id,
         startTimestamp: "",
         endTimestamp: "",
-        gameStatus: "ACTIVE",
-        userId: null
+        gameStatus: "ACTIVE"
       },
       users: []
     };
@@ -55,6 +55,7 @@ export default {
               "Error submitting new board. Request could not be created.";
           }
         });
+        this.$router.push("/gameId")
     },
     resetGame() {
       this.game = {
