@@ -1,11 +1,13 @@
 <template>
   <form v-on:submit.prevent="saveGame">
-    <label for="startTimestamp"> Start Date</label>
-    <input type="date" v-model="game.startTimestamp" />
+<!--
+WE DON'T NEED TO SET START TIMESTAMP, IT WILL BE ADDED ON THE BACKEND RIGHT BEFORE GAME IS ADDED TO THE DATABASE.
+<label for="startTimestamp"> Start Date</label>-->
+<!--    <input type="date" v-model="game.startTimestamp" />-->
     <label for="endTimestamp"> End Date</label>
     <input type="date" v-model="game.endTimestamp" />
     <div class="checkbox" v-for="user in users" :key="user.id">
-      <input type="checkbox" name="userId" v-bind:value="user.id" v-model="user.id"/>
+      <input type="checkbox" name="userId" v-bind:value="user.id" v-model="invitedUsers"/>
       <label for="userId">{{user.username}}</label>
     </div>
 
@@ -16,6 +18,7 @@
 <script>
 import requestGames from "@/services/ServiceGames";
 import requestUsers from "@/services/ServiceUsers";
+import requestPortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "game-new-form",
@@ -23,12 +26,10 @@ export default {
     return {
       game: {
         gameOrganizer: this.$store.state.user.id,
-        startTimestamp: "",
-        endTimestamp: "",
-        gameStatus: "ACTIVE",
-        userId: null
+        endTimestamp: ""
       },
-      users: []
+      users: [],
+      invitedUsers: []
     };
   },
   methods: {
