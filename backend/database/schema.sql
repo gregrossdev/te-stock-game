@@ -125,12 +125,12 @@ ALTER TABLE portfolios_stocks
         FOREIGN KEY (stock_symbol)
             REFERENCES stocks (stock_symbol);
 
-INSERT INTO games (game_id, game_organizer, start_timestamp, end_timestamp, game_status)
-VALUES (1, 2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
-       (2, 3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
-       (3, 4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
-       (4, 5, '2021-12-01 12:00:00', '2021-12-14 12:00:00', 'ACTIVE'),
-       (5, 6, '2021-12-01 12:00:00', '2021-12-15 12:00:00', 'ACTIVE');
+INSERT INTO games (game_organizer, start_timestamp, end_timestamp, game_status)
+VALUES (2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
+       (3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
+       (4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
+       (5, '2021-12-01 12:00:00', '2021-12-14 12:00:00', 'ACTIVE'),
+       (6, '2021-12-01 12:00:00', '2021-12-15 12:00:00', 'ACTIVE');
 
 INSERT INTO portfolios (user_id, game_id, portfolio_status)
 VALUES (2, 1, 'ACTIVE'),
