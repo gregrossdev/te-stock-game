@@ -73,10 +73,13 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public boolean create(Game gameToCreate) {
-        String sql = "INSERT INTO games (game_organizer, game_winner, start_timestamp, end_timestamp, game_status) " +
-                "VALUES (?, ?, ?, ?, ?);";
-        return jdbcTemplate.update(sql, gameToCreate.getGameOrganizer(), gameToCreate.getGameWinner(),
-                gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp(), gameToCreate.getGameStatus()) == 1;
+        String sql = "INSERT INTO games (game_organizer, start_timestamp, end_timestamp) " +
+                "VALUES (?, ?, ?); " +
+                "INSERT INTO portfolios (user_id, game_id) " +
+                "VALUES (?, (SELECT game_id FROM games WHERE game_organizer = ? AND start_timestamp = ? AND end_timestamp = ?));";
+        return jdbcTemplate.update(sql, gameToCreate.getGameOrganizer(),
+                gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp(), gameToCreate.getGameOrganizer(),
+                gameToCreate.getGameOrganizer(), gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp()) == 1;
     }
 
     @Override
