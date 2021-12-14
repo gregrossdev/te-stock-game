@@ -3,6 +3,7 @@
     <h2>Greetings, {{ this.$store.state.user.username }}.</h2>
     <p>Your user ID is {{ this.$store.state.user.id }}.</p>
     <section>
+      <game-list></game-list>
       <!-- <game-list /> -->
       <!-- <article v-for="data in $store.state.games" v-bind:key="data.gameId" class="game">
         <h4>{{ data }}</h4>
@@ -20,10 +21,12 @@
 // import GameNewForm from "../components/games/GameNewForm.vue";
 
 import StockList from "../components/stocks/StockList.vue";
+import GameList from "@/components/games/GameList.vue";
 
 export default {
   name: "profile",
   components: {
+    GameList,
     // GameList,
     // GameNewForm, 
     StockList,

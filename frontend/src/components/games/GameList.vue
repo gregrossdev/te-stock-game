@@ -1,46 +1,46 @@
 <template>
   <section>
-    <article v-for="game in this.$store.state.games" v-bind:key="game.id">
-      <table>
-        <thead>
-          <tr>
-            <th>gameId</th>
-            <th>gameOrganizer</th>
-            <th>gameWinner</th>
-            <th>startTimestamp</th>
-            <th>endTimestamp</th>
-            <th>gameStatus</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{game.gameId}}</td>
-            <td>{{game.gameOrganizer}}</td>
-            <td>{{game.gameWinner}}</td>
-            <td>{{game.startTimestamp}}</td>
-            <td>{{game.endTimestamp}}</td>
-            <td>{{game.gameStatus}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </article>
+    <h2>Your Games</h2>
+    <game-card v-for="game in this.$store.state.games" v-bind:key="game.gameId" v-bind:gameId="game.gameId"></game-card>
+<!--    <article v-for="game in this.$store.state.games" v-bind:key="game.id">-->
+<!--      <table>-->
+<!--        <thead>-->
+<!--          <tr>-->
+<!--            <th>gameId</th>-->
+<!--            <th>gameOrganizer</th>-->
+<!--            <th>gameWinner</th>-->
+<!--            <th>startTimestamp</th>-->
+<!--            <th>endTimestamp</th>-->
+<!--            <th>gameStatus</th>-->
+<!--          </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--          <tr>-->
+<!--            <td>{{game.gameId}}</td>-->
+<!--            <td>{{game.gameOrganizer}}</td>-->
+<!--            <td>{{game.gameWinner}}</td>-->
+<!--            <td>{{game.startTimestamp}}</td>-->
+<!--            <td>{{game.endTimestamp}}</td>-->
+<!--            <td>{{game.gameStatus}}</td>-->
+<!--          </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </article>-->
   </section>
 </template>
 
 <script>
 import requestGames from "@/services/ServiceGames";
+import GameCard from "@/components/games/GameCard";
 
 export default {
   name: "game-list",
-  methods: {
-    getGames() {
-      requestGames.list().then((response) => {
-        this.$store.commit("SET_GAMES", response.data);
-      });
-    },
-  },
+  components: {GameCard},
+  methods: {},
   created() {
-    this.getGames();
+    requestGames.getGamesByUserId(this.$store.state.user.id).then((response) => {
+      this.$store.commit("SET_GAMES", response.data);
+    });
   },
 };
 </script>
