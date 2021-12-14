@@ -1,6 +1,6 @@
 <template>
   <div>
-      <form v-on:submit.prevent="saveTransaction2">
+      <form v-on:submit.prevent="saveTransaction2" class="transaction-form">
         <input class="hidden" type="text" placeholder="stockSymbol" v-model="transaction.stockSymbol"/>
         <input list="transactionType" name="transactionType" v-model="transaction.transactionType"/>
           <datalist id="transactionType" autocomplete="off">
@@ -94,6 +94,16 @@ export default {
 </script>
 
 <style scoped>
+.transaction-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-form input, .transaction-form button {
+  margin-bottom: 0;
+  margin-top: 0.5em; 
+}
+
 .hidden{
   display: none;
 }
