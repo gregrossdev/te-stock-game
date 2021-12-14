@@ -1,3 +1,4 @@
+<!--
 <template>
   <div>
     <h2>All Stocks</h2>
@@ -18,3 +19,4 @@ export default {
 
 <style>
 </style>
+-->

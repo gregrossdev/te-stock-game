@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <h2>Current stocks available for purchase</h2>
-    <h3>Stock Ticker - Stock Price</h3>
-    <div class="stocks">
-      <article v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock">
-        <input :value="stock.stockSymbol" class="hidden" type="text"/>
-        <h5>{{ stock.stockSymbol }} - ${{ stock.sharePrice }}</h5>
-        <transaction-new-form v-model="stock.stockSymbol" v-bind:sharePrice="stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
-      </article>
-    </div>
+  <div class="stocks">
+    <article v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock">
+      <input :value="stock.stockSymbol" class="hidden" type="text"/>
+      <h5>{{ stock.stockSymbol }} - ${{ stock.sharePrice }}</h5>
+      <transaction-new-form v-model="stock.stockSymbol" v-bind:sharePrice="stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
+    </article>
   </div>
 </template>
 
