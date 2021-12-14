@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <nav class="nav-profile">
+      <nav v-if="$store.state.token != ''" class="nav-profile">
         <router-link v-bind:to="{ name: 'profile' }">Profile</router-link
         >
+        <router-link v-bind:to="{ name: 'ViewNewGame'}">New Game</router-link>
         <router-link
           v-bind:to="{ name: 'logout' }"
-          v-if="$store.state.token != ''"
           >Logout</router-link
         >
       </nav>
-      <nav>
+      <!-- <nav>
         <router-link v-bind:to="{ name: 'ViewAllStocks' }">Stocks</router-link
         >&nbsp;|&nbsp;
         <router-link v-bind:to="{ name: 'ViewAllGames' }">Games</router-link
@@ -20,8 +20,7 @@
         <router-link v-bind:to="{ name: 'ViewAllTransactions' }">Transactions</router-link
         >&nbsp;|&nbsp;
         <router-link v-bind:to="{ name: 'ViewAllUsers' }">Users</router-link>
-        
-      </nav>
+      </nav> -->
     </div>
     <router-view />
   </div>
@@ -37,9 +36,14 @@
   max-width: 960px;
 }
 
+#nav {
+  padding-top: 1em;
+}
+
 .nav-profile {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1em;
 }
 
 .nav-profile a{
@@ -47,5 +51,10 @@
   font-weight: 800;
   color: inherit;
   border-bottom: 1px solid var(--clr-grey-80);   
+}
+
+button {
+  font-size: 1rem;
+  padding: 0.5em; 
 }
 </style>
