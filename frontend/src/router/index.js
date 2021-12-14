@@ -5,15 +5,10 @@ import ViewLogin from '../views/ViewLogin.vue'
 import ViewLogout from '../views/ViewLogout.vue'
 import ViewRegister from '../views/ViewRegister.vue'
 
-import ViewTest from '../views/ViewTest.vue'
 
 import ViewAllGames from "@/views/ViewAllGames";
-import ViewAllUsers from "@/views/ViewAllUsers";
 import ViewAllStocks from '../views/ViewAllStocks.vue'
-import ViewAllPortfolios from '../views/ViewAllPortfolios.vue'
-import ViewAllTransactions from '../views/ViewAllTransactions.vue'
 
-import ViewStocks from '../views/ViewStocks.vue'
 
 import ViewProfile from '../views/ViewProfile.vue'
 import ViewGame from "@/views/ViewGame";
@@ -40,14 +35,6 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'profile',
-      component: ViewProfile,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
       path: "/login",
       name: "login",
       component: ViewLogin,
@@ -72,17 +59,17 @@ const router = new Router({
       }
     },
     {
-      path: "/test",
-      name: "test",
-      component: ViewTest,
+      path: '/',
+      name: 'profile',
+      component: ViewProfile,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
-      path: '/stocks',
-      name: 'ViewStocks',
-      component: ViewStocks,
+      path: '/new',
+      name: 'ViewNewGame',
+      component: ViewNewGame,
       meta: {
         requiresAuth: true
       }
@@ -96,14 +83,6 @@ const router = new Router({
       }
     },
     {
-      path: '/new-game',
-      name: 'ViewNewGame',
-      component: ViewNewGame,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
       path: '/game/:gameId/portfolio/:portfolioId/new-transaction',
       name: 'ViewNewTransaction',
       component: ViewNewTransaction,
@@ -112,7 +91,7 @@ const router = new Router({
       }
     },
     {
-      path: '/allgames',
+      path: '/games',
       name: 'ViewAllGames',
       component: ViewAllGames,
       meta: {
@@ -120,33 +99,9 @@ const router = new Router({
       }
     },
     {
-      path: '/allstocks',
+      path: '/stocks',
       name: 'ViewAllStocks',
       component: ViewAllStocks,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/allportfolios',
-      name: 'ViewAllPortfolios',
-      component: ViewAllPortfolios,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/alltransactions',
-      name: 'ViewAllTransactions',
-      component: ViewAllTransactions,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/allusers',
-      name: 'ViewAllUsers',
-      component: ViewAllUsers,
       meta: {
         requiresAuth: true
       }
