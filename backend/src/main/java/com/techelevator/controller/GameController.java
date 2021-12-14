@@ -5,6 +5,7 @@ import com.techelevator.model.game.Game;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @CrossOrigin
@@ -53,6 +54,8 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public boolean create(@RequestBody Game gameToCreate) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        gameToCreate.setStartTimestamp(timestamp);
         return gameDao.create(gameToCreate);
     }
 
