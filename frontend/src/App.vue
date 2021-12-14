@@ -6,7 +6,7 @@
         <router-link v-bind:to="{ name: 'ViewNewGame' }">New Game</router-link>
         <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
       </nav>
-      <div class="all">
+      <!-- <div class="all">
         <router-link v-bind:to="{ name: 'ViewAllStocks' }">Stocks
         </router-link
         >&nbsp;|&nbsp;
@@ -14,7 +14,7 @@
         <router-link v-bind:to="{ name: 'ViewAllGames' }">Games
         </router-link
         >&nbsp;|&nbsp;
-      </div>
+      </div> -->
     </div>
     <router-view/>
   </div>
