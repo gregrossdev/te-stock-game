@@ -56,8 +56,11 @@ export default {
   margin-bottom: 1em;
   border-radius: 0.25rem;
   padding: 0.5em;
-  width: 20vh;
-  height: 20vh;
+  /* width: 20vh;
+  height: 20vh; */
+  width: 10rem; 
+  display: flex;
+  flex-direction: column;
 }
 .hidden{
   display: none;
