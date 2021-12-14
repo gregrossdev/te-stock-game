@@ -1,6 +1,6 @@
 <template>
   <div>
-    <portfolio-card v-for="portfolio in this.$store.state.gamePortfolios" v-bind:key="portfolio.portfolioId" v-bind:portfolioId="portfolio.portfolioId"></portfolio-card>
+    <portfolio-card v-for="portfolio in this.$store.state.gamePortfolios" v-bind:key="portfolio.portfolioId" v-bind:portfolio="portfolio"></portfolio-card>
   </div>
 </template>
 
