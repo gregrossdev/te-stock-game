@@ -36,9 +36,10 @@ export default new Vuex.Store({
       portfolioId: 1,
       userId: 2,
       gameId: 1,
-      portfolioBalance: null,
-      portfolioValue: null,
-      portfolioStocks: []
+      portfolioCash: null,
+      portfolioStocksValue: null,
+      portfolioTotalValue: null
+      // portfolioStocks: []
     }
   },
   mutations: {

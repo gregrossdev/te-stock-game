@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <h1>Current stocks available for purchase</h1>
-    <h2>Stock Ticker - Stock Price</h2>
-    <div class="stocks">
-      <article
-        class="stock"
-        v-for="data in dataStocks"
-        v-bind:key="data.stockSymbol"
-      >
-        <h3>{{ data.stockSymbol }} - ${{ data.sharePrice }}</h3>
-      </article>
-    </div>
+  <div class="stocks">
+    <article
+      class="stock"
+      v-for="data in dataStocks"
+      v-bind:key="data.stockSymbol"
+    >
+      <h3>{{ data.stockSymbol }} - ${{ data.sharePrice }}</h3>
+    </article>
   </div>
 </template>
 

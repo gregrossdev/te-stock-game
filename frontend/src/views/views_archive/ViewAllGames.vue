@@ -1,3 +1,4 @@
+<!--
 <template>
   <div>
     <h2>All Games</h2>
@@ -16,3 +17,4 @@ export default {
 
 <style>
 </style>
+-->

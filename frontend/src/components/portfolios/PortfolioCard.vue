@@ -1,6 +1,7 @@
 <template>
   <div class="portfolio-card">
-    <h3>Portfolio #{{this.portfolioId}}</h3>
+    <h3>Portfolio #{{this.portfolio.portfolioId}}</h3>
+    <p>Total Value: ${{this.portfolio.portfolioTotalValue}}</p>
   </div>
 </template>
 
@@ -8,7 +9,7 @@
 export default {
   name: "portfolio-card",
   props: {
-    portfolioId: Number
+    portfolio: Object
   },
   methods: {},
   created() {}

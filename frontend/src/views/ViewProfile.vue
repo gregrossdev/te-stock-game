@@ -1,7 +1,8 @@
 <template>
   <main class="profile">
+
     <h2>Welcome to the Virtual Stock Market, {{ this.$store.state.user.username }}!</h2>
-    <p>Your user ID is {{ this.$store.state.user.id }}.</p>
+
     <section>
       <game-list />
     </section>
