@@ -69,7 +69,7 @@ CREATE TABLE portfolios_stocks
 (
     portfolio_id SERIAL,
     stock_symbol varchar(10),
-    total_shares int,
+    total_shares decimal,
     PRIMARY KEY (portfolio_id, stock_symbol)
 );
 

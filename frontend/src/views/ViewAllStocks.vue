@@ -1,16 +1,18 @@
 <template>
   <div>
     <h2>All Stocks</h2>
-    <stock-table />
+    <stock-list/>
   </div>
 </template>
 
 <script>
-import StockTable from "@/components/stocks/StockTable";
+import StockList from "@/components/stocks/StockList.vue";
 
 export default {
   name: "allstocks",
-  components: { StockTable },
+  components: { 
+    StockList, 
+ }, //settopics
 };
 </script>
 

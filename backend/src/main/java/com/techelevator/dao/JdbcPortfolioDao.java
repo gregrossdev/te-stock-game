@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.portfolio.Portfolio;
 import com.techelevator.model.portfolio.PortfolioNotFoundException;
+import com.techelevator.model.portfolioStock.PortfolioStock;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -65,6 +66,22 @@ public class JdbcPortfolioDao implements PortfolioDao {
     }
 
     @Override
+    public PortfolioStock getPortfolioStockByPortfolioIdAndStockSymbol(Long portfolioId, String stockSymbol) {
+        PortfolioStock portfolioStock = new PortfolioStock();
+
+        String sql = "SELECT * FROM portfolios_stocks WHERE portfolio_id = ? AND stock_symbol = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId, stockSymbol);
+
+        if (results.next()) {
+            portfolioStock.setPortfolioId(results.getLong("portfolio_id"));
+            portfolioStock.setStockSymbol(results.getString("stock_symbol"));
+            portfolioStock.setTotalShares(results.getBigDecimal("total_shares"));
+        }
+
+        return portfolioStock;
+    }
+
+    @Override
     public boolean create(Portfolio portfolioToCreate) {
         String sql = "INSERT INTO portfolios (user_id, game_id, portfolio_status) " +
                 "VALUES (?, ?, ?);";
@@ -119,6 +136,20 @@ public class JdbcPortfolioDao implements PortfolioDao {
                                 "WHERE portfolio_id = ?;";
             jdbcTemplate.update(updateSql, portfolioStocksValue, portfolioStocksValue, portfolioId);
         }
+    }
+
+    @Override
+    public void buyStock(Long portfolioId, String stockSymbol, BigDecimal totalShares) {
+        String sql = "INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares) " +
+                        "VALUES (?, ?, ?) " +
+                        "ON CONFLICT DO UPDATE SET total_shares = total_shares + ? WHERE portfolio_id = ? AND stock_symbol = ?;";
+        jdbcTemplate.update(sql, portfolioId, stockSymbol, totalShares, totalShares, portfolioId, stockSymbol);
+    }
+
+    @Override
+    public void sellStock(Long portfolioId, String stockSymbol, BigDecimal totalShares) {
+        String sql = "UPDATE portfolios_stocks SET total_shares = total_shares - ? WHERE portfolio_id = ? AND stock_symbol = ?;";
+        jdbcTemplate.update(sql, totalShares, portfolioId, stockSymbol);
     }
 
     @Override

@@ -1,5 +1,7 @@
 <template>
   <main class="profile">
+    <h2>Greetings, {{ this.$store.state.user.username }}.</h2>
+    <p>Your user ID is {{ this.$store.state.user.id }}.</p>
     <nav>
       <game-new-form />
     </nav>
