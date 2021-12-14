@@ -5,14 +5,14 @@
         <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
         <router-link v-bind:to="{ name: 'ViewNewGame' }">New Game</router-link>
         <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
-        <div class="all">
+      </nav>
+      <div class="all">
           <router-link v-bind:to="{ name: 'ViewAllStocks' }">Stocks</router-link
           >&nbsp;|&nbsp;
 
           <router-link v-bind:to="{ name: 'ViewAllGames' }">Games</router-link
           >&nbsp;|&nbsp;
         </div>
-      </nav>
     </div>
     <router-view />
   </div>
@@ -38,14 +38,11 @@
   margin-bottom: 1em;
 }
 
-.nav-profile a {
+.nav-profile a, .all a {
   font-size: 1.35rem;
   font-weight: 800;
   color: inherit;
   border-bottom: 1px solid var(--clr-grey-80);
-}
-.all {
-  margin-top: 1em;
 }
 
 button {
