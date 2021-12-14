@@ -97,7 +97,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
                         "WHERE portfolio_id =?;";
         return jdbcTemplate.update(sql, portfolioToUpdate.getUserId(), portfolioToUpdate.getGameId(),
                 portfolioToUpdate.getPortfolioCash(), portfolioToUpdate.getPortfolioStocksValue(), portfolioToUpdate.getPortfolioTotalValue(),
-                portfolioToUpdate.getPortfolioStatus()) == 1;
+                portfolioToUpdate.getPortfolioStatus(), portfolioToUpdate.getUserId()) == 1;
     }
 
     // EXPERIMENTAL METHOD BELOW! DEEP SQL MAGIC! STILL NEED TO TEST!
@@ -139,17 +139,17 @@ public class JdbcPortfolioDao implements PortfolioDao {
     }
 
     @Override
-    public void buyStock(Long portfolioId, String stockSymbol, BigDecimal totalShares) {
+    public void buyStock(Long portfolioId, String stockSymbol, BigDecimal totalSharesToBuy) {
         String sql = "INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares) " +
                         "VALUES (?, ?, ?) " +
-                        "ON CONFLICT DO UPDATE SET total_shares = total_shares + ? WHERE portfolio_id = ? AND stock_symbol = ?;";
-        jdbcTemplate.update(sql, portfolioId, stockSymbol, totalShares, totalShares, portfolioId, stockSymbol);
+                        "ON CONFLICT (portfolio_id, stock_symbol) DO UPDATE SET total_shares = portfolios_stocks.total_shares + EXCLUDED.total_shares;";
+        jdbcTemplate.update(sql, portfolioId, stockSymbol, totalSharesToBuy);
     }
 
     @Override
-    public void sellStock(Long portfolioId, String stockSymbol, BigDecimal totalShares) {
+    public void sellStock(Long portfolioId, String stockSymbol, BigDecimal totalSharesToSell) {
         String sql = "UPDATE portfolios_stocks SET total_shares = total_shares - ? WHERE portfolio_id = ? AND stock_symbol = ?;";
-        jdbcTemplate.update(sql, totalShares, portfolioId, stockSymbol);
+        jdbcTemplate.update(sql, totalSharesToSell, portfolioId, stockSymbol);
     }
 
     @Override
