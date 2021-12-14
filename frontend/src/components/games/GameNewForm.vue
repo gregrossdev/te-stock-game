@@ -1,9 +1,5 @@
 <template>
   <form v-on:submit.prevent="saveGame">
-<!--
-WE DON'T NEED TO SET START TIMESTAMP, IT WILL BE ADDED ON THE BACKEND RIGHT BEFORE GAME IS ADDED TO THE DATABASE.
-<label for="startTimestamp"> Start Date</label>-->
-<!--    <input type="date" v-model="game.startTimestamp" />-->
     <label for="endTimestamp"> End Date</label>
     <input type="date" v-model="game.endTimestamp" />
     <div class="checkbox" v-for="user in users" :key="user.id">
@@ -12,13 +8,13 @@ WE DON'T NEED TO SET START TIMESTAMP, IT WILL BE ADDED ON THE BACKEND RIGHT BEFO
     </div>
 
     <button>Save</button>
+
   </form>
 </template>
 
 <script>
 import requestGames from "@/services/ServiceGames";
 import requestUsers from "@/services/ServiceUsers";
-import requestPortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "game-new-form",
@@ -56,6 +52,7 @@ export default {
               "Error submitting new board. Request could not be created.";
           }
         });
+        this.$router.push("/gameId")
     },
     resetGame() {
       this.game = {

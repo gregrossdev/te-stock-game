@@ -74,8 +74,16 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    // {
+    //   path: '/game/:gameId/portfolio/:portfolioId',
+    //   name: 'ViewGame',
+    //   component: ViewGame,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
     {
-      path: '/game/:gameId/portfolio/:portfolioId',
+      path: '/game/:gameId/',
       name: 'ViewGame',
       component: ViewGame,
       meta: {

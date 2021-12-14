@@ -1,8 +1,10 @@
 <template>
-  <div class="game-card">
-    <h3>Game #{{ this.gameId }}</h3>
-    <img src="https://source.unsplash.com/300x150/?stocks" alt="stocks" />
-  </div>
+  <router-link v-bind:to="{ name: 'ViewGame', params: { gameId: this.gameId } }">
+    <div class="game-card">
+      <h3>Game #{{ this.gameId }}</h3>
+      <img src="https://source.unsplash.com/300x150/?stocks" alt="stocks" />
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -12,31 +14,35 @@ import servicePortfolios from "@/services/ServicePortfolios";
 export default {
   name: "game-card",
   props: {
-    gameId: Number // TODO: MAKE SURE PARENT COMPONENT PASSES A GAMEID TO EACH GAMECARD AS A PROP.
+    gameId: Number, // TODO: MAKE SURE PARENT COMPONENT PASSES A GAMEID TO EACH GAMECARD AS A PROP.
   },
-  methods: {},
+  methods: {
+    viewGame(gameId) {
+      this.$router.push(`/game/${gameId}`);
+    },
+  },
   created() {
     serviceGames
-        .getGameByGameId(this.gameId)
-        .then(response => {
-          this.$store.commit("SET_ACTIVE_GAME", response.data);
-        })
-        .catch(error => {
-          if (error.response.status === 404) {
-            this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
-          }
-        });
+      .getGameByGameId(this.gameId)
+      .then((response) => {
+        this.$store.commit("SET_ACTIVE_GAME", response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
+        }
+      });
     servicePortfolios
-        .getPortfolioByUserIdAndGameId(this.$store.state.user.id, this.gameId)
-        .then(response => {
-          this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
-        })
-        .catch(error => {
-          if (error.response.status === 404) {
-            this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
-          }
-        });
-  }
+      .getPortfolioByUserIdAndGameId(this.$store.state.user.id, this.gameId)
+      .then((response) => {
+        this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
+        }
+      });
+  },
 };
 </script>
 
