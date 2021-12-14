@@ -1,15 +1,14 @@
 <template>
   <div>
-      <form v-on:submit.prevent="saveTransaction2" class="transaction-form">
-        <input class="" type="text" placeholder="stockSymbol" v-model="transaction.stockSymbol"/>
-        <input list="transactionType" name="transactionType" v-model="transaction.transactionType"/>
-          <datalist id="transactionType" autocomplete="off">
-            <option value="BUY"></option>
-            <option value="SELL"></option>
-          </datalist>
-      <input type="text" placeholder="transactionShares" v-model="transaction.transactionShares"/>
-    <button>Save</button>
-  </form>
+    <form class="transaction-form" v-on:submit.prevent="saveTransaction">
+      <input v-model="transaction.transactionType" list="transactionType" name="transactionType"/>
+      <datalist id="transactionType" autocomplete="off">
+        <option value="BUY"></option>
+        <option value="SELL"></option>
+      </datalist>
+      <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
+      <button>Save</button>
+    </form>
   </div>
 </template>
 
@@ -18,39 +17,22 @@ import serviceTransactions from "@/services/ServiceTransactions";
 
 export default {
   name: "transaction-new-form",
+  props: {
+    stockSymbol: String,
+    sharePrice: Number,
+  },
   data() {
     return {
       transaction: {
-        // portfolioId: this.$store.state.activePortfolio.portfolioId,
-        portfolioId: 1, //NEED TO FIX THIS
-        stockSymbol: "", //this.$attrs prints it but cant get it to fill
-        transactionType: "", //filled from transactionType datalist
-        // transactionAmount: null, 
-        // transactionShares: null,
-        transactionAmount: 200, //back end calc?? or front end? price * shares amnt?
-        transactionShares: null, 
-        // sharePrice: this.$store.state.stocks.find(stock => stock.stockSymbol === this.stockSymbol).sharePrice,
-        sharePrice: 50, //NEED TO FIX THIS - SEEMS EASY??? INFO IS THERE.
-        //idk if this is what we need - we can just do the timestamp on back end?
-        // transactionTimestamp: "2021-12-13 20:05:32",
-        transactionStatus:"COMPLETED", //should this be completed or pending til we confirm back end?
-        portfolioCashAfterTransaction: 80085, //can be calculated on back end????
+        portfolioId: this.$store.state.activePortfolio.portfolioId,
+        // TODO STILL NEED TO SET ACTIVE PORTFOLIO (AND ACTIVE GAME) IN THE STORE,
+        //  BUT THIS WORKS WITH A HARDCODED VALUE AND SHOULD WORK WHEN THE ACTIVE PORTFOLIO IS UPDATED IN THE STORE.
+        stockSymbol: this.stockSymbol,
+        transactionType: "",
+        transactionAmount: null,
+        transactionShares: null,
+        sharePrice: this.sharePrice,
       }
-
-// EXAMPLE OF JSON RETURN OBJECT FROM SERVER:
-// {
-//   "transactionId": 1,
-//     "portfolioId": 1,
-//     "stockSymbol": "RKLB",
-//     "transactionType": "BUY",
-//     "transactionAmount": 1000,
-//     "transactionShares": 10,
-//     "sharePrice": 100,
-//     "transactionTimestamp": "2021-12-01T18:00:00.000+00:00",
-//     "transactionStatus": "COMPLETED",
-//     "portfolioCashAfterTransaction": 99000
-// }
-
     }
   },
   methods: {
@@ -62,32 +44,9 @@ export default {
       }
       serviceTransactions.create(this.transaction).then((response) => {
         if (response && response.status === 201) {
-          this.$router.push('/game/:gameId/portfolio/:portfolioId'); // NOT SURE IF THIS IS THE RIGHT WAY OR PATH TO RE-ROUTE THE URL. NEEDS TO GO BACK TO THE CURRENT/ACTIVE GAME VIEW.
+          this.$router.push('/');
         }
       });
-    },
-    saveTransaction2(){
-      // console.log(this.transaction.stockSymbol);
-      // console.log(this.transaction.stockPrice);
-      console.log(this.transaction.transactionShares);
-      console.log(this.$attrs) //this.$attrs allows me to grab the stocksymbol from the parent stockList when it is made in vfor loop
-      serviceTransactions.create(this.transaction);
-
-
-      // portfolioId: 1,
-      //   stockSymbol: "",
-      //   transactionType: "",
-      //   // transactionAmount: null, 
-      //   // transactionShares: null,
-      //    transactionAmount: 200, 
-      //   transactionShares: 20,
-      //   // sharePrice: this.$store.state.stocks.find(stock => stock.stockSymbol === this.stockSymbol).sharePrice,
-      //   sharePrice: 50,
-      //   //idk if this is what we need
-      //   // transactionTimestamp: "2021-12-13 20:05:32",
-      //   transactionStatus:"COMPLETED",
-      //   portfolioCashAfterTransaction: 80085,
-
     }
   }
 };
@@ -101,10 +60,10 @@ export default {
 
 .transaction-form input, .transaction-form button {
   margin-bottom: 0;
-  margin-top: 0.5em; 
+  margin-top: 0.5em;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 </style>
