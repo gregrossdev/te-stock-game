@@ -5,9 +5,9 @@
     </nav>
     <section>
       <game-list />
-      <article v-for="data in $store.state.games" v-bind:key="data.gameId" class="game">
+      <!-- <article v-for="data in $store.state.games" v-bind:key="data.gameId" class="game">
         <h4>{{ data }}</h4>
-      </article> 
+      </article>  -->
     </section>
     <section>
       <stock-list /> 

@@ -1,10 +1,7 @@
 <template>
   <form v-on:submit.prevent="saveGame">
     <label for="startTimestamp"> Start Date & Time </label>
-    <input
-      type="datetime-local"
-      v-model="game.startTimestamp"
-    />
+    <input type="datetime-local" v-model="game.startTimestamp" />
     <label for="endTimestamp"> End Date & Time </label>
     <input type="datetime-local" v-model="game.endTimestamp" />
     <button>Save</button>
@@ -12,34 +9,53 @@
 </template>
 
 <script>
+import requestGames from "@/services/ServiceGames";
+
 export default {
   name: "game-new-form",
   data() {
     return {
       game: {
-        gameId: "",
         gameOrganizer: this.$store.state.user.id,
-        gameWinner: "",
         startTimestamp: "",
         endTimestamp: "",
-        gameStatus: "",
+        gameStatus: "ACTIVE",
       },
     };
   },
   methods: {
     saveGame() {
-      this.$store.commit("SAVE_GAME", this.game);
+      requestGames
+      .create(this.game)
+      .then(response => {
+        if(response && response.status == 201) {
+          this.game();
+        }
+      })
+      .catch(error => {
+        // log the error
+        if (error.response) {
+          this.errorMsg = "Error submitting new board. Response received was '" + error.response.statusText + "'.";
+
+        } else if (error.request) {
+          this.errorMsg = "Error submitting new board. Server could not be reached.";
+
+        } else {
+          this.errorMsg = "Error submitting new board. Request could not be created.";
+        }
+      });
+    },
+    resetGame() {
       this.game = {
         gameId: "",
-        gameOrganizer: "",
+        gameOrganizer: this.$store.state.user.id,
         gameWinner: "",
         startTimestamp: "",
         endTimestamp: "",
-        gameStatus: "",
+        gameStatus: ""
       };
-      // this.$router.push({ name: "profile" });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -51,6 +67,6 @@ form {
   width: 50%;
   margin: 1rem auto;
   border: 4px solid var(--clr-pri-90);
-  padding: 2em;  
+  padding: 2em;
 }
 </style>
