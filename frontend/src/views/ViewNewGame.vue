@@ -1,14 +1,19 @@
 <template>
   <div>
-      <p>new game</p>
-   
+      <p>New Game</p>
+      <game-new-form />
   </div>
 </template>
 
 <script>
+import GameNewForm from "../components/games/GameNewForm.vue";
+
 
 export default {
-  name: "new-game",
+  name: "ViewNewGame",
+  components: {
+    GameNewForm
+  },
 
 }
 

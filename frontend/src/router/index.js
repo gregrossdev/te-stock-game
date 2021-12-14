@@ -15,10 +15,11 @@ import ViewAllTransactions from '../views/ViewAllTransactions.vue'
 
 import ViewStocks from '../views/ViewStocks.vue'
 
-import ViewNewGame from "@/views/ViewNewGame";
 import ViewProfile from '../views/ViewProfile.vue'
 import ViewGame from "@/views/ViewGame";
+
 import ViewNewTransaction from "@/views/ViewNewTransaction";
+import ViewNewGame from "@/views/ViewNewGame";
 
 Vue.use(Router)
 
@@ -146,7 +147,7 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
   ]
 })
 

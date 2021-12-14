@@ -4,12 +4,18 @@
     <input type="date" v-model="game.startTimestamp" />
     <label for="endTimestamp"> End Date</label>
     <input type="date" v-model="game.endTimestamp" />
+    <div class="checkbox" v-for="user in users" :key="user.id">
+      <input type="checkbox" name="userId" v-bind:value="user.id" v-model="user.id"/>
+      <label for="userId">{{user.username}}</label>
+    </div>
+
     <button>Save</button>
   </form>
 </template>
 
 <script>
 import requestGames from "@/services/ServiceGames";
+import requestUsers from "@/services/ServiceUsers";
 
 export default {
   name: "game-new-form",
@@ -20,30 +26,35 @@ export default {
         startTimestamp: "",
         endTimestamp: "",
         gameStatus: "ACTIVE",
+        userId: null
       },
+      users: []
     };
   },
   methods: {
     saveGame() {
       requestGames
-      .create(this.game)
-      .then(response => {
-        if(response && response.status == 201) {
-          this.game();
-        }
-      })
-      .catch(error => {
-        // log the error
-        if (error.response) {
-          this.errorMsg = "Error submitting new board. Response received was '" + error.response.statusText + "'.";
-
-        } else if (error.request) {
-          this.errorMsg = "Error submitting new board. Server could not be reached.";
-
-        } else {
-          this.errorMsg = "Error submitting new board. Request could not be created.";
-        }
-      });
+        .create(this.game)
+        .then((response) => {
+          if (response && response.status == 201) {
+            this.game();
+          }
+        })
+        .catch((error) => {
+          // log the error
+          if (error.response) {
+            this.errorMsg =
+              "Error submitting new board. Response received was '" +
+              error.response.statusText +
+              "'.";
+          } else if (error.request) {
+            this.errorMsg =
+              "Error submitting new board. Server could not be reached.";
+          } else {
+            this.errorMsg =
+              "Error submitting new board. Request could not be created.";
+          }
+        });
     },
     resetGame() {
       this.game = {
@@ -52,10 +63,15 @@ export default {
         gameWinner: "",
         startTimestamp: "",
         endTimestamp: "",
-        gameStatus: ""
+        gameStatus: "",
       };
-    }
-  }
+    },
+  },
+  created() {
+      requestUsers.list().then((response) => {
+        this.users = response.data;
+      });
+    },
 };
 </script>
 
@@ -69,4 +85,19 @@ form {
   border: 4px solid var(--clr-pri-90);
   padding: 2em;
 }
+
+.checkbox {
+  display: flex;
+  align-items: baseline;
+}
+
+.checkbox input, .checkbox label {
+  margin-left: 0.5em;
+}
+
+.checkbox[type="checkbox" i] {
+   padding: 10em; 
+}
+
+
 </style>
