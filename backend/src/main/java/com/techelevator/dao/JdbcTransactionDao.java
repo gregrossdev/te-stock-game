@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,20 +74,6 @@ public class JdbcTransactionDao implements TransactionDao {
                 transactionToCreate.getTransactionTimestamp(), transactionToCreate.getTransactionStatus(),
                 transactionToCreate.getPortfolioCashAfterTransaction()) == 1;
     }
-
-//    @Override
-//    public boolean create(Transaction transactionToCreate) {
-//        Timestamp nowTimeStamp = new Timestamp(System.currentTimeMillis());
-//
-//        String sql = "INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount, " +
-//                "transaction_shares, share_price, transaction_timestamp, transaction_status, portfolio_cash_after_transaction) " +
-//                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-//        return jdbcTemplate.update(sql, transactionToCreate.getPortfolioId(), transactionToCreate.getStockSymbol(),
-//                transactionToCreate.getTransactionType(), transactionToCreate.getTransactionAmount(),
-//                transactionToCreate.getTransactionShares(), transactionToCreate.getSharePrice(),
-//                nowTimeStamp, transactionToCreate.getTransactionStatus(),
-//                transactionToCreate.getPortfolioCashAfterTransaction()) == 1;
-//    }
 
     @Override
     public boolean update(Transaction transactionToUpdate) {

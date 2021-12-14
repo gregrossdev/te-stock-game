@@ -22,6 +22,10 @@ export default {
 		return http.get(`game/${gameId}`);
 	},
 
+	getPortfolioByUserIdAndGameId(userId, gameId) {
+		return http.get(`user/${userId}/game/${gameId}`);
+	},
+
 	create(portfolioToCreate) {
 		return http.post("", portfolioToCreate);
 	},

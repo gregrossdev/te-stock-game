@@ -2,7 +2,6 @@ package com.techelevator.service;
 
 import com.techelevator.dao.PortfolioDao;
 import com.techelevator.dao.StockDao;
-import com.techelevator.model.portfolio.Portfolio;
 import com.techelevator.model.stock.StockWrapper;
 import org.springframework.stereotype.Component;
 import yahoofinance.Stock;

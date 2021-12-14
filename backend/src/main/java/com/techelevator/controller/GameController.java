@@ -32,7 +32,7 @@ public class GameController {
     }
 
     // USE: View all Games for current/active User.
-    @RequestMapping(path="user/{userId}", method = RequestMethod.GET)
+    @RequestMapping(path = "user/{userId}", method = RequestMethod.GET)
     public List<Game> getGamesByUserId(@PathVariable Long userId) {
         return gameDao.getGamesByUserId(userId);
     }

@@ -38,6 +38,11 @@ public class PortfolioController {
         return portfolioDao.getPortfoliosByGameId(gameId);
     }
 
+    @RequestMapping(path = "user/{userId}/game/{gameId}", method = RequestMethod.GET)
+    public Portfolio getPortfolioByUserIdAndGameId(@PathVariable Long userId, @PathVariable Long gameId) {
+        return portfolioDao.getPortfolioByUserIdAndGameId(userId, gameId);
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public boolean create(@RequestBody Portfolio portfolioToCreate) {

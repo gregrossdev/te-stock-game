@@ -16,6 +16,8 @@ public interface PortfolioDao {
 
     List<Portfolio> getPortfoliosByGameId(Long gameId);
 
+    Portfolio getPortfolioByUserIdAndGameId(Long userId, Long gameId);
+
     PortfolioStock getPortfolioStockByPortfolioIdAndStockSymbol(Long portfolioId, String stockSymbol);
 
     boolean create(Portfolio portfolioToCreate);
