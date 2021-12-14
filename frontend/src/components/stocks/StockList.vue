@@ -8,7 +8,9 @@
         v-for="data in dataStocks"
         v-bind:key="data.stockSymbol"
       >
-        <h3>{{ data.stockSymbol }} - ${{ data.sharePrice }}</h3>
+      <input class="hidden" type="text" placeholder="stockSymbol" v-model="data.stockSymbol"/>
+        <h5>{{ data.stockSymbol }} - ${{ data.sharePrice }}</h5>
+        <transaction-new-form v-model="data.stockSymbol"/> <!-- I don;'t think this is working the way I want it to - also very backwards component building I know sorry! -->
       </article>
     </div>
   </div>
@@ -16,9 +18,18 @@
 
 <script>
 import requestStocks from "@/services/ServiceStocks";
+import TransactionNewForm from "../transactions/TransactionNewForm.vue";
 
 export default {
   name: "stock-list",
+
+  props:{
+    //i want to pass in stockSymbol to the each transaction form im building inside the list
+  },
+
+  components:{
+    TransactionNewForm,
+  },
   data() {
     return {
       dataStocks: [],
@@ -45,7 +56,11 @@ export default {
   margin-bottom: 1em;
   border-radius: 0.25rem;
   padding: 0.5em;
-  width: 12rem;
+  width: 20vh;
+  height: 20vh;
+}
+.hidden{
+  display: none;
 }
 </style>
 

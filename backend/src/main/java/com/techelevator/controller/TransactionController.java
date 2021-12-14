@@ -8,6 +8,7 @@ import com.techelevator.model.transaction.Transaction;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 @CrossOrigin
@@ -51,23 +52,27 @@ public class TransactionController {
         BigDecimal transactionAmount = transactionToCreate.getTransactionAmount();
         BigDecimal transactionShares = transactionToCreate.getTransactionShares();
 
+        String transactionStatus = transactionToCreate.getTransactionStatus();
+        Timestamp transactionTimestamp = new Timestamp(System.currentTimeMillis());
+        BigDecimal portfolioCashAfterTransaction = transactionToCreate.getPortfolioCashAfterTransaction();
+
         Portfolio portfolio = portfolioDao.getPortfolioByPortfolioId(portfolioId);
         BigDecimal portfolioCash = portfolio.getPortfolioCash();
 
         PortfolioStock portfolioStock = portfolioDao.getPortfolioStockByPortfolioIdAndStockSymbol(portfolioId, stockSymbol);
         BigDecimal portfolioShares = portfolioStock.getTotalShares();
 
-        if (transactionType.equalsIgnoreCase("BUY") && portfolioCash.compareTo(transactionAmount) >= 0) {
-            portfolio.setPortfolioCash(portfolioCash.subtract(transactionAmount));
-            portfolioDao.buyStock(portfolioId, stockSymbol, transactionShares);
-            portfolioDao.update(portfolio);
-        } else if (transactionType.equalsIgnoreCase("SELL") && portfolioShares.compareTo(transactionShares) >= 0) {
-            portfolio.setPortfolioCash(portfolioCash.add(transactionAmount));
-            portfolioDao.sellStock(portfolioId, stockSymbol, transactionShares);
-            portfolioDao.update(portfolio);
-        } else {
-            return false;
-        }
+//        if (transactionType.equalsIgnoreCase("BUY") && portfolioCash.compareTo(transactionAmount) >= 0) {
+//            portfolio.setPortfolioCash(portfolioCash.subtract(transactionAmount));
+//            portfolioDao.buyStock(portfolioId, stockSymbol, transactionShares);
+//            portfolioDao.update(portfolio);
+//        } else if (transactionType.equalsIgnoreCase("SELL") && portfolioShares.compareTo(transactionShares) >= 0) {
+//            portfolio.setPortfolioCash(portfolioCash.add(transactionAmount));
+//            portfolioDao.sellStock(portfolioId, stockSymbol, transactionShares);
+//            portfolioDao.update(portfolio);
+//        } else {
+//            return false;
+//        }
 
         return transactionDao.create(transactionToCreate);
     }
