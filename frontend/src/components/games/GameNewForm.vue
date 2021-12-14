@@ -1,9 +1,9 @@
 <template>
   <form v-on:submit.prevent="saveGame">
-    <label for="startTimestamp"> Start Date & Time </label>
-    <input type="datetime-local" v-model="game.startTimestamp" />
-    <label for="endTimestamp"> End Date & Time </label>
-    <input type="datetime-local" v-model="game.endTimestamp" />
+    <label for="startTimestamp"> Start Date</label>
+    <input type="date" v-model="game.startTimestamp" />
+    <label for="endTimestamp"> End Date</label>
+    <input type="date" v-model="game.endTimestamp" />
     <button>Save</button>
   </form>
 </template>
