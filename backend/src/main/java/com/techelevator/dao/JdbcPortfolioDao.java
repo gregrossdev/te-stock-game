@@ -66,6 +66,19 @@ public class JdbcPortfolioDao implements PortfolioDao {
     }
 
     @Override
+    public Portfolio getPortfolioByUserIdAndGameId(Long userId, Long gameId) {
+
+        String sql = "SELECT * FROM portfolios WHERE user_id = ? AND game_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, gameId);
+
+        if (results.next()) {
+            return mapRowToPortfolio(results);
+        }
+
+        throw new PortfolioNotFoundException();
+    }
+
+    @Override
     public PortfolioStock getPortfolioStockByPortfolioIdAndStockSymbol(Long portfolioId, String stockSymbol) {
         PortfolioStock portfolioStock = new PortfolioStock();
 
@@ -92,9 +105,9 @@ public class JdbcPortfolioDao implements PortfolioDao {
     @Override
     public boolean update(Portfolio portfolioToUpdate) {
         String sql = "UPDATE portfolios " +
-                        "SET user_id = ?, game_id = ?, portfolio_cash = ?, portfolio_stocks_value = ?, portfolio_total_value = ?, " +
-                            "portfolio_status = ? " +
-                        "WHERE portfolio_id =?;";
+                "SET user_id = ?, game_id = ?, portfolio_cash = ?, portfolio_stocks_value = ?, portfolio_total_value = ?, " +
+                "portfolio_status = ? " +
+                "WHERE portfolio_id =?;";
         return jdbcTemplate.update(sql, portfolioToUpdate.getUserId(), portfolioToUpdate.getGameId(),
                 portfolioToUpdate.getPortfolioCash(), portfolioToUpdate.getPortfolioStocksValue(), portfolioToUpdate.getPortfolioTotalValue(),
                 portfolioToUpdate.getPortfolioStatus(), portfolioToUpdate.getUserId()) == 1;
@@ -105,12 +118,12 @@ public class JdbcPortfolioDao implements PortfolioDao {
     public void updatePortfolioTotalValues() {
 
         String sql = "SELECT portfolios.portfolio_id, portfolios.portfolio_cash, portfolios.portfolio_stocks_value, " +
-                        "portfolios.portfolio_total_value, portfolios_stocks.stock_symbol, portfolios_stocks.total_shares, " +
-                        "stocks.share_price " +
-                    "FROM portfolios_stocks " +
-                    "JOIN portfolios ON portfolios_stocks.portfolio_id = portfolios.portfolio_id " +
-                    "JOIN stocks ON portfolios_stocks.stock_symbol = stocks.stock_symbol " +
-                    "WHERE portfolios.portfolio_status = 'ACTIVE';";
+                "portfolios.portfolio_total_value, portfolios_stocks.stock_symbol, portfolios_stocks.total_shares, " +
+                "stocks.share_price " +
+                "FROM portfolios_stocks " +
+                "JOIN portfolios ON portfolios_stocks.portfolio_id = portfolios.portfolio_id " +
+                "JOIN stocks ON portfolios_stocks.stock_symbol = stocks.stock_symbol " +
+                "WHERE portfolios.portfolio_status = 'ACTIVE';";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         Map<Long, BigDecimal> portfolioStocksValueMap = new HashMap<>();
@@ -131,9 +144,9 @@ public class JdbcPortfolioDao implements PortfolioDao {
             Long portfolioId = entry.getKey();
             BigDecimal portfolioStocksValue = entry.getValue();
             String updateSql = "UPDATE portfolios " +
-                                "SET portfolio_stocks_value = ?, " +
-                                    "portfolio_total_value = portfolio_cash + ? " +
-                                "WHERE portfolio_id = ?;";
+                    "SET portfolio_stocks_value = ?, " +
+                    "portfolio_total_value = portfolio_cash + ? " +
+                    "WHERE portfolio_id = ?;";
             jdbcTemplate.update(updateSql, portfolioStocksValue, portfolioStocksValue, portfolioId);
         }
     }
@@ -141,8 +154,8 @@ public class JdbcPortfolioDao implements PortfolioDao {
     @Override
     public void buyStock(Long portfolioId, String stockSymbol, BigDecimal totalSharesToBuy) {
         String sql = "INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares) " +
-                        "VALUES (?, ?, ?) " +
-                        "ON CONFLICT (portfolio_id, stock_symbol) DO UPDATE SET total_shares = portfolios_stocks.total_shares + EXCLUDED.total_shares;";
+                "VALUES (?, ?, ?) " +
+                "ON CONFLICT (portfolio_id, stock_symbol) DO UPDATE SET total_shares = portfolios_stocks.total_shares + EXCLUDED.total_shares;";
         jdbcTemplate.update(sql, portfolioId, stockSymbol, totalSharesToBuy);
     }
 
