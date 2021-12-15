@@ -38,31 +38,20 @@ export default {
           }
         })
         .catch((error) => {
-          // log the error
           if (error.response) {
             this.errorMsg =
-              "Error submitting new board. Response received was '" +
+              "Error submitting new game. Response received was '" +
               error.response.statusText +
               "'.";
           } else if (error.request) {
             this.errorMsg =
-              "Error submitting new board. Server could not be reached.";
+              "Error submitting new game. Server could not be reached.";
           } else {
             this.errorMsg =
-              "Error submitting new board. Request could not be created.";
+              "Error submitting new game. Request could not be created.";
           }
         });
-        this.$router.push("/gameId")
-    },
-    resetGame() {
-      this.game = {
-        gameId: "",
-        gameOrganizer: this.$store.state.user.id,
-        gameWinner: "",
-        startTimestamp: "",
-        endTimestamp: "",
-        gameStatus: "",
-      };
+        this.$router.push("/")
     },
   },
   created() {

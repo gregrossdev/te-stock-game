@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="portfolios">
     <portfolio-card v-for="portfolio in this.$store.state.gamePortfolios" v-bind:key="portfolio.portfolioId" v-bind:portfolio="portfolio"></portfolio-card>
   </div>
 </template>
@@ -16,6 +16,7 @@ export default {
     servicePortfolios
       .getPortfoliosByGameId(this.$route.params.gameId)
       .then(response => {
+        console.log(response.data);
         this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
       });
   }

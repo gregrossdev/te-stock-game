@@ -9,10 +9,10 @@ import ViewRegister from '../views/ViewRegister.vue'
 // import ViewAllStocks from '../views/ViewAllStocks.vue'
 
 import ViewProfile from '../views/ViewProfile.vue'
+import ViewNewGame from "@/views/ViewNewGame";
 import ViewGame from "@/views/ViewGame";
 
 // import ViewNewTransaction from "@/views/ViewNewTransaction";
-// import ViewNewGame from "@/views/ViewNewGame";
 
 Vue.use(Router)
 
@@ -64,14 +64,14 @@ const router = new Router({
         requiresAuth: true
       }
     },
-    // {
-    //   path: '/new',
-    //   name: 'ViewNewGame',
-    //   component: ViewNewGame,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
+    {
+      path: '/new',
+      name: 'ViewNewGame',
+      component: ViewNewGame,
+      meta: {
+        requiresAuth: true
+      }
+    },
     // {
     //   path: '/game/:gameId/portfolio/:portfolioId',
     //   name: 'ViewGame',
@@ -96,22 +96,7 @@ const router = new Router({
     //     requiresAuth: true
     //   }
     // },
-    // {
-    //   path: '/games',
-    //   name: 'ViewAllGames',
-    //   component: ViewAllGames,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
-    // {
-    //   path: '/stocks',
-    //   name: 'ViewAllStocks',
-    //   component: ViewAllStocks,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
+
   ]
 })
 

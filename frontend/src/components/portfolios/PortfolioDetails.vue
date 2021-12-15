@@ -50,4 +50,8 @@ export default {
 
 <style scoped>
 
+.portfolio-details {
+  background-color: var(--clr-pri); 
+}
+
 </style>

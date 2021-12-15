@@ -1,6 +1,6 @@
 <template>
   <div class="stocks">
-    <article v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock">
+    <article v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock card">
       <input :value="stock.stockSymbol" class="hidden" type="text"/>
       <h5>{{ stock.stockSymbol }} - ${{ stock.sharePrice }}</h5>
       <transaction-new-form v-model="stock.stockSymbol" v-bind:sharePrice="stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
@@ -40,12 +40,11 @@ export default {
   margin-bottom: 1em;
   border-radius: 0.25rem;
   padding: 0.5em;
-  /* width: 20vh;
-  height: 20vh; */
   width: 10rem;
   display: flex;
   flex-direction: column;
 }
+
 
 .hidden {
   display: none;
