@@ -37,6 +37,9 @@ h2 {
   font-size: 2rem;
 }
 
+section {
+  margin-bottom: 0; 
+}
 
 </style>
 

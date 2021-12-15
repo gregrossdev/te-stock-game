@@ -29,13 +29,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 article {
   width: 300px;
   padding: 2em;
-  background-color: var(--clr-pri);
-  border: 2px solid var(--clr-green);
-  border-radius: 0.25em;
 }
 
 article h2,
@@ -44,8 +41,9 @@ article h3 {
 }
 
 article h2 {
-  color: var(--clr-grey-10);
+  color: var(--clr-grey-80);
   font-size: 1.4rem;
+  border-bottom: 1px solid var(--clr-green);
 }
 
 article h3 {

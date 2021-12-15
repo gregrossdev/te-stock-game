@@ -1,7 +1,7 @@
 <template>
-  <form v-on:submit.prevent="saveGame">
+  <form v-on:submit.prevent="saveGame" class="form-onboard">
     <label for="endTimestamp"> End Date</label>
-    <input type="date" v-model="game.endTimestamp" />
+    <input type="date" v-model="game.endTimestamp" class="date"/>
     <div class="checkbox" v-for="user in users" :key="user.id">
       <input type="checkbox" name="userId" v-bind:value="user.id" v-model="invitedUsers"/>
       <label for="userId">{{user.username}}</label>
@@ -66,12 +66,12 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  /* flex-basis: 80%; */
   width: 50%;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   border: 4px solid var(--clr-pri-90);
   padding: 2em;
 }
+
 
 .checkbox {
   display: flex;
@@ -86,5 +86,8 @@ form {
    padding: 10em; 
 }
 
+.date {
+  padding: 1.25em 0.25em;
+}
 
 </style>

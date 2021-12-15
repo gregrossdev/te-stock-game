@@ -7,7 +7,7 @@
       </h2>
     </div>
 
-    <section>
+    <section class="games-list">
       <game-list />
     </section>
   </main>
@@ -26,7 +26,5 @@ export default {
 </script>
 
 <style scope>
-section {
-  margin-bottom: 4rem;
-}
+
 </style>
