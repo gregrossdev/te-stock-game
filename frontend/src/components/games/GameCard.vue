@@ -8,13 +8,11 @@
 </template>
 
 <script>
-// import serviceGames from "@/services/ServiceGames";
-// import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "game-card",
   props: {
-    gameId: Number, // TODO: MAKE SURE PARENT COMPONENT PASSES A GAMEID TO EACH GAMECARD AS A PROP.
+    gameId: Number
   },
   methods: {
     viewGame(gameId) {
@@ -34,8 +32,6 @@ export default {
 
 <style scoped>
 
-
-
 article img {
   width: 100%;
   border: 1px solid var(--clr-grey-30);
@@ -45,10 +41,8 @@ article img {
 h2 {
   color: var(--clr-grey-90);
   padding: 0.25em 0;
-  margin: 0; 
-  margin-left: 0.15em;
+  margin: 0 0 0 0.15em;
 }
-
 
 </style>
 

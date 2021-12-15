@@ -1,22 +1,19 @@
 <template>
-  <div class="stocks">
-    <article v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock card">
-      <input :value="stock.stockSymbol" class="hidden" type="text"/>
-      <h5>{{ stock.stockSymbol }} - ${{ stock.sharePrice }}</h5>
-      <transaction-new-form v-model="stock.stockSymbol" v-bind:sharePrice="stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
-    </article>
+  <div class="stock-list">
+    <stock-card v-for="stock in this.$store.state.stocks" v-bind:key="stock.stockSymbol" class="stock card"
+                v-bind:stock="stock"></stock-card>
   </div>
 </template>
 
 <script>
 import requestStocks from "@/services/ServiceStocks";
-import TransactionNewForm from "../transactions/TransactionNewForm.vue";
+import StockCard from "@/components/stocks/StockCard";
 
 export default {
   name: "stock-list",
 
   components: {
-    TransactionNewForm,
+    StockCard
   },
 
   created() {
@@ -28,25 +25,12 @@ export default {
 </script>
 
 <style scoped>
-.stocks {
+
+.stock-list {
   padding: 1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-.stock {
-  border: 1px solid var(--clr-grey-70);
-  margin-bottom: 1em;
-  border-radius: 0.25rem;
-  padding: 0.5em;
-  width: 10rem;
-  display: flex;
-  flex-direction: column;
-}
-
-
-.hidden {
-  display: none;
-}
 </style>
