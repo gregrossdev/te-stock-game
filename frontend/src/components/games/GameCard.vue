@@ -1,9 +1,13 @@
 <template>
   <router-link
-    v-bind:to="{ name: 'ViewGame', params: { gameId: this.gameId } }"
+    v-bind:to="{ name: 'ViewGame', params: { gameId: this.game.gameId } }"
   >
     <article class="game card">
-      <h2>Game #{{ this.gameId }}</h2>
+      <h2>{{ this.game.gameName }}</h2>
+      <p>Game ID: {{ this.game.gameId }}</p>
+
+<!--      TODO: make randomly generated image stay put with the same game, to help users remember/distinguish games.-->
+
       <img :src="stonksImg(url)" alt="stocks" />
     </article>
   </router-link>
@@ -18,7 +22,7 @@ export default {
     }
   },
   props: {
-    gameId: Number,
+    game: Object
   },
   methods: {
     viewGame(gameId) {

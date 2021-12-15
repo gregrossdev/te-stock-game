@@ -16,7 +16,7 @@ public interface GameDao {
 
     Game getGameByGameWinner(Long gameWinner);
 
-    boolean create(Game gameToCreate);
+    Game create(Game gameToCreate);
 
     boolean update(Game gameToUpdate);
 

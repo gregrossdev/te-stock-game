@@ -3,7 +3,7 @@
     <div class="h-wrap-2">
       <h2>
         Welcome to the Virtual Stock Market,
-        {{ this.$store.state.user.username }}!
+        {{ capitalizedUsername }}!
       </h2>
     </div>
 
@@ -22,6 +22,12 @@ export default {
   components: {
     GameList,
   },
+  computed: {
+    capitalizedUsername() {
+      let username = this.$store.state.user.username;
+      return username.trim().replace(/^\w/, (c) => c.toUpperCase());
+    }
+  }
 };
 </script>
 

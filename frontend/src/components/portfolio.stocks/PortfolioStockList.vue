@@ -20,6 +20,9 @@ export default {
     PortfolioStockCard,
   },
   created() {
+
+    // TODO: Check why this doesn't seem to always work. Make sure that portfolioStocks are being correctly set in the store.
+
     ServicePortfolios.getPortfolioStocksByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
       this.$store.commit("SET_ACTIVE_PORTFOLIO_STOCKS", response.data);
     });
@@ -28,6 +31,8 @@ export default {
 </script>
 
 <style scoped>
+
+/*TODO improve styling for the PortfolioStockList.*/
 
 .stock-list {
   padding: 1.5rem 1rem; 

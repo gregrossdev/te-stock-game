@@ -18,26 +18,33 @@ export default {
 		return http.get(`user/${userId}`);
 	},
 
+	// USE: Data for LEADERBOARD inside ViewGame
 	getPortfoliosByGameId(gameId) {
 		return http.get(`game/${gameId}`);
 	},
 
+	// USE: Data for ACTIVE PORTFOLIO once ACTIVE GAME ID is known
 	getPortfolioByUserIdAndGameId(userId, gameId) {
 		return http.get(`user/${userId}/game/${gameId}`);
 	},
 
+	// USE: Data for YOUR INVESTMENTS in PortfolioDetails in ViewGame
 	getPortfolioStocksByPortfolioId(portfolioId) {
 		return http.get(`portfolio-stocks/${portfolioId}`);
 	},
 
+	// USE: Creates portfolio with ACTIVE status for game organizer when game is created
+	// USE: Creates portfolio with PENDING status for user once they're invited to a game
 	create(portfolioToCreate) {
 		return http.post("", portfolioToCreate);
 	},
 
+	// USE: Updates portfolio status from PENDING to ACTIVE once a user accepts a pending invitation to a game
 	update(portfolioToUpdate) {
 		return http.put(`${portfolioToUpdate.portfolioId}`, portfolioToUpdate);
 	},
 
+	// USE: Deletes portfolio once a user rejects a pending invitation to a game
 	delete(portfolioIdToDelete) {
 		return http.delete(`${portfolioIdToDelete}`);
 	}

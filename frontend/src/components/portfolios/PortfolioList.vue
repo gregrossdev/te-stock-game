@@ -12,6 +12,9 @@ import PortfolioCard from "@/components/portfolios/PortfolioCard";
 export default {
   name: "portfolio-list",
   components: {PortfolioCard},
+
+  // TODO: Make sure that "gamePortfolios" are being correctly and consistently set in the store.
+
   created() {
     servicePortfolios
       .getPortfoliosByGameId(this.$route.params.gameId)

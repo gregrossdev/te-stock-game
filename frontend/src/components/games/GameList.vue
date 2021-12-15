@@ -7,7 +7,7 @@
       <game-card
         v-for="game in this.$store.state.games"
         v-bind:key="game.gameId"
-        v-bind:gameId="game.gameId"
+        v-bind:game="game"
       ></game-card>
     </section>
   </div>
@@ -20,7 +20,6 @@ import GameCard from "@/components/games/GameCard";
 export default {
   name: "game-list",
   components: { GameCard },
-  methods: {},
   created() {
     requestGames
       .getGamesByUserId(this.$store.state.user.id)
