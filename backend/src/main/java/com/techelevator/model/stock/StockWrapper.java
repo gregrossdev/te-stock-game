@@ -6,16 +6,17 @@ import java.sql.Timestamp;
 public class StockWrapper {
 
     private String stockSymbol;
+    private String stockName;
     private BigDecimal sharePrice;
     private Timestamp quoteTimestamp;
-    private String stockName;
 
     public StockWrapper() {
 
     }
 
-    public StockWrapper(String stockSymbol, BigDecimal sharePrice, Timestamp quoteTimestamp) {
+    public StockWrapper(String stockSymbol, String stockName, BigDecimal sharePrice, Timestamp quoteTimestamp) {
         this.stockSymbol = stockSymbol;
+        this.stockName = stockName;
         this.sharePrice = sharePrice;
         this.quoteTimestamp = quoteTimestamp;
     }
@@ -26,6 +27,14 @@ public class StockWrapper {
 
     public void setStockSymbol(String stockSymbol) {
         this.stockSymbol = stockSymbol;
+    }
+
+    public String getStockName() {
+        return stockName;
+    }
+
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
     }
 
     public BigDecimal getSharePrice() {

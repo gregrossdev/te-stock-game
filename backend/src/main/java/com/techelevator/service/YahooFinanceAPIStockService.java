@@ -44,7 +44,7 @@ public class YahooFinanceAPIStockService implements StockService {
                 Stock tempStock = stocks.get(stockSymbol);
                 BigDecimal updatedPrice = tempStock.getQuote().getPrice();
                 Timestamp currentTempTimestamp = new Timestamp(System.currentTimeMillis());
-                StockWrapper tempStockWrapper = new StockWrapper(tempStock.getSymbol(), updatedPrice, currentTempTimestamp);
+                StockWrapper tempStockWrapper = new StockWrapper(tempStock.getSymbol(), tempStock.getName(), updatedPrice, currentTempTimestamp);
                 stockDao.update(tempStockWrapper);
             }
             portfolioDao.updatePortfolioTotalValues();

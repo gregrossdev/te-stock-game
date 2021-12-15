@@ -54,12 +54,14 @@ CREATE TABLE portfolios
     portfolio_stocks_value decimal     NOT NULL DEFAULT 0,
     portfolio_total_value  decimal     NOT NULL DEFAULT 100000.00,
     portfolio_status       varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (portfolio_status IN ('PENDING', 'ACTIVE', 'ARCHIVED')),
-    PRIMARY KEY (portfolio_id)
+    PRIMARY KEY (portfolio_id),
+    UNIQUE (user_id, game_id)
 );
 
 CREATE TABLE stocks
 (
     stock_symbol    varchar(10) NOT NULL,
+    stock_name      varchar(50) NULL,
     share_price     decimal     NOT NULL,
     quote_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (stock_symbol)
@@ -238,7 +240,7 @@ VALUES ('SPCE', '12.70'),
        ('RIOT', '99.00'),
        ('WISH', '99.00'),
        ('XOM', '99.00'),
-       ('NIKE', '99.00'),
+       ('NKE', '99.00'),
        ('ARKK', '99.00'),
        ('GNUS', '99.00'),
        ('CRSR', '99.00'),

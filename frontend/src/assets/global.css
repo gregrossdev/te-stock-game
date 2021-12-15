@@ -155,11 +155,6 @@ Site Styles
 ===============
 */
 
-#nav {
-  text-align: center;
-  background-color: var(--clr-pri);
-  margin-top: 0.5em;
-}
 
 #login,
 #register {
@@ -173,7 +168,7 @@ Site Styles
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
   border: solid 2px var(--clr-yellow);
   border-radius: 1em;
   padding: 3rem;
@@ -227,7 +222,8 @@ form button {
 }
 
 main {
-  background-color: var(--clr-yellow); 
+  background-color: var(--clr-yellow);
+  border-radius: 0.25rem; 
 }
 
 .main h2 {
@@ -246,9 +242,19 @@ main {
   border-radius: 0.25em;
 }
 
-.header {
+.h-wrap-1 {
   background-color: var(--clr-green);
   padding: 1em;  
+  border: 2px solid var(--clr-pri-80);
+}
+
+.h-wrap-2 {
+  padding: 1em;  
+  border: 2px solid var(--clr-green);
+}
+
+.u-m1 {
+  margin-top: -0.5rem;
 }
 
 /*
@@ -262,20 +268,22 @@ Games
   grid-area: game-card;
 }
 
-.games section {
+.games-grid {
   display: grid;
+  justify-content: center;
+  justify-content: space-around;
   gap: 1rem 1rem;
   grid-template-columns: 1fr;
   grid-template-areas: "game-card";
   align-items: center;
   border: 3px solid var(--clr-pri-80);
   /* border-radius: 0.25rem; */
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   /* margin: 1rem 0; */
 }
 
 @media only screen and (min-width: 576px) {
-  .games section {
+  .games-grid {
     display: grid;
     gap: 1rem 1rem;
     grid-template-columns: 1fr 1fr;
@@ -285,7 +293,7 @@ Games
 }
 
 @media only screen and (min-width: 768px) {
-  .games section {
+  .games-grid {
     display: grid;
     gap: 1rem 1rem;
     grid-template-columns: 1fr 1fr 1fr;
@@ -303,13 +311,9 @@ Portfolio
 .portfolios {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem; 
-  padding: 1rem; 
+  gap: 1rem; 
+  padding: 1.5rem 1rem; 
 }
 
-.portfolio-details h3 {
-  margin-left: 1rem;
-  padding: 0.5em 0;
-  font-weight: 800;
-}
+
 

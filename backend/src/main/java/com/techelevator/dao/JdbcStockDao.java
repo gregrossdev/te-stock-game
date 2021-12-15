@@ -50,8 +50,8 @@ public class JdbcStockDao implements StockDao {
 
     @Override
     public boolean update(StockWrapper stockWrapperToUpdate) {
-        String sql = "UPDATE stocks SET share_price = ?, quote_timestamp = ? WHERE stock_symbol = ?;";
-        return jdbcTemplate.update(sql, stockWrapperToUpdate.getSharePrice(), stockWrapperToUpdate.getQuoteTimestamp(),
+        String sql = "UPDATE stocks SET stock_name = ?, share_price = ?, quote_timestamp = ? WHERE stock_symbol = ?;";
+        return jdbcTemplate.update(sql, stockWrapperToUpdate.getStockName(), stockWrapperToUpdate.getSharePrice(), stockWrapperToUpdate.getQuoteTimestamp(),
                 stockWrapperToUpdate.getStockSymbol()) == 1;
     }
 
@@ -74,6 +74,7 @@ public class JdbcStockDao implements StockDao {
     private StockWrapper mapRowToStock(SqlRowSet results) {
         StockWrapper stockWrapper = new StockWrapper();
         stockWrapper.setStockSymbol(results.getString("stock_symbol"));
+        stockWrapper.setStockName(results.getString("stock_name"));
         stockWrapper.setSharePrice(results.getBigDecimal("share_price"));
         stockWrapper.setQuoteTimestamp(results.getTimestamp("quote_timestamp"));
         return stockWrapper;

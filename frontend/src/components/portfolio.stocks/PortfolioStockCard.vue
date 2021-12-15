@@ -1,21 +1,15 @@
 <template>
-  <article class="stock-card">
-    <h5>{{ this.stock.stockSymbol }} | {{ formatPrice(this.stock.sharePrice) }}</h5>
-    <p>{{this.stock.stockName}}</p>
-    <transaction-new-form v-bind:sharePrice="this.stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
-  </article>
+  <div class="stock-card">
+    <h5>Stock: {{ this.portfolioStock.stockSymbol }} | Shares: {{ this.portfolioStock.totalShares }}</h5>
+  </div>
 </template>
 
 <script>
-import TransactionNewForm from "@/components/transactions/TransactionNewForm";
 
 export default {
   name: "stock-card",
   props: {
-    stock: Object
-  },
-  components: {
-    TransactionNewForm
+    portfolioStock: Object
   },
   methods: {
     formatPrice(value) {

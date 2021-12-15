@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="transaction-form" v-on:submit.prevent="saveTransaction">
+    <form class="transaction-form" v-on:submit="saveTransaction">
       <input v-model="transaction.transactionType" list="transactionType" name="transactionType"/>
       <datalist id="transactionType" autocomplete="off">
         <option value="BUY"></option>
@@ -25,8 +25,6 @@ export default {
     return {
       transaction: {
         portfolioId: this.$store.state.activePortfolio.portfolioId,
-        // TODO STILL NEED TO SET ACTIVE PORTFOLIO (AND ACTIVE GAME) IN THE STORE,
-        //  BUT THIS WORKS WITH A HARDCODED VALUE AND SHOULD WORK WHEN THE ACTIVE PORTFOLIO IS UPDATED IN THE STORE.
         stockSymbol: this.stockSymbol,
         transactionType: "",
         transactionAmount: null,
@@ -35,6 +33,7 @@ export default {
       }
     }
   },
+
   methods: {
     saveTransaction() {
       if (this.transaction.transactionAmount == null || this.transaction.transactionAmount === 0) {

@@ -1,9 +1,9 @@
 <template>
   <div class="games">
-    <div class="header">
+    <div class="h-wrap-1">
       <h2>Your Games</h2>
     </div>
-    <section>
+    <section class="games-grid">
       <game-card
         v-for="game in this.$store.state.games"
         v-bind:key="game.gameId"
@@ -37,6 +37,9 @@ h2 {
   font-size: 2rem;
 }
 
+section {
+  margin-bottom: 0; 
+}
 
 </style>
 
