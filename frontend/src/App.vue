@@ -9,6 +9,7 @@
     </div>
     <router-view/>
     <footer>
+      <router-link v-bind:to="{ name: 'ViewWinner' }">Game Winners</router-link>
       <h2>Made with ☕ && ❤️ by Stonks Dev Team</h2>
     </footer>
   </div>
@@ -63,6 +64,16 @@ footer {
 footer h2 {
   padding: 1.5em 0 1em;
   text-align: center;
+}
+
+footer a {
+  display: block;
+  font-weight: 900;
+  font-size: 1.35rem;
+  text-align: center; 
+  padding: 1em 0;
+  color: var(--clr-yellow);
+  border: 1px solid var(--clr-green);
 }
 
 </style>
