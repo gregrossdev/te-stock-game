@@ -71,4 +71,9 @@ export default {
   background-color: var(--clr-pri); 
 }
 
+.portfolio-details h3 {
+  margin-bottom: 0;
+  padding: 1em 0;
+}
+
 </style>

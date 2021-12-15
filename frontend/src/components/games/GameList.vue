@@ -1,6 +1,6 @@
 <template>
   <div class="games">
-    <div class="header">
+    <div class="h-wrap-1">
       <h2>Your Games</h2>
     </div>
     <section class="games-grid">

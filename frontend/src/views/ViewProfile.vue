@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <div class="h-wrapper">
+    <div class="h-wrap-2">
       <h2>
         Welcome to the Virtual Stock Market,
         {{ this.$store.state.user.username }}!
