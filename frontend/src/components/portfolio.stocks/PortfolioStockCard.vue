@@ -1,6 +1,12 @@
 <template>
   <div class="stock-card">
+
     <h5>Stock: {{ this.portfolioStock.stockSymbol }} | Shares: {{ this.portfolioStock.totalShares }}</h5>
+
+<!--    TODO: Figure out why share price isn't displaying.-->
+<!--    TODO: Display total value of investment (totalShares X sharePrice).-->
+
+    <p>Share Price: ${{ sharePrice }}</p>
   </div>
 </template>
 
@@ -10,6 +16,14 @@ export default {
   name: "stock-card",
   props: {
     portfolioStock: Object
+  },
+  computed: {
+
+    // TODO: Figure out why this doesn't seem to be working.
+    sharePrice () {
+      const stockToLookUp = this.$store.state.portfolioStocks.find(portfolioStock => portfolioStock.stockSymbol === this.portfolioStock.stockSymbol);
+      return stockToLookUp.sharePrice;
+    }
   },
   methods: {
     formatPrice(value) {
@@ -28,6 +42,8 @@ export default {
 </script>
 
 <style scoped>
+
+/*TODO:Improve styling for PortfolioStockCard.*/
 
 p {
   color: white;

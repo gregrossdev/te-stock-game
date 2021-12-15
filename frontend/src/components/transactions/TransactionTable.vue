@@ -1,5 +1,8 @@
 <template>
   <div>
+
+<!--    TODO: EDIT this table so that it can be used to display the CURRENT USER'S TRANSACTION HISTORY.-->
+
     <div class="transactions">
       <table
         class="transaction"
@@ -47,7 +50,7 @@ export default {
   name: "stock-list",
   methods: {
     getTransactions() {
-      requestTransactions.list().then((response) => {
+      requestTransactions.getTransactionsByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
         this.$store.commit("SET_TRANSACTIONS", response.data);
       });
     },

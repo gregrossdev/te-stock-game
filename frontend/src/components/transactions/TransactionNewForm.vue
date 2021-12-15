@@ -6,6 +6,14 @@
         <option value="BUY"></option>
         <option value="SELL"></option>
       </datalist>
+
+      <!--      TODO: Allow user to select either number of shares OR total dollar amount, if transaction is a BUY.-->
+      <!--      TODO: Only allow user to select POSITIVE numbers for dollar amount and number of shares.-->
+      <!--      TODO: For BUY, check that the user has enough money before submitting form.-->
+      <!--      TODO: Only allow user to SELL a stock if they already have shares of that stock.-->
+      <!--      TODO: For SELL, check that the user has that many shares available to sell.-->
+      <!--      TODO: Implement some kind of error message/alert for invalid input, or if the server throws an error.-->
+
       <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
       <button>Save</button>
     </form>

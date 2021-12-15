@@ -19,14 +19,31 @@ if (currentToken != null) {
 export default new Vuex.Store({
     state: {
         token: currentToken || "",
+
+        // USE: this.$store.state.user.id is the CURRENT USER'S USERID.
         user: currentUser || {},
+
+        // USE: Stores all users so that a user can select which users to invite to a game.
         users: [],
+
+        // USE: Stores all games that the CURRENT USER is a participant in
+        // TODO: Make sure that games[] only stores games that a user has either created or accepted an invitation to.
         games: [],
+
+        // USE: Stores all portfolios that a user is a part of, across games.
         userPortfolios: [],
+
+        // USE: Stores all user/portfolios for a particular game, so that LEADERBOARD can be displayed.
         gamePortfolios: [],
+
+        // USE: Stores most recent stock prices from the database.
         stocks: [],
+
+        // USE: Stores all stocks, as well as total shares, that a particular portfolio is invested in.
         portfolioStocks: [],
+
         transactions: [],
+
         activeGame: {
             gameId: 0,
             gameOrganizer: 0,
@@ -35,6 +52,7 @@ export default new Vuex.Store({
             endTimestamp: "",
             gameStatus: ""
         },
+
         activePortfolio: {
             portfolioId: 0,
             userId: 0,
