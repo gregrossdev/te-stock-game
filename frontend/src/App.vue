@@ -8,6 +8,9 @@
       </nav>
     </div>
     <router-view/>
+    <footer>
+      <h2>Made with ☕ && ❤️ by Stonks Dev Team</h2>
+    </footer>
   </div>
 </template>
 
@@ -48,6 +51,18 @@
   background-color: var(--clr-green);
   padding: 0.1em 0.5em;
   border-radius: 0.25rem; 
+}
+
+footer {
+  background-color: var(--clr-pri);
+  border: 1px solid var(--clr-green);
+  margin-bottom: 1rem;
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+
+footer h2 {
+  padding: 1.5em 0 1em;
+  text-align: center;
 }
 
 </style>
