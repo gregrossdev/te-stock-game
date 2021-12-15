@@ -11,6 +11,7 @@ import ViewRegister from '../views/ViewRegister.vue'
 import ViewProfile from '../views/ViewProfile.vue'
 import ViewNewGame from "@/views/ViewNewGame";
 import ViewGame from "@/views/ViewGame";
+import ViewWinner from "@/views/ViewWinner";
 
 // import ViewNewTransaction from "@/views/ViewNewTransaction";
 
@@ -68,6 +69,14 @@ const router = new Router({
       path: '/new',
       name: 'ViewNewGame',
       component: ViewNewGame,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/game/win',
+      name: 'ViewWinner',
+      component: ViewWinner,
       meta: {
         requiresAuth: true
       }
