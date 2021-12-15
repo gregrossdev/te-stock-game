@@ -77,7 +77,7 @@ figcaption {
   padding: 1em;
   background-color: var(--clr-green);
   border: 1px solid var(--clr-pri);
-  color: var(--clr-yellow);
+  color: var(--clr-pri);
   font-weight: 900;
 }
 </style>
