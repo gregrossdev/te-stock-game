@@ -168,7 +168,7 @@ Site Styles
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
   border: solid 2px var(--clr-yellow);
   border-radius: 1em;
   padding: 3rem;
@@ -278,7 +278,7 @@ Games
   align-items: center;
   border: 3px solid var(--clr-pri-80);
   /* border-radius: 0.25rem; */
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   /* margin: 1rem 0; */
 }
 
@@ -311,13 +311,9 @@ Portfolio
 .portfolios {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem; 
-  padding: 1rem; 
+  gap: 1rem; 
+  padding: 1.5rem 1rem; 
 }
 
-.portfolio-details h3 {
-  margin-left: 1rem;
-  padding: 0.5em 0;
-  font-weight: 800;
-}
+
 

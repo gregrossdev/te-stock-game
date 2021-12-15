@@ -45,7 +45,7 @@ export default {
 
 <style scoped>
 .stock-list {
-  padding: 1rem;
+  padding: 1.5rem 1rem; 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

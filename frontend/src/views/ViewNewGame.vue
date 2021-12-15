@@ -1,8 +1,11 @@
 <template>
-  <div>
-      <p>New Game</p>
+  <main>
+    <div class="h-wrap-1">
+      <h2>New Game</h2>
+    </div>
+      
       <game-new-form />
-  </div>
+  </main>
 </template>
 
 <script>
