@@ -53,7 +53,7 @@ public class GameController {
     // USE: User can create a Game.
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public boolean create(@RequestBody Game gameToCreate) {
+    public Game create(@RequestBody Game gameToCreate) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         gameToCreate.setStartTimestamp(timestamp);
         return gameDao.create(gameToCreate);
