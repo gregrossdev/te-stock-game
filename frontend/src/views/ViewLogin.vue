@@ -2,7 +2,7 @@
   <main>
     <h2 class="page-title">Welcome to the Virtual Stock Market Game</h2>
     <div id="login">
-      <form class="form-signin" @submit.prevent="login">
+      <form class="form-onboard" @submit.prevent="login">
         <h2>Sign In</h2>
         <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
           Invalid username and password!

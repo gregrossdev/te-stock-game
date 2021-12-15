@@ -1,4 +1,3 @@
-<!--
 <template>
   <div>
       <p>New Game</p>
@@ -25,4 +24,4 @@ export default {
 
 
 </style>
--->
+
