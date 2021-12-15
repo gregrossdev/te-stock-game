@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="transaction-form" v-on:submit.prevent="saveTransaction">
+    <form class="transaction-form" v-on:submit="saveTransaction">
       <input v-model="transaction.transactionType" list="transactionType" name="transactionType"/>
       <datalist id="transactionType" autocomplete="off">
         <option value="BUY"></option>
@@ -14,7 +14,6 @@
 
 <script>
 import serviceTransactions from "@/services/ServiceTransactions";
-import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "transaction-new-form",
@@ -25,7 +24,7 @@ export default {
   data() {
     return {
       transaction: {
-        portfolioId: this.portfolioIdForTransaction,
+        portfolioId: this.$store.state.activePortfolio.portfolioId,
         stockSymbol: this.stockSymbol,
         transactionType: "",
         transactionAmount: null,
@@ -34,11 +33,7 @@ export default {
       }
     }
   },
-  computed: {
-    portfolioIdForTransaction() {
-      return servicePortfolios.getPortfolioByUserIdAndGameId(this.$store.state.user.id, this.$route.params.gameId);
-    }
-  },
+
   methods: {
     saveTransaction() {
       if (this.transaction.transactionAmount == null || this.transaction.transactionAmount === 0) {

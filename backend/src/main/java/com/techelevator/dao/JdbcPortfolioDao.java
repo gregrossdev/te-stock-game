@@ -110,7 +110,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
                 "WHERE portfolio_id =?;";
         return jdbcTemplate.update(sql, portfolioToUpdate.getUserId(), portfolioToUpdate.getGameId(),
                 portfolioToUpdate.getPortfolioCash(), portfolioToUpdate.getPortfolioStocksValue(), portfolioToUpdate.getPortfolioTotalValue(),
-                portfolioToUpdate.getPortfolioStatus(), portfolioToUpdate.getUserId()) == 1;
+                portfolioToUpdate.getPortfolioStatus(), portfolioToUpdate.getPortfolioId()) == 1;
     }
 
     // EXPERIMENTAL METHOD BELOW! DEEP SQL MAGIC! STILL NEED TO TEST!
