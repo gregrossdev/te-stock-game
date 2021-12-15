@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.portfolio.Portfolio;
 import com.techelevator.model.portfolio.PortfolioNotFoundException;
 import com.techelevator.model.portfolioStock.PortfolioStock;
+import com.techelevator.model.portfolioStock.PortfolioStockNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -79,6 +80,17 @@ public class JdbcPortfolioDao implements PortfolioDao {
     }
 
     @Override
+    public List<PortfolioStock> getPortfolioStocksByPortfolioId(Long portfolioId) {
+        List<PortfolioStock> portfolioStocksByPortfolioId = new ArrayList<PortfolioStock>();
+        String sql = "SELECT * FROM portfolios_stocks WHERE portfolio_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId);
+        while (results.next()) {
+            portfolioStocksByPortfolioId.add(mapRowToPortfolioStock(results));
+        }
+        return portfolioStocksByPortfolioId;
+    }
+
+    @Override
     public PortfolioStock getPortfolioStockByPortfolioIdAndStockSymbol(Long portfolioId, String stockSymbol) {
         PortfolioStock portfolioStock = new PortfolioStock();
 
@@ -86,12 +98,9 @@ public class JdbcPortfolioDao implements PortfolioDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId, stockSymbol);
 
         if (results.next()) {
-            portfolioStock.setPortfolioId(results.getLong("portfolio_id"));
-            portfolioStock.setStockSymbol(results.getString("stock_symbol"));
-            portfolioStock.setTotalShares(results.getBigDecimal("total_shares"));
+            return mapRowToPortfolioStock(results);
         }
-
-        return portfolioStock;
+        throw new PortfolioStockNotFoundException();
     }
 
     @Override
@@ -134,8 +143,10 @@ public class JdbcPortfolioDao implements PortfolioDao {
             BigDecimal stockValue = results.getBigDecimal("share_price");
 
             if (portfolioStocksValueMap.get(portfolioId) == null) {
+                assert stockValue != null;
                 portfolioStocksValueMap.put(portfolioId, (stockValue.multiply(totalShares)));
             } else {
+                assert stockValue != null;
                 portfolioStocksValueMap.put(portfolioId, (portfolioStocksValueMap.get(portfolioId).add(stockValue.multiply(totalShares))));
             }
         }
@@ -181,5 +192,13 @@ public class JdbcPortfolioDao implements PortfolioDao {
         portfolio.setPortfolioTotalValue(results.getBigDecimal("portfolio_total_value"));
         portfolio.setPortfolioStatus(results.getString("portfolio_status"));
         return portfolio;
+    }
+
+    private PortfolioStock mapRowToPortfolioStock(SqlRowSet results) {
+        PortfolioStock portfolioStock = new PortfolioStock();
+        portfolioStock.setPortfolioId(results.getLong("portfolio_id"));
+        portfolioStock.setStockSymbol(results.getString("stock_symbol"));
+        portfolioStock.setTotalShares(results.getBigDecimal("total_shares"));
+        return portfolioStock;
     }
 }

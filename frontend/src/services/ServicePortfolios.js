@@ -26,6 +26,10 @@ export default {
 		return http.get(`user/${userId}/game/${gameId}`);
 	},
 
+	getPortfolioStocksByPortfolioId(portfolioId) {
+		return http.get(`portfolio-stocks/${portfolioId}`);
+	},
+
 	create(portfolioToCreate) {
 		return http.post("", portfolioToCreate);
 	},
