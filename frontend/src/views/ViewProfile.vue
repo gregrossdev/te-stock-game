@@ -1,7 +1,7 @@
 <template>
-  <main class="profile">
+  <main class="main">
 
-    <h2>Welcome to the Virtual Stock Market, {{ this.$store.state.user.username }}!</h2>
+    <h2 class="l-align">Welcome to the Virtual Stock Market, {{ this.$store.state.user.username }}!</h2>
 
     <section>
       <game-list />

@@ -9,4 +9,4 @@ INSERT INTO stocks (stock_symbol, share_price) values ('AMZN','1005.20');
 INSERT INTO stocks (stock_symbol, share_price) values ('ICLN','43.50');
 INSERT INTO stocks (stock_symbol, share_price) values ('AAPL','99.00');
 
-UPDATE stocks SET share_price = '21';
+UPDATE stocks SET share_price = '1' WHERE stock_symbol = 'RKLB';
