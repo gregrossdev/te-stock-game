@@ -13,94 +13,96 @@ const currentToken = localStorage.getItem("token");
 const currentUser = JSON.parse(localStorage.getItem("user"));
 
 if (currentToken != null) {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${currentToken}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${currentToken}`;
 }
 
 export default new Vuex.Store({
-  state: {
-    token: currentToken || "",
-    user: currentUser || {},
-    users: [], 
-    games: [],
-    userPortfolios: [],
-    gamePortfolios: [],
-    stocks: [],
-    transactions: [],
-    activeGame: {
-      gameId: 1,
-      gameOrganizer: 2,
-      gameStartTimestamp: null,
-      gameEndTimestamp: null
+    state: {
+        token: currentToken || "",
+        user: currentUser || {},
+        users: [],
+        games: [],
+        userPortfolios: [],
+        gamePortfolios: [],
+        stocks: [],
+        transactions: [],
+        activeGame: {
+            gameId: 0,
+            gameOrganizer: 0,
+            gameWinner: 0,
+            startTimestamp: "",
+            endTimestamp: "",
+            gameStatus: ""
+        },
+        activePortfolio: {
+            portfolioId: 0,
+            userId: 0,
+            gameId: 0,
+            portfolioCash: 0,
+            portfolioStocksValue: 0,
+            portfolioTotalValue: 0,
+            portfolioStatus: ""
+        }
     },
-    activePortfolio: {
-      portfolioId: 1,
-      userId: 2,
-      gameId: 1,
-      portfolioCash: null,
-      portfolioStocksValue: null,
-      portfolioTotalValue: null
-      // portfolioStocks: []
-    }
-  },
-  mutations: {
-    SET_AUTH_TOKEN(state, token) {
-      state.token = token;
-      localStorage.setItem("token", token);
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    mutations: {
+        SET_AUTH_TOKEN(state, token) {
+            state.token = token;
+            localStorage.setItem("token", token);
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        },
+        SET_USER(state, user) {
+            state.user = user;
+            localStorage.setItem("user", JSON.stringify(user));
+        },
+        LOGOUT(state) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            state.token = "";
+            state.user = {};
+            axios.defaults.headers.common = {};
+        },
+        /*
+         * Users
+         */
+        SET_USERS(state, data) {
+            state.users = data;
+        },
+        /*
+         * Stocks
+         */
+        SET_STOCKS(state, data) {
+            state.stocks = data;
+        },
+        /*
+         * GAMES
+         */
+        SET_GAMES(state, data) {
+            state.games = data;
+        },
+        SAVE_GAME(state, game) {
+            state.games.push(game);
+        },
+        SET_ACTIVE_GAME(state, data) {
+            state.activeGame = data;
+        },
+        /*
+         * Portfolios
+         */
+        SET_USER_PORTFOLIOS(state, data) {
+            state.userPortfolios = data;
+        },
+        SET_GAME_PORTFOLIOS(state, data) {
+            state.gamePortfolios = data;
+        },
+        SET_ACTIVE_PORTFOLIO(state, data) {
+            state.activePortfolio = data;
+        },
+        /*
+         * Transactions
+         */
+        SET_TRANSACTIONS(state, data) {
+            state.transactions = data;
+        },
+
     },
-    SET_USER(state, user) {
-      state.user = user;
-      localStorage.setItem("user", JSON.stringify(user));
-    },
-    LOGOUT(state) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      state.token = "";
-      state.user = {};
-      axios.defaults.headers.common = {};
-    },
-    /*
-     * Users
-     */
-    SET_USERS(state, data) {
-      state.users = data;
-    },
-    /*
-     * Stocks
-     */
-    SET_STOCKS(state, data) {
-      state.stocks = data;
-    },
-    /*
-     * GAMES
-     */
-    SET_GAMES(state, data) {
-      state.games = data;
-    },
-    SAVE_GAME(state, game) {
-      state.games.push(game);
-    },
-    SET_ACTIVE_GAME(state, data) {
-      state.activeGame = data;
-    },
-    /*
-     * Portfolios
-     */
-    SET_USER_PORTFOLIOS(state, data) {
-      state.userPortfolios = data;
-    },
-    SET_GAME_PORTFOLIOS(state, data) {
-      state.gamePortfolios = data;
-    },
-    SET_ACTIVE_PORTFOLIO(state, data) {
-      state.activePortfolio = data;
-    },
-    /*
-     * Transactions
-     */
-    SET_TRANSACTIONS(state, data) {
-      state.transactions = data;
-    },
-    
-  },
 });

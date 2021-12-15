@@ -17,11 +17,33 @@
 <script>
 // import TransactionList from "@/components/transactions/TransactionList";
 // import StockList from "@/components/stocks/StockList";
+import serviceGames from "@/services/ServiceGames";
+import servicePortfolios from "@/services/ServicePortfolios";
+
 export default {
   name: "PortfolioDetails",
-  data() {
-    return
-  }
+  created() {
+    serviceGames
+        .getGameByGameId(this.$route.params.gameId)
+        .then((response) => {
+          this.$store.commit("SET_ACTIVE_GAME", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
+          }
+        });
+    servicePortfolios
+        .getPortfolioByUserIdAndGameId(this.$store.state.user.id, this.$route.params.gameId)
+        .then((response) => {
+          this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
+          }
+        });
+  },
   // components: {StockList, TransactionList}
 }
 </script>
