@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.PortfolioDao;
 import com.techelevator.model.portfolio.Portfolio;
+import com.techelevator.model.portfolioStock.PortfolioStock;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,12 @@ public class PortfolioController {
     @RequestMapping(path = "user/{userId}/game/{gameId}", method = RequestMethod.GET)
     public Portfolio getPortfolioByUserIdAndGameId(@PathVariable Long userId, @PathVariable Long gameId) {
         return portfolioDao.getPortfolioByUserIdAndGameId(userId, gameId);
+    }
+
+
+    @RequestMapping(path="portfolio-stocks/{portfolioId}", method = RequestMethod.GET)
+    public List<PortfolioStock> getPortfolioStocksByPortfolioId(@PathVariable Long portfolioId) {
+        return portfolioDao.getPortfolioStocksByPortfolioId(portfolioId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
