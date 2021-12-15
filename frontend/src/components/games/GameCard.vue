@@ -25,7 +25,7 @@ export default {
       this.$router.push(`/game/${gameId}`);
     },
     stonksImg(url) {
-      let num = Math.floor(Math.random() * 12);
+      let num = Math.floor(Math.random() * 25);
       let query;
       switch (num) {
         case 0:
@@ -63,6 +63,45 @@ export default {
           break;
         case 11:
           query = "charts";
+          break;
+        case 12:
+          query = "coins";
+          break;
+        case 13:
+          query = "rich";
+          break;
+        case 14:
+          query = "bank";
+          break;
+        case 15:
+          query = "wallet";
+          break;
+        case 16:
+          query = "jackpot";
+          break;
+        case 17:
+          query = "credit";
+          break;
+        case 18:
+          query = "funds";
+          break;
+        case 19:
+          query = "market";
+          break;
+        case 20:
+          query = "cryptocurrency";
+          break;
+        case 21:
+          query = "graph";
+          break;
+        case 22:
+          query = "dollars";
+          break;
+        case 23:
+          query = "dollar";
+          break;
+        case 24:
+          query = "chart";
           break;
         default:
           query = "deco";
