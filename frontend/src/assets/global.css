@@ -153,11 +153,6 @@ Site Styles
 ===============
 */
 
-#nav {
-  text-align: center;
-  background-color: var(--clr-pri);
-  margin-top: 0.5em;
-}
 
 #login,
 #register {
@@ -262,6 +257,7 @@ Games
 
 .games section {
   display: grid;
+  justify-content: center;
   gap: 1rem 1rem;
   grid-template-columns: 1fr;
   grid-template-areas: "game-card";

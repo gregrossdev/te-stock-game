@@ -23,7 +23,11 @@
 
 #nav {
   padding-top: 1em;
+  text-align: center;
+  background-color: var(--clr-pri);
+  margin-top: 1rem;
 }
+
 
 .nav-profile {
   display: flex;
