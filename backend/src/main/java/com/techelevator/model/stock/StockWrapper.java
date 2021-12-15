@@ -8,6 +8,7 @@ public class StockWrapper {
     private String stockSymbol;
     private BigDecimal sharePrice;
     private Timestamp quoteTimestamp;
+    private String stockName;
 
     public StockWrapper() {
 
