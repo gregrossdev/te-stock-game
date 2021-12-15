@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 public class Game {
 
     private Long gameId;
+    private String gameName;
     private Long gameOrganizer;
     private Long gameWinner;
     private Timestamp startTimestamp;
@@ -16,8 +17,9 @@ public class Game {
 
     }
 
-    public Game(Long gameId, Long gameOrganizer, Long gameWinner, Timestamp startTimestamp, Timestamp endTimestamp, String gameStatus) {
+    public Game(Long gameId, String gameName, Long gameOrganizer, Long gameWinner, Timestamp startTimestamp, Timestamp endTimestamp, String gameStatus) {
         this.gameId = gameId;
+        this.gameName = gameName;
         this.gameOrganizer = gameOrganizer;
         this.gameWinner = gameWinner;
         this.startTimestamp = startTimestamp;
@@ -31,6 +33,14 @@ public class Game {
 
     public void setGameId(Long gameId) {
         this.gameId = gameId;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public void setGameName(String gameName) {
+        this.gameName = gameName;
     }
 
     public Long getGameOrganizer() {

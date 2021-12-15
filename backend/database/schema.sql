@@ -37,6 +37,7 @@ VALUES ('admin', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC',
 CREATE TABLE games
 (
     game_id         SERIAL,
+    game_name       varchar(50) NOT NULL,
     game_organizer  int         NOT NULL,
     game_winner     int         NULL,
     start_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -127,12 +128,12 @@ ALTER TABLE portfolios_stocks
         FOREIGN KEY (stock_symbol)
             REFERENCES stocks (stock_symbol);
 
-INSERT INTO games (game_organizer, start_timestamp, end_timestamp, game_status)
-VALUES (2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
-       (3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
-       (4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
-       (5, '2021-12-01 12:00:00', '2021-12-14 12:00:00', 'ACTIVE'),
-       (6, '2021-12-01 12:00:00', '2021-12-15 12:00:00', 'ACTIVE');
+INSERT INTO games (game_name, game_organizer, start_timestamp, end_timestamp, game_status)
+VALUES ('First Test Game', 2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
+       ('Second Test Game', 3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
+       ('Third Test Game', 4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
+       ('Fourth Test Game', 5, '2021-12-01 12:00:00', '2021-12-14 12:00:00', 'ACTIVE'),
+       ('Fifth Test Game', 6, '2021-12-01 12:00:00', '2021-12-15 12:00:00', 'ACTIVE');
 
 INSERT INTO portfolios (user_id, game_id, portfolio_status)
 VALUES (2, 1, 'ACTIVE'),

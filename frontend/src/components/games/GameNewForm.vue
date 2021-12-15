@@ -1,14 +1,12 @@
 <template>
 
 <!--  TODO: Make sure that this form creates new PORTFOLIOS for each invited user, with a portfolioStatus of "PENDING"-->
-<!--  TODO: Decide exactly what should happen when the SAVE button gets clicked.
-  We might want to remove "prevent" here so that the page refreshes.
-  OR we might want to immediately take the user to the ViewGame view for the newly created game.-->
+<!--  TODO: Decide exactly what should happen when the SAVE button gets clicked.-->
 
   <form v-on:submit.prevent="saveGame" class="form-onboard">
 
-<!--    TODO: Insert Game Name input text field, to be saved as gameName attribute, once that's added to both backend and frontend.-->
-
+    <label for="gameName">Game Name</label>
+    <input type="text" name="gameName" v-model="game.gameName" class="game-name" />
     <label for="endTimestamp"> End Date</label>
     <input type="date" v-model="game.endTimestamp" class="date"/>
     <div class="checkbox" v-for="user in users" :key="user.id">
@@ -24,17 +22,26 @@
 <script>
 import requestGames from "@/services/ServiceGames";
 import requestUsers from "@/services/ServiceUsers";
+import requestPortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "game-new-form",
   data() {
     return {
       game: {
+        gameName: "",
         gameOrganizer: this.$store.state.user.id,
         endTimestamp: ""
       },
+      createdGame: {},
       users: [],
-      invitedUsers: []
+      invitedUsers: [],
+      invitedUserPortfolio: {
+        userId: 0,
+        gameId: 0,
+        portfolioStatus: 'PENDING'
+      },
+      invitedUsersPortfolios: []
     };
   },
   methods: {
@@ -45,8 +52,11 @@ export default {
       requestGames
         .create(this.game)
         .then((response) => {
-          if (response && response.status == 201) {
-            this.game();
+          if (response && response.status === 201) {
+            this.createdGame = response.data;
+            this.updateGames();
+            this.inviteUsers();
+            this.$router.push('/');
           }
         })
         .catch((error) => {
@@ -63,7 +73,25 @@ export default {
               "Error submitting new game. Request could not be created.";
           }
         });
-        this.$router.push("/")
+    },
+    inviteUsers() {
+      // TODO FIGURE OUT WHAT IS GOING WRONG HERE. USERID IS NOT GETTING SUCCESSFULLY ASSIGNED IN THE PORTFOLIO OBJECT THAT'S BEING CREATED.
+      this.invitedUsers.forEach(value => {
+        this.invitedUserPortfolio.userId = value;
+        this.invitedUserPortfolio.gameId = this.createdGame.gameId;
+        requestPortfolios.create(this.invitedUserPortfolio).then(response => {
+          if (response && response.status === 201) {
+            this.invitedUsersPortfolios.push(this.invitedUserPortfolio);
+          }
+        });
+      });
+      this.invitedUsers = [];
+      this.invitedUsersPortfolios = [];
+    },
+    updateGames() {
+      requestGames.list().then(response => {
+        this.$store.commit("SET_GAMES", response.data);
+      })
     },
   },
   created() {
@@ -79,6 +107,7 @@ form {
   display: flex;
   flex-direction: column;
   width: 50%;
+  height: 100%;
   margin: 1.5rem auto;
   border: 4px solid var(--clr-pri-90);
   padding: 2em;

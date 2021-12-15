@@ -72,21 +72,27 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
-    public boolean create(Game gameToCreate) {
-        String sql = "INSERT INTO games (game_organizer, start_timestamp, end_timestamp) " +
-                "VALUES (?, ?, ?); " +
+    public Game create(Game gameToCreate) {
+        String sql = "INSERT INTO games (game_name, game_organizer, start_timestamp, end_timestamp) " +
+                "VALUES (?, ?, ?, ?); " +
                 "INSERT INTO portfolios (user_id, game_id) " +
                 "VALUES (?, (SELECT game_id FROM games WHERE game_organizer = ? AND start_timestamp = ? AND end_timestamp = ?));";
-        return jdbcTemplate.update(sql, gameToCreate.getGameOrganizer(),
+        if (jdbcTemplate.update(sql, gameToCreate.getGameName(), gameToCreate.getGameOrganizer(),
                 gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp(), gameToCreate.getGameOrganizer(),
-                gameToCreate.getGameOrganizer(), gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp()) == 1;
+                gameToCreate.getGameOrganizer(), gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp()) == 1) {
+            String newGameIdSql = "SELECT game_id FROM games WHERE game_organizer = ? AND start_timestamp = ? AND end_timestamp = ?;";
+            Long newGameId = jdbcTemplate.queryForObject(newGameIdSql, Long.class, gameToCreate.getGameOrganizer(), gameToCreate.getStartTimestamp(), gameToCreate.getEndTimestamp());
+            gameToCreate.setGameId(newGameId);
+            return gameToCreate;
+        };
+        throw new GameNotFoundException();
     }
 
     @Override
     public boolean update(Game gameToUpdate) {
-        String sql = "UPDATE games SET game_organizer = ?, game_winner = ?, start_timestamp = ?, end_timestamp = ?, " +
+        String sql = "UPDATE games SET game_name = ?, game_organizer = ?, game_winner = ?, start_timestamp = ?, end_timestamp = ?, " +
                 "game_status = ? WHERE game_id = ?;";
-        return jdbcTemplate.update(sql, gameToUpdate.getGameOrganizer(), gameToUpdate.getGameWinner(),
+        return jdbcTemplate.update(sql, gameToUpdate.getGameName(), gameToUpdate.getGameOrganizer(), gameToUpdate.getGameWinner(),
                 gameToUpdate.getStartTimestamp(), gameToUpdate.getEndTimestamp(), gameToUpdate.getGameStatus(),
                 gameToUpdate.getGameId()) == 1;
     }
@@ -100,6 +106,7 @@ public class JdbcGameDao implements GameDao {
     private Game mapRowToGame(SqlRowSet results) {
         Game game = new Game();
         game.setGameId(results.getLong("game_id"));
+        game.setGameName(results.getString("game_name"));
         game.setGameOrganizer(results.getLong("game_organizer"));
         game.setGameWinner(results.getLong("game_winner"));
         game.setStartTimestamp(results.getTimestamp("start_timestamp"));
