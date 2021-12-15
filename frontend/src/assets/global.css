@@ -155,11 +155,6 @@ Site Styles
 ===============
 */
 
-#nav {
-  text-align: center;
-  background-color: var(--clr-pri);
-  margin-top: 0.5em;
-}
 
 #login,
 #register {
@@ -227,7 +222,8 @@ form button {
 }
 
 main {
-  background-color: var(--clr-yellow); 
+  background-color: var(--clr-yellow);
+  border-radius: 0.25rem; 
 }
 
 .main h2 {
@@ -249,6 +245,12 @@ main {
 .header {
   background-color: var(--clr-green);
   padding: 1em;  
+  border: 2px solid var(--clr-pri-80);
+}
+
+.h-wrapper {
+  padding: 1em;  
+  border: 2px solid var(--clr-green);
 }
 
 /*
@@ -262,8 +264,10 @@ Games
   grid-area: game-card;
 }
 
-.games section {
+.games-grid {
   display: grid;
+  justify-content: center;
+  justify-content: space-around;
   gap: 1rem 1rem;
   grid-template-columns: 1fr;
   grid-template-areas: "game-card";
@@ -275,7 +279,7 @@ Games
 }
 
 @media only screen and (min-width: 576px) {
-  .games section {
+  .games-grid {
     display: grid;
     gap: 1rem 1rem;
     grid-template-columns: 1fr 1fr;
@@ -285,7 +289,7 @@ Games
 }
 
 @media only screen and (min-width: 768px) {
-  .games section {
+  .games-grid {
     display: grid;
     gap: 1rem 1rem;
     grid-template-columns: 1fr 1fr 1fr;
