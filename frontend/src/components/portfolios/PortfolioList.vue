@@ -14,7 +14,7 @@ export default {
   components: {PortfolioCard},
   created() {
     servicePortfolios
-      .getPortfoliosByGameId(this.$store.state.activeGame.gameId)
+      .getPortfoliosByGameId(this.$route.params.gameId)
       .then(response => {
         this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
       });
