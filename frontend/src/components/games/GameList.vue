@@ -3,7 +3,7 @@
     <div class="header">
       <h2>Your Games</h2>
     </div>
-    <section>
+    <section class="games-grid">
       <game-card
         v-for="game in this.$store.state.games"
         v-bind:key="game.gameId"

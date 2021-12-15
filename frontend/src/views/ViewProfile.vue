@@ -1,31 +1,32 @@
 <template>
   <main class="main">
-
-    <h2 class="l-align">Welcome to the Virtual Stock Market, {{ this.$store.state.user.username }}!</h2>
+    <div class="h-wrapper">
+      <h2>
+        Welcome to the Virtual Stock Market,
+        {{ this.$store.state.user.username }}!
+      </h2>
+    </div>
 
     <section>
       <game-list />
     </section>
-
   </main>
 </template>
 
 
 <script>
-
 import GameList from "@/components/games/GameList.vue";
 
 export default {
   name: "profile",
   components: {
-    GameList
+    GameList,
   },
 };
-
 </script>
 
-<style scope> 
-  section {
-    margin-bottom: 4rem; 
-  }
+<style scope>
+section {
+  margin-bottom: 4rem;
+}
 </style>
