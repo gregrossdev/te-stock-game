@@ -1,7 +1,7 @@
 <template>
   <div class="portfolio-details">
 
-    <h3>Current Portfolio Value: {{this.$store.state.activePortfolio.portfolioTotalValue}}</h3>
+    <h3>Current Portfolio Value: {{formatPrice(this.$store.state.activePortfolio.portfolioTotalValue)}}</h3>
 
 
     <h3>Your Investments</h3>
@@ -22,6 +22,19 @@ import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "PortfolioDetails",
+  methods: {
+    formatPrice(value) {
+      if (typeof value !== "number") {
+        return value;
+      }
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+      });
+      return formatter.format(value);
+    }
+  },
   created() {
     serviceGames
         .getGameByGameId(this.$route.params.gameId)
