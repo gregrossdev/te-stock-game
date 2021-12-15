@@ -1,6 +1,7 @@
 <template>
   <div class="stock-card">
     <h5>{{ this.stock.stockSymbol }} | {{ formatPrice(this.stock.sharePrice) }}</h5>
+    <p>{{this.stock.stockName}}</p>
     <transaction-new-form v-bind:sharePrice="this.stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
   </div>
 </template>
@@ -33,6 +34,11 @@ export default {
 </script>
 
 <style scoped>
+
+p {
+  color: white;
+  font-size: 1em;
+}
 
 .stock-card {
   color: white;

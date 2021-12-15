@@ -1,6 +1,10 @@
 <template>
   <div class="portfolio-details">
 
+    <p style="color: red">Active User is: {{this.$store.state.user.id}}.
+      Active Game is: {{this.$store.state.activeGame.gameId}}.
+      Active Portfolio is: {{this.$store.state.activePortfolio.portfolioId}}.</p>
+
     <h3>Current Portfolio Value: {{formatPrice(this.$store.state.activePortfolio.portfolioTotalValue)}}</h3>
 
 
