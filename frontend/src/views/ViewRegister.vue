@@ -2,7 +2,7 @@
   <main>
     <h2 class="page-title">Please register to start playing!!!</h2> 
     <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
+    <form class="form-onboard" @submit.prevent="register">
       <h2>Register Account</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
