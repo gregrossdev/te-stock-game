@@ -14,6 +14,7 @@
 
 <script>
 import serviceTransactions from "@/services/ServiceTransactions";
+import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "transaction-new-form",
@@ -24,15 +25,18 @@ export default {
   data() {
     return {
       transaction: {
-        portfolioId: this.$store.state.activePortfolio.portfolioId,
-        // TODO STILL NEED TO SET ACTIVE PORTFOLIO (AND ACTIVE GAME) IN THE STORE,
-        //  BUT THIS WORKS WITH A HARDCODED VALUE AND SHOULD WORK WHEN THE ACTIVE PORTFOLIO IS UPDATED IN THE STORE.
+        portfolioId: this.portfolioIdForTransaction,
         stockSymbol: this.stockSymbol,
         transactionType: "",
         transactionAmount: null,
         transactionShares: null,
         sharePrice: this.sharePrice,
       }
+    }
+  },
+  computed: {
+    portfolioIdForTransaction() {
+      return servicePortfolios.getPortfolioByUserIdAndGameId(this.$store.state.user.id, this.$route.params.gameId);
     }
   },
   methods: {
