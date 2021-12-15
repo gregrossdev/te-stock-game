@@ -18,6 +18,14 @@ export default {
     viewGame(gameId) {
       this.$router.push(`/game/${gameId}`);
     },
+    randomBackgroundColor() {
+      return "#" + this.generateHexCode();
+    },
+    generateHexCode() {
+      var bg = Math.floor(Math.random()*16777215).toString(16);
+      if (bg.length !== 6) bg = this.generateHexCode();
+      return bg;
+    },
   }
 };
 </script>
