@@ -1,13 +1,19 @@
 <template>
   <main class="main-game">
-    <h2 class="l-align">Your Portfolio Details</h2>
-    <portfolio-details/>
+    <div class="h-wrap-2">
+      <h2>Your Portfolio Details</h2>
+    </div>
+    <portfolio-details />
 
-    <h2 class="l-align">Leaderboard</h2>
-    <portfolio-list/>
+    <div class="h-wrap-1" >
+      <h2>Leaderboard</h2>
+    </div>
+    <portfolio-list />
 
-    <h2 class="l-align">Buy & Sell Stocks</h2>
-    <stock-list/>
+    <div class="h-wrap-1">
+      <h2>Buy & Sell Stocks</h2>
+    </div>
+    <stock-list />
   </main>
 </template>
 
@@ -21,16 +27,13 @@ export default {
   components: {
     StockList,
     PortfolioList,
-    PortfolioDetails
+    PortfolioDetails,
   },
-
-}
+};
 </script>
 
 <style scoped>
-
 h2 {
-  padding: 0.75em 0 0.75em; 
+  padding: 0.75em 0 0.75em;
 }
-
 </style>

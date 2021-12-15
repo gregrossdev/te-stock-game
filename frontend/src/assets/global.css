@@ -242,15 +242,19 @@ main {
   border-radius: 0.25em;
 }
 
-.header {
+.h-wrap-1 {
   background-color: var(--clr-green);
   padding: 1em;  
   border: 2px solid var(--clr-pri-80);
 }
 
-.h-wrapper {
+.h-wrap-2 {
   padding: 1em;  
   border: 2px solid var(--clr-green);
+}
+
+.u-m1 {
+  margin-top: -0.5rem;
 }
 
 /*
