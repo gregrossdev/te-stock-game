@@ -60,7 +60,7 @@ public class JdbcStockDaoTests extends FinalCapstoneDaoTests{
     @Test
     public void updating_price_functions(){
         //OK new logic. Update price to not real time. Then compare with DB? --Update this isn't necessary
-        StockWrapper amdPassedInForUpdate = new StockWrapper("AMD",new BigDecimal(10), new Timestamp(System.currentTimeMillis())); //Should I create variables above for the price / timestamp?
+        StockWrapper amdPassedInForUpdate = new StockWrapper("AMD", "Advanced Micro Devices, Inc.", new BigDecimal(10), new Timestamp(System.currentTimeMillis())); //Should I create variables above for the price / timestamp?
 
         boolean isTrueOnUpdate = sut.update(amdPassedInForUpdate); //Actual use of method
 
