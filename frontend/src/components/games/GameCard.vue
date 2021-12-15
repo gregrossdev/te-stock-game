@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import serviceGames from "@/services/ServiceGames";
-import servicePortfolios from "@/services/ServicePortfolios";
+// import serviceGames from "@/services/ServiceGames";
+// import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "game-card",
@@ -20,29 +20,7 @@ export default {
     viewGame(gameId) {
       this.$router.push(`/game/${gameId}`);
     },
-  },
-  created() {
-    serviceGames
-      .getGameByGameId(this.gameId)
-      .then((response) => {
-        this.$store.commit("SET_ACTIVE_GAME", response.data);
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
-        }
-      });
-    servicePortfolios
-      .getPortfolioByUserIdAndGameId(this.$store.state.user.id, this.gameId)
-      .then((response) => {
-        this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
-      })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
-        }
-      });
-  },
+  }
 };
 </script>
 
