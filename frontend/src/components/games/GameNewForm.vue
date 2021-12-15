@@ -1,5 +1,14 @@
 <template>
+
+<!--  TODO: Make sure that this form creates new PORTFOLIOS for each invited user, with a portfolioStatus of "PENDING"-->
+<!--  TODO: Decide exactly what should happen when the SAVE button gets clicked.
+  We might want to remove "prevent" here so that the page refreshes.
+  OR we might want to immediately take the user to the ViewGame view for the newly created game.-->
+
   <form v-on:submit.prevent="saveGame" class="form-onboard">
+
+<!--    TODO: Insert Game Name input text field, to be saved as gameName attribute, once that's added to both backend and frontend.-->
+
     <label for="endTimestamp"> End Date</label>
     <input type="date" v-model="game.endTimestamp" class="date"/>
     <div class="checkbox" v-for="user in users" :key="user.id">
@@ -29,6 +38,9 @@ export default {
     };
   },
   methods: {
+
+    // TODO: Chain this "saveGame()" method to an "inviteUsers()" method that creates a new portfolio, with a status of PENDING, for each user in invitedUsers.
+
     saveGame() {
       requestGames
         .create(this.game)

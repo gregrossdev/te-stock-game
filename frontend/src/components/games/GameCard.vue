@@ -4,6 +4,10 @@
   >
     <article class="game card">
       <h2>Game #{{ this.gameId }}</h2>
+
+<!--      TODO: add Game name.-->
+<!--      TODO: make randomly generated image stay put with the same game, to help users remember/distinguish games.-->
+
       <img :src="stonksImg(url)" alt="stocks" />
     </article>
   </router-link>

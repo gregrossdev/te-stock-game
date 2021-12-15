@@ -1,12 +1,9 @@
 <template>
   <div class="portfolio-details">
     <div class="h-wrap-1 active">
-      <h2>Active User is: {{ this.$store.state.user.id }}.</h2>
-      <h2>Active Game is: {{ this.$store.state.activeGame.gameId }}.</h2>
-      <h2>
-        Active Portfolio is:
-        {{ this.$store.state.activePortfolio.portfolioId }}.
-      </h2>
+      <h2>Your user ID is: {{ this.$store.state.user.id }}.</h2>
+      <h2>You're playing Game #: {{ this.$store.state.activeGame.gameId }}.</h2>
+      <h2>Your portfolio # is: {{ this.$store.state.activePortfolio.portfolioId }}.</h2>
     </div>
 
     <div class="h-wrap-2">
@@ -19,20 +16,24 @@
     <div class="h-wrap-2">
       <h3>Your Investments</h3>
     </div>
-    <portfolio-stock-list></portfolio-stock-list>
 
-    <!--    TODO: DISPLAY STOCK LIST OF STOCK CARDS HERE WITH THE ACTIVE PORTFOLIOS STOCK INVESTMENTS, DRAWN FROM PORTFOLIOS_STOCKS TABLE.-->
-    <!--    <stock-list></stock-list>-->
+    <!--    TODO: Make sure portfolioStocks are displaying correctly, and that they update when stocks update.-->
+
+    <portfolio-stock-list></portfolio-stock-list>
 
     <div class="h-wrap-2">
       <h3>Your Transaction History</h3>
     </div>
-    <!--    TODO: DISPLAY TRANSACTION LIST OF TRANSACTION CARDS, DRAWN FROM TRANSACTIONS TABLE USING THE ACTIVE PORTFOLIO ID.-->
-    <!--    <transaction-list></transaction-list>-->
+
+<!--    TODO: Make sure transaction history displays correctly. Perhaps make it a dropdown show/hide section?-->
+
+    <transaction-table></transaction-table>
+
   </div>
 </template>
 
 <script>
+import TransactionTable from "@/components/transactions/TransactionTable";
 // import TransactionList from "@/components/transactions/TransactionList";
 // import StockList from "@/components/stocks/StockList";
 import serviceGames from "@/services/ServiceGames";
@@ -42,7 +43,8 @@ import PortfolioStockList from "@/components/portfolio.stocks/PortfolioStockList
 export default {
   name: "PortfolioDetails",
   components: {
-    PortfolioStockList
+    PortfolioStockList,
+    TransactionTable
   },
   methods: {
     formatPrice(value) {

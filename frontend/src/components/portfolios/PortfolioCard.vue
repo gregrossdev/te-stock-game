@@ -1,5 +1,8 @@
 <template>
   <article class="card">
+
+<!--    TODO: Display username here, in addition to portfolio #.-->
+
     <h2>Portfolio #{{this.portfolio.portfolioId}}</h2>
     <h3>Total Value: {{formatPrice(this.portfolio.portfolioTotalValue)}}</h3>
     <h3>Available Cash: {{formatPrice(this.portfolio.portfolioCash)}}</h3>
@@ -24,8 +27,7 @@ export default {
       });
       return formatter.format(value);
     }
-  },
-  created() {}
+  }
 }
 </script>
 
