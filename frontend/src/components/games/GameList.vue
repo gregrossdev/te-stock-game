@@ -20,7 +20,6 @@ import GameCard from "@/components/games/GameCard";
 export default {
   name: "game-list",
   components: { GameCard },
-  methods: {},
   created() {
     requestGames
       .getGamesByUserId(this.$store.state.user.id)
