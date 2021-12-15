@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <h2>Your Portfolio Details</h2>
+  <main class="main-game">
+    <h2 class="l-align">Your Portfolio Details</h2>
     <portfolio-details/>
 
-    <h2>Leaderboard</h2>
+    <h2 class="l-align">Leaderboard</h2>
     <portfolio-list/>
 
-    <h2>Buy & Sell Stocks</h2>
+    <h2 class="l-align">Buy & Sell Stocks</h2>
     <stock-list/>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -27,7 +27,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
+h2 {
+  padding: 0.75em 0 0.75em; 
+}
 
 </style>
