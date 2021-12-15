@@ -25,6 +25,7 @@ export default new Vuex.Store({
         userPortfolios: [],
         gamePortfolios: [],
         stocks: [],
+        portfolioStocks: [],
         transactions: [],
         activeGame: {
             gameId: 0,
@@ -96,6 +97,9 @@ export default new Vuex.Store({
         },
         SET_ACTIVE_PORTFOLIO(state, data) {
             state.activePortfolio = data;
+        },
+        SET_ACTIVE_PORTFOLIO_STOCKS(state, data) {
+            state.portfolioStocks = data;
         },
         /*
          * Transactions

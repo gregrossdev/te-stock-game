@@ -19,6 +19,7 @@
     <div class="h-wrap-2">
       <h3>Your Investments</h3>
     </div>
+    <portfolio-stock-list></portfolio-stock-list>
 
     <!--    TODO: DISPLAY STOCK LIST OF STOCK CARDS HERE WITH THE ACTIVE PORTFOLIOS STOCK INVESTMENTS, DRAWN FROM PORTFOLIOS_STOCKS TABLE.-->
     <!--    <stock-list></stock-list>-->
@@ -36,9 +37,13 @@
 // import StockList from "@/components/stocks/StockList";
 import serviceGames from "@/services/ServiceGames";
 import servicePortfolios from "@/services/ServicePortfolios";
+import PortfolioStockList from "@/components/portfolio.stocks/PortfolioStockList";
 
 export default {
   name: "PortfolioDetails",
+  components: {
+    PortfolioStockList
+  },
   methods: {
     formatPrice(value) {
       if (typeof value !== "number") {
