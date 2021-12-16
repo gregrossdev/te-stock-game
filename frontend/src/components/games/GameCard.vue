@@ -1,15 +1,11 @@
 <template>
   <router-link
     v-bind:to="{ name: 'ViewGame', params: { gameId: this.game.gameId } }"
+    class="game card"
   >
-    <article class="game card">
-      <h2>{{ this.game.gameName }}</h2>
-      <p>Game ID: {{ this.game.gameId }}</p>
-
-<!--      TODO: make randomly generated image stay put with the same game, to help users remember/distinguish games.-->
-
-      <img :src="stonksImg(url)" alt="stocks" />
-    </article>
+    <p>Game ID: {{ this.game.gameId }}</p>
+    <h2>{{ this.game.gameName }}</h2>
+    <img :src="stonksImg(url, this.game.gameId)" alt="stocks" />
   </router-link>
 </template>
 
@@ -18,115 +14,88 @@ export default {
   name: "game-card",
   data() {
     return {
-      url: "https://source.unsplash.com/300x150/?"
-    }
+      url: "",
+    };
   },
   props: {
-    game: Object
+    game: Object,
   },
   methods: {
     viewGame(gameId) {
       this.$router.push(`/game/${gameId}`);
     },
-    stonksImg(url) {
-      let num = Math.floor(Math.random() * 25);
-      let query;
-      switch (num) {
-        case 0:
-          query = "coins";
-          break;
-        case 1:
-          query = "stocks";
-          break;
-        case 2:
-          query = "money";
-          break;
-        case 3:
-          query = "cash";
-          break;
-        case 4:
-          query = "win";
-          break;
-        case 5:
-          query = "lottery";
-          break;
-        case 6:
-          query = "finance";
-          break;
-        case 7:
-          query = "currency";
-          break;
-        case 8:
-          query = "crypto";
-          break;
-        case 9:
-          query = "exchange";
-          break;
-        case 10:
-          query = "slots";
-          break;
-        case 11:
-          query = "charts";
-          break;
-        case 12:
-          query = "coins";
-          break;
-        case 13:
-          query = "rich";
-          break;
-        case 14:
-          query = "bank";
-          break;
-        case 15:
-          query = "wallet";
-          break;
-        case 16:
-          query = "jackpot";
-          break;
-        case 17:
-          query = "credit";
-          break;
-        case 18:
-          query = "funds";
-          break;
-        case 19:
-          query = "market";
-          break;
-        case 20:
-          query = "cryptocurrency";
-          break;
-        case 21:
-          query = "graph";
-          break;
-        case 22:
-          query = "dollars";
-          break;
-        case 23:
-          query = "dollar";
-          break;
-        case 24:
-          query = "chart";
-          break;
-        default:
-          query = "deco";
+    stonksImg(url, num) {
+      if (num % 1 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1593672715438-d88a70629abe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW9uZXl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
       }
-      return url + query 
-    }
+      if (num % 2 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1579227114347-15d08fc37cae?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
+      }
+      if (num % 3 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1580519542036-c47de6196ba5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80";
+      }
+      if (num % 4 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1603777953662-5310c93eeb1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
+      }
+      if (num % 5 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1575472782454-230f8dd14bd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
+      }
+      if (num % 6 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1579227114400-4752dc0a7506?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80";
+      }
+      if (num % 7 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1602272385319-1dbf089994cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1242&q=80";
+      }
+      if (num % 8 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1621932953986-15fcf084da0f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80";
+      }
+      if (num % 9 === 0) {
+        url =
+          "https://images.unsplash.com/photo-1593713150481-de2e67b4bbf8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80";
+      }
+
+      return url;
+    },
   },
 };
 </script>
 
 <style scoped>
-article img {
+a {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-self: stretch;
+}
+
+a img {
+  display: block;
+  object-fit: cover;
   width: 100%;
+  height: 150px;
   border: 1px solid var(--clr-grey-30);
   border-radius: 0.25em;
+  margin-top: auto;
+  padding-bottom: 0.25em;
+}
+
+a p {
+  margin: 0;
+  margin-top: 0.25em;
+  color: var(--clr-grey-90);
 }
 
 h2 {
   color: var(--clr-grey-90);
-  padding: 0.25em 0;
-  margin: 0 0 0 0.15em;
+  margin-bottom: 0.15em;
 }
 </style>
 

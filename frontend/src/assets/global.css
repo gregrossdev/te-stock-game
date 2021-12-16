@@ -171,16 +171,27 @@ Site Styles
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-bottom: 5rem;
+  margin-bottom: 2.5rem;
   border: solid 2px var(--clr-yellow);
   border-radius: 1em;
-  padding: 3rem;
-  width: 25rem;
-  height: 28rem;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
   background-color: var(--clr-pri);
   color: var(--clr-grey-100);
   box-shadow: var(--light-shadow);
 }
+
+@media only screen and (min-width: 576px) {
+  .form-onboard {
+    margin-bottom: 5rem;
+    border-radius: 1em;
+    padding: 3rem;
+    width: 25rem;
+    height: 28rem;
+  }
+}
+
 
 form h2 {
   font-size: 1.75rem;
@@ -239,7 +250,7 @@ main {
 
 .card {
   max-width: 100%;
-  padding: 0 0.25em;
+  padding: 0 0.35em;
   background-color: var(--clr-pri); 
   border: 2px solid var(--clr-green);
   border-radius: 0.25em;
@@ -267,22 +278,17 @@ Games
 */
 
 
-.game {
-  grid-area: game-card;
-}
+
 
 .games-grid {
   display: grid;
-  justify-content: center;
   justify-content: space-around;
   gap: 1rem 1rem;
   grid-template-columns: 1fr;
-  grid-template-areas: "game-card";
   align-items: center;
   border: 3px solid var(--clr-pri-80);
-  /* border-radius: 0.25rem; */
   padding: 1.5rem 1rem;
-  /* margin: 1rem 0; */
+
 }
 
 @media only screen and (min-width: 576px) {
@@ -290,8 +296,6 @@ Games
     display: grid;
     gap: 1rem 1rem;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "game-card game-card";
-    align-items: center;
   }
 }
 
@@ -300,8 +304,6 @@ Games
     display: grid;
     gap: 1rem 1rem;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-areas: "game-card game-card game-card";
-    align-items: center;
   }
 }
 

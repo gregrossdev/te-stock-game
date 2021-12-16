@@ -1,5 +1,3 @@
-<!--TODO: STYLE THIS TEMPLATE SECTION WITH CONSISTENT CSS AND FORMATTING.-->
-
 <template>
   <main class="main">
 
@@ -7,19 +5,19 @@
       <h2>Welcome to the Virtual Stock Market, {{ capitalizedUsername }}!</h2>
     </div>
 
-    <div class="h-wrap-2" v-if="this.$store.state.pendingPortfolios.length > 0">
+    <div class="h-wrap-1" v-if="this.$store.state.pendingPortfolios.length > 0">
       <h2>Your Pending Game Invitations</h2>
-
       <!--
       THE CREATED() LIFECYCLE HOOK WILL SET PENDING PORTFOLIOS IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
       THE PORTFOLIO PENDING INVITATION LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
       -->
       <portfolio-pending-invitation-list/>
-
     </div>
 
-    <div class="h-wrap-2">
+
+    <div class="h-wrap-1">
       <h2>Your Active Games</h2>
+    </div>
 
       <!--
       THE CREATED() LIFECYCLE HOOK WILL SET GAMES (FOR THE CURRENT USER) IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
@@ -27,7 +25,7 @@
       -->
       <game-list/>
 
-    </div>
+
 
   </main>
 </template>

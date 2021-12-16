@@ -24,6 +24,7 @@
   min-height: 100vh;
   max-width: 980px;
   margin-top: 2em;
+  padding: 1em; 
 }
 
 #nav {

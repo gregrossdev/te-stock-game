@@ -37,11 +37,9 @@ export default {
       return formatter.format(value);
     },
     findUsersById(userId) {
-      let un = '';  
       this.users.filter(user => {
         if(user.id == userId) {
-          un = user.username; 
-          return un; 
+          return user.username; 
         }
       })
     },
