@@ -1,37 +1,48 @@
 <template>
   <div class="portfolio-details">
     <div class="h-wrap-1 active">
-      <h2>Cash Remaining: {{ formatPrice(this.$store.state.activePortfolio.portfolioCash) }}</h2>
-      <ul>
-        <li>Your user ID is: {{ this.$store.state.user.id }}.</li>
-        <li>You're playing Game #: {{ this.$store.state.activeGame.gameId }}.</li>
-        <li>Your portfolio # is: {{ this.$store.state.activePortfolio.portfolioId }}.</li>
-      </ul>
-
+      <h2>
+        Cash Remaining:<span class="money">
+          {{ formatPrice(this.$store.state.activePortfolio.portfolioCash) }}
+        </span>
+      </h2>
+      <div class="active-id">
+        <div class="wrap-id">
+          <h3>Your user ID is: {{ this.$store.state.user.id }}.</h3>
+        </div>
+        <div class="wrap-id">
+          <h3>
+            Your portfolio # is:
+            {{ this.$store.state.activePortfolio.portfolioId }}.
+          </h3>
+        </div>
+        <div class="wrap-id">
+          <h3>
+            You're playing Game #: {{ this.$store.state.activeGame.gameId }}.
+          </h3>
+        </div>
+      </div>
     </div>
 
-    <div class="h-wrap-2">
+    <div class="h-wrap-2 portfolio-value">
       <h3>
         Current Portfolio Value:
         {{ formatPrice(this.$store.state.activePortfolio.portfolioTotalValue) }}
       </h3>
     </div>
 
-    <div v-show="this.$store.state.portfolioStocks.length > 0" class="h-wrap-2">
+    <div v-show="this.$store.state.portfolioStocks.length > 0" class="h-wrap-2 portfolio-investments">
       <h3>Your Investments</h3>
       <portfolio-stock-list></portfolio-stock-list>
     </div>
 
     <!--    TODO: Make sure portfolioStocks are displaying correctly, and that they update when stocks update.-->
 
-
-    <div v-if="this.$store.state.transactions.length > 0" class="h-wrap-2">
+    <div v-if="this.$store.state.transactions.length > 0" class="h-wrap-2 transaction-history">
       <h3>Your Transaction History</h3>
       <transaction-table></transaction-table>
       <!--    TODO: Make sure transaction history displays correctly. Perhaps make it a dropdown show/hide section?-->
     </div>
-
-
   </div>
 </template>
 
@@ -44,7 +55,7 @@ export default {
   name: "PortfolioDetails",
   components: {
     PortfolioStockList,
-    TransactionTable
+    TransactionTable,
   },
   methods: {
     formatPrice(value) {
@@ -60,10 +71,12 @@ export default {
     },
   },
   created() {
-    ServicePortfolios.getPortfolioStocksByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
+    ServicePortfolios.getPortfolioStocksByPortfolioId(
+      this.$store.state.activePortfolio.portfolioId
+    ).then((response) => {
       this.$store.state.commit("SET_ACTIVE_PORTFOLIO_STOCKS", response.data);
-    })
-  }
+    });
+  },
 };
 </script>
 
@@ -80,9 +93,57 @@ export default {
   color: var(--clr-yellow);
 }
 
+.active {
+  padding-top: 0.25em;
+}
+
 .active h2 {
-  margin-bottom: 0.75em;
+  margin-bottom: 0.25em;
+  padding: 1em;
+  padding-left: 0.5em;
+  margin-left: -0.5em;
+  margin-right: -0.5em;
+  color: var(--clr-pri);
+  border-bottom: 1px solid var(--clr-yellow);
+  text-shadow: 1px 1px var(--clr-yellow);
+  box-shadow: var(--light-shadow);
+}
+
+span {
   color: var(--clr-black);
+  font-size: 125%;
+}
+
+.active-id {
+  display: flex;
+  text-shadow: 1px 1px var(--clr-pri);
+  box-shadow: var(--light-shadow);
+  margin-left: -0.75em;
+  margin-right: -0.75em;
+  margin-top: 0;
+}
+
+.wrap-id {
+  padding: 1em;
+}
+
+.active-id h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.25em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--clr-grey-40);
+}
+
+.portfolio-value h3 {
+  font-size: 2.25rem;
+  padding: 0.5em 0;
+  text-shadow: 1px 1px var(--clr-green);
+}
+
+.portfolio-investments h3, .transaction-history h3  {
+  font-size: 2.25rem;
+  padding: 0.5em 0;
+  text-shadow: 1px 1px var(--clr-grey-70);
 }
 
 

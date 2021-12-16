@@ -35,10 +35,8 @@ export default {
 /*TODO improve styling for the PortfolioStockList.*/
 
 .stock-list {
-  padding: 1.5rem 1rem; 
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 1rem;
 }
 

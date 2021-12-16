@@ -1,41 +1,53 @@
 <template>
-  <div>
+  <section class="transactions">
+    <div
+      class="transaction"
+      v-for="transaction in this.portfolioTransactions"
+      v-bind:key="transaction.transactionId"
+    >
+      <div class="well">
+        <h3>Stock</h3>
+        <p>{{ transaction.stockSymbol }}</p>
+      </div>
 
-<!--    TODO: EDIT this table so that it can be used to display the CURRENT USER'S TRANSACTION HISTORY.-->
+      <div class="well">
+        <h3>Buy/Sell</h3>
+        <p>{{ transaction.transactionType }}</p>
+      </div>
 
-    <div class="transactions">
-      <table>
-      <thead>
-          <tr>
-            <th>Stock</th>
-            <th>Buy/Sell</th>
-            <th>Amount</th>
-            <th>Shares</th>
-            <th>Price</th>
-            <th>Timestamp</th>
-            <th>Status</th>
-            <th>Cash Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr class="transaction"
-            v-for="transaction in this.portfolioTransactions"
-            v-bind:key="transaction.transactionId"
-        >
-            <td>{{transaction.stockSymbol}}</td>
-            <td>{{transaction.transactionType}}</td>
-            <td>{{formatPrice(transaction.transactionAmount)}}</td>
-            <td>{{transaction.transactionShares}}</td>
-            <td>{{formatPrice(transaction.sharePrice)}}</td>
-            <td>{{transaction.transactionTimestamp}}</td>
-            <td>{{transaction.transactionStatus}}</td>
-            <td>{{formatPrice(transaction.portfolioCashAfterTransaction)}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="well">
+        <h3>Amount</h3>
+        <p>{{ formatPrice(transaction.transactionAmount) }}</p>
+      </div>
 
+      <div class="well">
+        <h3>Shares</h3>
+        <p>{{ transaction.transactionShares }}</p>
+      </div>
+
+      <div class="well">
+        <h3>Price</h3>
+        <p>{{ formatPrice(transaction.sharePrice) }}</p>
+      </div>
+
+      <div class="well">
+        <h3>Timestamp</h3>
+        <p>{{ transaction.transactionTimestamp }}</p>
+      </div>
+
+      <div class="well">
+        <h3>Status</h3>
+        <p>{{ transaction.transactionStatus }}</p>
+      </div>
+
+      <div class="well">
+        <h3>Cash Balance</h3>
+        <p>
+          {{ formatPrice(transaction.portfolioCashAfterTransaction) }}
+        </p>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -45,27 +57,34 @@ export default {
   name: "transaction-table",
   computed: {
     portfolioTransactions() {
-      return this.$store.state.transactions.filter(transaction =>
-        transaction.portfolioId === this.$store.state.activePortfolio.portfolioId);
-    }
+      return this.$store.state.transactions.filter(
+        (transaction) =>
+          transaction.portfolioId ===
+          this.$store.state.activePortfolio.portfolioId
+      );
+    },
   },
   methods: {
     getTransactions() {
-      requestTransactions.getTransactionsByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
-        this.$store.commit("SET_TRANSACTIONS", response.data);
-      });
+      requestTransactions
+        .getTransactionsByPortfolioId(
+          this.$store.state.activePortfolio.portfolioId
+        )
+        .then((response) => {
+          this.$store.commit("SET_TRANSACTIONS", response.data);
+        });
     },
     formatPrice(value) {
       if (typeof value !== "number") {
         return value;
       }
-      const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
       });
       return formatter.format(value);
-    }
+    },
   },
   created() {
     this.getTransactions();
@@ -74,24 +93,27 @@ export default {
 </script>
 
 <style scoped>
-
-table {
-  margin-bottom: 1em;  
+.transaction {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  border: 3px solid var(--clr-yellow);
 }
 
-table tr {
-  text-align: left;
+.well {
+  background-color: var(--clr-green); 
+  padding: 0.35em 0.5em;
+}
+.well h3 {
+  font-weight: 900;
+  color: var(--clr-grey-20);
+  border-bottom: 1px solid var(--clr-grey-50); 
+  width: fit-content; 
 }
 
-th,
-td {
-  padding: 0 1em 0 0;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+.well p {
+  font-weight: 700;
+  color: var(--clr-grey-10);
 }
 
 </style>
