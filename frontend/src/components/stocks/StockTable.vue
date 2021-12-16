@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="stocks">
-      <table
-        class="stock"
-        v-for="stock in this.$store.state.stocks"
-        v-bind:key="stock.stockSymbol"
-      >
+      <table>
       <thead>
           <tr>
             <th>stockSymbol</th>
@@ -14,7 +10,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="stock" v-for="stock in this.$store.state.stocks"
+                      v-bind:key="stock.stockSymbol">
             <td>{{stock.stockSymbol}}</td>
             <td>{{stock.sharePrice}}</td>
             <td>{{stock.quoteTimestamp}}</td>
