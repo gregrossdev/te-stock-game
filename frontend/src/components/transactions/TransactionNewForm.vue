@@ -1,6 +1,6 @@
 <template>
   <div class="transaction-new-form">
-    <form class="transaction-form" v-on:submit.prevent>
+    <form class="form-onboard" v-on:submit.prevent>
       <h3>{{this.stock.stockSymbol}}</h3>
       <h3>Buy or Sell?</h3>
 
@@ -14,7 +14,10 @@
         <option>SELL</option>
       </select>
 
-      <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
+      <label for="share">Shares</label>
+      <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number" min="0"/>
+      <label for="dollars">Total Money</label>
+      <input readonly :value="dollarValue()" placeholder="$" type="number" class="money"/>
       <button type="submit" v-on:click="saveTransaction()">Save</button>
     </form>
   </div>
@@ -67,6 +70,9 @@ export default {
         }
       });
     },
+    dollarValue() {
+      return this.transaction.transactionAmount = this.transaction.transactionShares * this.transaction.sharePrice; 
+    },
     // getPortfolios() {
     //   servicePortfolios
     //       .getPortfolioByUserIdAndGameId(
@@ -97,14 +103,14 @@ export default {
 </script>
 
 <style scoped>
-.transaction-form {
-  display: flex;
-  flex-direction: column;
+
+.money::before {
+  content: "$"; 
 }
 
-.transaction-form input, .transaction-form button {
-  margin-bottom: 0;
-  margin-top: 0.5em;
+.form-onboard {
+  justify-content: space-between;
+  margin: 2rem auto ; 
 }
 
 .hidden {

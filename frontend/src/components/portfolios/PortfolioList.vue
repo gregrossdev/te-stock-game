@@ -12,17 +12,21 @@ import PortfolioCard from "@/components/portfolios/PortfolioCard";
 export default {
   name: "portfolio-list",
   components: {PortfolioCard},
+  methods: {
+     sortByLeader() {
+      return this.$store.state.gamePortfolios.portfolioTotalValue.sort((a, b) => b - a); 
+    }
+  },
 
   // TODO: Make sure that "gamePortfolios" are being correctly and consistently set in the store.
-
+  
   created() {
     servicePortfolios
       .getPortfoliosByGameId(this.$route.params.gameId)
       .then(response => {
-        console.log(response.data);
         this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
       });
-  }
+  },
 }
 </script>
 

@@ -3,10 +3,10 @@
 
 <!--    TODO: Add some way to FILTER and SORT the StockList. Perhaps just use StockTable with some added functionality/styling if StockCards prove too difficult to filter and sort?-->
 
-    <!-- <input type="text" v-model="filterStock" /> -->
+    <input type="text" v-model="filterStock" />
     <div class="stock-list">
       <stock-card
-        v-for="stock in this.$store.state.stocks"
+        v-for="stock in filterStocks"
         v-bind:key="stock.stockSymbol"
         class="stock card"
         v-bind:stock="stock"
@@ -36,13 +36,15 @@ export default {
       this.$store.commit("SET_STOCKS", response.data);
     });
   },
-  // computed: {
-  //   filterStocks() {
-  //     return this.$store.state.stocks.filter((stock) => {
-  //       return stock.stockName.toLowerCase().includes(this.filterStock.toLowerCase())
-  //     });
-  //   },
-  // },
+  computed: {
+    filterStocks() {
+      return this.$store.state.stocks.filter((stock) => {
+        return stock.stockName
+          .toLowerCase()
+          .includes(this.filterStock.toLowerCase());
+      });
+    },
+  },
 };
 </script>
 
