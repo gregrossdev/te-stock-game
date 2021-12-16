@@ -25,7 +25,7 @@ CREATE TABLE users
 
 INSERT INTO users (username, password_hash, role)
 -- ALL PRE-BUILT PASSWORDS ARE 'password'
-VALUES ('demo', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_ADMIN');
+VALUES ('demo', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_ADMIN'),
        ('user', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
        ('alex', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
        ('aubrey', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
@@ -130,39 +130,50 @@ ALTER TABLE portfolios_stocks
             REFERENCES stocks (stock_symbol);
 
 INSERT INTO games (game_name, game_organizer, start_timestamp, end_timestamp, game_status)
-VALUES ('STONKS DEMO GAME', 1, '2021-12-01 12:00:00', '2021-12-16 09:00:00', 'ACTIVE'),
-       ('USER gonna win', 2, '2021-12-01 12:00:00', '2021-12-16 15:00:00', 'ACTIVE'),
-       ('Alex Test Game', 3, '2021-12-01 12:00:00', '2021-12-16 15:15:00', 'ACTIVE'),
-       ('Third Test Game', 4, '2021-12-01 12:00:00', '2021-12-16 15:30:00', 'ACTIVE'),
-       ('Fourth Test Game', 5, '2021-12-01 12:00:00', '2021-12-16 16:00:00', 'ACTIVE'),
-       ('Fifth Test Game', 6, '2021-12-01 12:00:00', '2021-12-16 16:15:00', 'ACTIVE');
+VALUES ('STONKS DEMO GAME', 1, '2021-12-15 12:00:00', '2021-12-16 16:30:00', 'ACTIVE'),
+       ('USER gonna Win', 2, '2021-12-15 12:00:00', '2021-12-16 16:35:00', 'ACTIVE'),
+       ('ALEX for the W', 3, '2021-12-15 12:00:00', '2021-12-16 16:40:00', 'ACTIVE'),
+       ('AUBREY is Golden', 4, '2021-12-15 12:00:00', '2021-12-16 16:45:00', 'ACTIVE'),
+       ('It is DENNY Time!', 5, '2021-12-15 12:00:00', '2021-12-16 16:50:00', 'ACTIVE'),
+       ('GREG the Bug-Crusher', 6, '2021-12-15 12:00:00', '2021-12-16 16:55:00', 'ACTIVE'),
+       ('Not JOSHing Around', 7, '2021-12-15 12:00:00', '2021-12-16 17:00:00', 'ACTIVE');
 
 INSERT INTO portfolios (user_id, game_id, portfolio_status)
-VALUES (2, 1, 'ACTIVE'),
+VALUES (1, 1, 'ACTIVE'),
+       (2, 1, 'ACTIVE'),
        (3, 1, 'ACTIVE'),
        (4, 1, 'ACTIVE'),
        (5, 1, 'ACTIVE'),
        (6, 1, 'ACTIVE'),
+       (7, 1, 'ACTIVE'),
+       (1, 2, 'ACTIVE'),
        (2, 2, 'ACTIVE'),
        (3, 2, 'ACTIVE'),
        (4, 2, 'ACTIVE'),
        (5, 2, 'ACTIVE'),
        (6, 2, 'ACTIVE'),
+       (7, 2, 'ACTIVE'),
+       (1, 3, 'ACTIVE'),
        (2, 3, 'ACTIVE'),
        (3, 3, 'ACTIVE'),
        (4, 3, 'ACTIVE'),
        (5, 3, 'ACTIVE'),
        (6, 3, 'ACTIVE'),
+       (7, 3, 'ACTIVE'),
+       (1, 4, 'ACTIVE'),
+       (2, 4, 'ACTIVE'),
+       (3, 4, 'ACTIVE'),
+       (4, 4, 'ACTIVE'),
        (5, 4, 'ACTIVE'),
+       (6, 4, 'ACTIVE'),
+       (7, 4, 'ACTIVE'),
+       (1, 5, 'ACTIVE'),
+       (2, 5, 'ACTIVE'),
+       (3, 5, 'ACTIVE'),
+       (4, 5, 'ACTIVE'),
+       (5, 5, 'ACTIVE'),
        (6, 5, 'ACTIVE'),
-       (2, 4, 'PENDING'),
-       (3, 4, 'PENDING'),
-       (4, 4, 'PENDING'),
-       (6, 4, 'PENDING'),
-       (2, 5, 'PENDING'),
-       (3, 5, 'PENDING'),
-       (4, 5, 'PENDING'),
-       (5, 5, 'PENDING');
+       (7, 5, 'ACTIVE');
 
 INSERT INTO stocks (stock_symbol, share_price)
 VALUES ('SPCE', '12.70'),
@@ -269,18 +280,78 @@ VALUES ('SPCE', '12.70'),
 INSERT INTO transactions (portfolio_id, stock_symbol, transaction_type, transaction_amount,
                           transaction_shares, share_price, transaction_timestamp, transaction_status,
                           portfolio_cash_after_transaction)
-VALUES (1, 'RKLB', 'BUY', 1000, 10, 100, '2021-12-01 13:00:00', 'COMPLETED', 99000),
-       (2, 'RKLB', 'BUY', 2000, 20, 100, '2021-12-01 14:00:00', 'COMPLETED', 98000),
-       (3, 'RKLB', 'BUY', 3000, 30, 100, '2021-12-01 15:00:00', 'COMPLETED', 97000),
-       (4, 'RKLB', 'BUY', 4000, 40, 100, '2021-12-01 16:00:00', 'COMPLETED', 96000),
-       (5, 'RKLB', 'BUY', 5000, 50, 100, '2021-12-01 17:00:00', 'COMPLETED', 95000);
+VALUES (1, 'AAPL', 'BUY', 1000, 10, 100, '2021-12-15 13:00:00', 'COMPLETED', 99000),
+       (2, 'TSLA', 'BUY', 2000, 20, 100, '2021-12-15 14:00:00', 'COMPLETED', 98000),
+       (3, 'NKE', 'BUY', 3000, 30, 100, '2021-12-15 15:00:00', 'COMPLETED', 97000),
+       (4, 'UBER', 'BUY', 4000, 40, 100, '2021-12-15 16:00:00', 'COMPLETED', 96000),
+       (5, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (6, 'ABNB', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (7, 'ACB', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (8, 'ADGI', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (9, 'AMC', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (10, 'AMD', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (11, 'ARKK', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (12, 'ATVI', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (13, 'AXDX', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (14, 'BABA', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (15, 'BAC', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (16, 'BB', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (17, 'BBAI', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (18, 'BIRD', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (19, 'BNGO', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (20, 'ZOM', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (21, 'ZM', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (22, 'WISH', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (23, 'TSLA', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (24, 'SPCE', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (25, 'SBUX', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (26, 'VOO', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (27, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (28, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (29, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (30, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (31, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (32, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (33, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (34, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000),
+       (35, 'AMZN', 'BUY', 5000, 50, 100, '2021-12-15 17:00:00', 'COMPLETED', 95000);
 
 INSERT INTO portfolios_stocks (portfolio_id, stock_symbol, total_shares)
-VALUES (1, 'RKLB', 10),
-       (2, 'RKLB', 20),
-       (3, 'RKLB', 30),
-       (4, 'RKLB', 40),
-       (5, 'RKLB', 50);
+VALUES  (1, 'AAPL', 10),
+        (2, 'TSLA', 20),
+        (3, 'NKE', 30),
+        (4, 'UBER', 40),
+        (5, 'AMZN', 50),
+        (6, 'ABNB', 50),
+        (7, 'ACB', 50),
+        (8, 'ADGI', 50),
+        (9, 'AMC', 50),
+        (10, 'AMD', 50),
+        (11, 'ARKK', 50),
+        (12, 'ATVI', 50),
+        (13, 'AXDX', 50),
+        (14, 'BABA', 50),
+        (15, 'BAC', 50),
+        (16, 'BB', 50),
+        (17, 'BBAI', 50),
+        (18, 'BIRD', 50),
+        (19, 'BNGO', 50),
+        (20, 'ZOM', 50),
+        (21, 'ZM', 50),
+        (22, 'WISH', 50),
+        (23, 'TSLA', 50),
+        (24, 'SPCE', 50),
+        (25, 'SBUX', 50),
+        (26, 'VOO', 50),
+        (27, 'AMZN', 50),
+        (28, 'AMZN', 50),
+        (29, 'AMZN', 50),
+        (30, 'AMZN', 50),
+        (31, 'AMZN', 50),
+        (32, 'AMZN', 50),
+        (33, 'AMZN', 50),
+        (34, 'AMZN', 50),
+        (35, 'AMZN', 50);
 
 UPDATE portfolios
 SET portfolio_cash = portfolio_cash - 1000
@@ -296,6 +367,6 @@ SET portfolio_cash = portfolio_cash - 4000
 WHERE portfolio_id = 4;
 UPDATE portfolios
 SET portfolio_cash = portfolio_cash - 5000
-WHERE portfolio_id = 5;
+WHERE portfolio_id BETWEEN 4 AND 36;
 
 COMMIT TRANSACTION;
