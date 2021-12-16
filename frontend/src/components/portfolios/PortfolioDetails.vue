@@ -17,7 +17,7 @@
       </h3>
     </div>
 
-    <div v-if="this.$store.state.portfolioStocks.length > 0" class="h-wrap-2">
+    <div v-show="this.$store.state.portfolioStocks.length > 0" class="h-wrap-2">
       <h3>Your Investments</h3>
       <portfolio-stock-list></portfolio-stock-list>
     </div>
@@ -38,6 +38,7 @@
 <script>
 import TransactionTable from "@/components/transactions/TransactionTable";
 import PortfolioStockList from "@/components/portfolio.stocks/PortfolioStockList";
+import ServicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "PortfolioDetails",
@@ -57,6 +58,11 @@ export default {
       });
       return formatter.format(value);
     },
+  },
+  created() {
+    ServicePortfolios.getPortfolioStocksByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
+      this.$store.state.commit("SET_ACTIVE_PORTFOLIO_STOCKS", response.data);
+    })
   }
 };
 </script>
