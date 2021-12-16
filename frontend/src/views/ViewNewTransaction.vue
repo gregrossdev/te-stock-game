@@ -1,9 +1,9 @@
 <template>
-  <div class="view-new-transaction">
+  <main>
     <transaction-new-form v-bind:stock="this.stock">
 
     </transaction-new-form>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -21,5 +21,8 @@ export default {
 </script>
 
 <style scoped>
+
+
+
 
 </style>
