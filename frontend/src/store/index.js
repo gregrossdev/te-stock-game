@@ -90,6 +90,10 @@ export default new Vuex.Store({
         // USE: Filters games[] for Games List so that only ACTIVE games are shown.
         activeGames: (state, getters) => {
             return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)) && item.gameStatus === "ACTIVE");
+        },
+        // USE: Filters gamePortfolios[] in reverse order by total portfolio value, to correctly populate Leaderboard in ViewGame.
+        gamePortfoliosSortedByLeader: (state) => {
+            return state.gamePortfolios.sort((a, b) => b.portfolioTotalValue - a.portfolioTotalValue);
         }
     },
     mutations: {

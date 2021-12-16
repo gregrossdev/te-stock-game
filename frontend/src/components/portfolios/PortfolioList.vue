@@ -1,6 +1,7 @@
 <template>
   <div class="portfolios">
-    <portfolio-card v-for="portfolio in this.$store.state.gamePortfolios" v-bind:key="portfolio.portfolioId" v-bind:portfolio="portfolio"></portfolio-card>
+    <portfolio-card v-for="portfolio in this.$store.getters.gamePortfoliosSortedByLeader"
+                    v-bind:key="portfolio.portfolioId" v-bind:portfolio="portfolio"></portfolio-card>
   </div>
 </template>
 
@@ -12,21 +13,14 @@ import PortfolioCard from "@/components/portfolios/PortfolioCard";
 export default {
   name: "portfolio-list",
   components: {PortfolioCard},
-  methods: {
-     sortByLeader() {
-      return this.$store.state.gamePortfolios.portfolioTotalValue.sort((a, b) => b - a); 
-    }
-  },
 
-  // TODO: Make sure that "gamePortfolios" are being correctly and consistently set in the store.
-  
   created() {
     servicePortfolios
-      .getPortfoliosByGameId(this.$route.params.gameId)
-      .then(response => {
-        this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
-      });
-  },
+        .getPortfoliosByGameId(this.$route.params.gameId)
+        .then(response => {
+          this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
+        });
+  }
 }
 </script>
 
