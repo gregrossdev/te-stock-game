@@ -39,6 +39,7 @@ import PortfolioPendingInvitationList from "../components/portfolios/PortfolioPe
 import ServicePortfolios from "../services/ServicePortfolios"
 import ServiceGames from "@/services/ServiceGames";
 import ServiceUsers from "@/services/ServiceUsers";
+import ServiceStocks from "@/services/ServiceStocks";
 
 export default {
   name: "profile",
@@ -53,6 +54,12 @@ export default {
     }
   },
   methods: {
+    getStocks() {
+      ServiceStocks.list().then(response => {
+        this.$store.commit("SET_STOCKS", response.data);
+      })
+    },
+
     getPendingPortfoliosForCurrentUser() {
       ServicePortfolios
           .getPendingPortfoliosByUserId(this.$store.state.user.id)
@@ -74,6 +81,7 @@ export default {
     }
   },
   created() {
+    this.getStocks();
     this.getPendingPortfoliosForCurrentUser();
     this.getGamesForCurrentUser();
     this.getAllUsers();

@@ -25,9 +25,10 @@ export default {
     game: Object
   },
   methods: {
-    viewGame(gameId) {
-      this.$router.push(`/game/${gameId}`);
-    },
+    // CLEANUP: MOST LIKELY DELETE THIS.
+    // viewGame(gameId) {
+    //   this.$router.push(`/game/${gameId}`);
+    // },
     stonksImg(url) {
       let num = Math.floor(Math.random() * 25);
       let query;
