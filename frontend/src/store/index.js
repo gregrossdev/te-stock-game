@@ -76,7 +76,17 @@ export default new Vuex.Store({
             portfolioStocksValue: 0,
             portfolioTotalValue: 0,
             portfolioStatus: ""
-        }
+        },
+        arhivedPortfolio: {
+            portfolioId: 0,
+            userId: 0,
+            gameId: 0,
+            portfolioCash: 0,
+            portfolioStocksValue: 0,
+            portfolioTotalValue: 0,
+            portfolioStatus: ""
+        },
+        
     },
     getters: {
         // USE: Keeps track of which games in games[] above are still PENDING invites.
@@ -90,6 +100,9 @@ export default new Vuex.Store({
         // USE: Filters games[] for Games List so that only ACTIVE games are shown.
         activeGames: (state, getters) => {
             return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)) && item.gameStatus === "ACTIVE");
+        },
+        archivedGames: (state, getters) => {
+            return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)) && item.gameStatus === "ARCHIVED");
         },
         // USE: Filters gamePortfolios[] in reverse order by total portfolio value, to correctly populate Leaderboard in ViewGame.
         gamePortfoliosSortedByLeader: (state) => {
