@@ -1,5 +1,5 @@
 BEGIN
-    TRANSACTION;
+TRANSACTION;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS games;
@@ -25,7 +25,8 @@ CREATE TABLE users
 
 INSERT INTO users (username, password_hash, role)
 -- ALL PRE-BUILT PASSWORDS ARE 'password'
-VALUES ('user', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
+VALUES ('demo', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_ADMIN');
+       ('user', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
        ('alex', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
        ('aubrey', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
        ('denny', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'ROLE_USER'),
@@ -39,7 +40,7 @@ CREATE TABLE games
     game_id         SERIAL,
     game_name       varchar(50) NOT NULL,
     game_organizer  int         NOT NULL,
-    game_winner     int         NULL,
+    game_winner     int NULL,
     start_timestamp timestamp   NOT NULL DEFAULT CURRENT_TIMESTAMP,
     end_timestamp   timestamp   NOT NULL CHECK (start_timestamp < end_timestamp),
     game_status     varchar(20) NOT NULL DEFAULT 'ACTIVE' CHECK (game_status IN ('ACTIVE', 'ARCHIVED')),
@@ -129,11 +130,12 @@ ALTER TABLE portfolios_stocks
             REFERENCES stocks (stock_symbol);
 
 INSERT INTO games (game_name, game_organizer, start_timestamp, end_timestamp, game_status)
-VALUES ('First Test Game', 2, '2021-12-01 12:00:00', '2021-12-11 12:00:00', 'ACTIVE'),
-       ('Second Test Game', 3, '2021-12-01 12:00:00', '2021-12-12 12:00:00', 'ACTIVE'),
-       ('Third Test Game', 4, '2021-12-01 12:00:00', '2021-12-13 12:00:00', 'ACTIVE'),
-       ('Fourth Test Game', 5, '2021-12-01 12:00:00', '2021-12-14 12:00:00', 'ACTIVE'),
-       ('Fifth Test Game', 6, '2021-12-01 12:00:00', '2021-12-15 12:00:00', 'ACTIVE');
+VALUES ('STONKS DEMO GAME', 1, '2021-12-01 12:00:00', '2021-12-16 09:00:00', 'ACTIVE'),
+       ('USER gonna win', 2, '2021-12-01 12:00:00', '2021-12-16 15:00:00', 'ACTIVE'),
+       ('Alex Test Game', 3, '2021-12-01 12:00:00', '2021-12-16 15:15:00', 'ACTIVE'),
+       ('Third Test Game', 4, '2021-12-01 12:00:00', '2021-12-16 15:30:00', 'ACTIVE'),
+       ('Fourth Test Game', 5, '2021-12-01 12:00:00', '2021-12-16 16:00:00', 'ACTIVE'),
+       ('Fifth Test Game', 6, '2021-12-01 12:00:00', '2021-12-16 16:15:00', 'ACTIVE');
 
 INSERT INTO portfolios (user_id, game_id, portfolio_status)
 VALUES (2, 1, 'ACTIVE'),
