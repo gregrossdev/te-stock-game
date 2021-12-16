@@ -1,22 +1,34 @@
+<!--TODO: STYLE THIS TEMPLATE SECTION WITH CONSISTENT CSS AND FORMATTING.-->
+
 <template>
   <main class="main">
+
     <div class="h-wrap-2">
-      <h2>
-        Welcome to the Virtual Stock Market,
-        {{ capitalizedUsername }}!
-      </h2>
+      <h2>Welcome to the Virtual Stock Market, {{ capitalizedUsername }}!</h2>
     </div>
 
-    <!-- <portfolio-pending-invitation-list 
-    v-for="pendingGame in this.$store.state.pendingPortfolios"
-    v-bind:key="pendingGame"
-    v-bind:pendingGame="pendingGame"/> -->
+    <div class="h-wrap-2" v-if="this.$store.state.pendingPortfolios.length > 0">
+      <h2>Your Pending Game Invitations</h2>
 
-  <portfolio-pending-invitation-list/>
+      <!--
+      THE CREATED() LIFECYCLE HOOK WILL SET PENDING PORTFOLIOS IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
+      THE PORTFOLIO PENDING INVITATION LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
+      -->
+      <portfolio-pending-invitation-list/>
 
-    <section class="games-list">
-      <game-list />
-    </section>
+    </div>
+
+    <div class="h-wrap-2">
+      <h2>Your Active Games</h2>
+
+      <!--
+      THE CREATED() LIFECYCLE HOOK WILL SET GAMES (FOR THE CURRENT USER) IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
+      THE GAME LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
+      -->
+      <game-list/>
+
+    </div>
+
   </main>
 </template>
 
@@ -24,8 +36,9 @@
 <script>
 import GameList from "@/components/games/GameList.vue";
 import PortfolioPendingInvitationList from "../components/portfolios/PortfolioPendingInvitationList.vue";
-// import PortfolioPendingCard from "../components/portfolios/PortfolioPendingCard.vue";
-// import requestPendingPortfolios from "../services/ServicePortfolios"
+import ServicePortfolios from "../services/ServicePortfolios"
+import ServiceGames from "@/services/ServiceGames";
+import ServiceUsers from "@/services/ServiceUsers";
 
 export default {
   name: "profile",
@@ -33,16 +46,37 @@ export default {
     GameList,
     PortfolioPendingInvitationList,
   },
-  // getPendingGames() {
-  //   requestPendingPortfolios.getPendingPortfoliosByUserId().then((response) => {
-  //     this.$store.commit("SET_PENDING_PORTFOLIOS", response.data)
-  //   });
-  // },
   computed: {
     capitalizedUsername() {
       let username = this.$store.state.user.username;
       return username.trim().replace(/^\w/, (c) => c.toUpperCase());
     },
+  },
+  methods: {
+    getPendingPortfoliosForCurrentUser() {
+      ServicePortfolios
+          .getPendingPortfoliosByUserId(this.$store.state.user.id)
+          .then((response) => {
+            this.$store.commit("SET_PENDING_PORTFOLIOS", response.data)
+          });
+    },
+    getGamesForCurrentUser() {
+      ServiceGames
+          .getGamesByUserId(this.$store.state.user.id)
+          .then((response) => {
+            this.$store.commit("SET_GAMES", response.data);
+          });
+    },
+    getAllUsers() {
+      ServiceUsers.list().then((response) => {
+        this.$store.commit("SET_USERS", response.data);
+      });
+    }
+  },
+  created() {
+    this.getPendingPortfoliosForCurrentUser();
+    this.getGamesForCurrentUser();
+    this.getAllUsers();
   }
 };
 </script>

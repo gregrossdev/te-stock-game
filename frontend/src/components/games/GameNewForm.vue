@@ -9,7 +9,7 @@
     <input type="text" name="gameName" v-model="game.gameName" class="game-name" />
     <label for="endTimestamp"> End Date</label>
     <input type="date" v-model="game.endTimestamp" class="date"/>
-    <div class="checkbox" v-for="user in users" :key="user.id">
+    <div class="checkbox" v-for="user in this.$store.state.users" :key="user.id">
       <input type="checkbox" name="userId" v-bind:value="user.id" v-model="invitedUsers"/>
       <label for="userId">{{user.username}}</label>
     </div>
@@ -96,7 +96,7 @@ export default {
   },
   created() {
       requestUsers.list().then((response) => {
-        this.users = response.data;
+        this.$store.commit("SET_USERS", response.data);
       });
     },
 };

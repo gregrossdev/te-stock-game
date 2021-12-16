@@ -26,8 +26,8 @@ export default new Vuex.Store({
         // USE: Stores all users so that a user can select which users to invite to a game.
         users: [],
 
-        // USE: Stores all games that the CURRENT USER is a participant in
-        // TODO: Make sure that games[] only stores games that a user has either created or accepted an invitation to.
+        // USE: Stores all games, BOTH ACTIVE AND PENDING INVITES, that the CURRENT USER is a participant in.
+        // TODO: FILTER GAMES[] TO SHOW ONLY ACTIVE GAMES FOR GAMES LIST AND TO SHOW PENDING GAMES IN PENDING INVITATION LIST.
         games: [],
 
         // USE: Stores all portfolios that a user is a part of, across games.
