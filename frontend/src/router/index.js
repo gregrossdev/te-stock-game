@@ -9,6 +9,7 @@ import ViewProfile from '../views/ViewProfile.vue'
 import ViewNewGame from "@/views/ViewNewGame";
 import ViewGame from "@/views/ViewGame";
 import ViewWinner from "@/views/ViewWinner";
+import ViewNewTransaction from "@/views/ViewNewTransaction";
 
 Vue.use(Router)
 
@@ -64,6 +65,15 @@ const router = new Router({
       path: '/new',
       name: 'ViewNewGame',
       component: ViewNewGame,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/new-transaction',
+      name: 'ViewNewTransaction',
+      component: ViewNewTransaction,
+      props: true,
       meta: {
         requiresAuth: true
       }
