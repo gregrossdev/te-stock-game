@@ -34,6 +34,11 @@ public class PortfolioController {
         return portfolioDao.getPortfoliosByUserId(userId);
     }
 
+    @RequestMapping(path = "user/pending/{userId}", method = RequestMethod.GET)
+    public List<Portfolio> getPendingPortfoliosByUserId(@PathVariable Long userId) {
+        return portfolioDao.getPendingPortfoliosByUserId(userId);
+    }
+
     @RequestMapping(path = "game/{gameId}", method = RequestMethod.GET)
     public List<Portfolio> getPortfoliosByGameId(@PathVariable Long gameId) {
         return portfolioDao.getPortfoliosByGameId(gameId);

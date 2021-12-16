@@ -47,6 +47,18 @@ export default {
 	// USE: Deletes portfolio once a user rejects a pending invitation to a game
 	delete(portfolioIdToDelete) {
 		return http.delete(`${portfolioIdToDelete}`);
-	}
+	},
 
+	//USE: Gets all pending portfolios from a userID
+	getPendingPortfoliosByUserId(userId) {
+		return http.get(`user/pending/${userId}`);
+	}
 }
+
+
+/*
+@RequestMapping(path = "user/pending/{userId}", method = RequestMethod.GET)
+    public List<Portfolio> getPendingPortfoliosByUserId(@PathVariable Long userId) {
+        return portfolioDao.getPendingPortfoliosByUserId(userId);
+    }
+*/

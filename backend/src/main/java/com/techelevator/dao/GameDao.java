@@ -20,6 +20,9 @@ public interface GameDao {
 
     boolean update(Game gameToUpdate);
 
+    //update when a game ends
+    boolean updateGameEnd(Long gameId, Long winnerId);
+
     boolean delete(Long gameIdToDelete);
 
 }
