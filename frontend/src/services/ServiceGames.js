@@ -41,6 +41,8 @@ export default {
     return http.put(`${gameToUpdate.gameId}`, gameToUpdate);
   },
 
+  //USE: when game ends
+
   // USE: ADMIN/TEST only. Game status is set to 'ARCHIVED' rather than deleting a Game after it's finished. That way, we can look up which User won which games.
   delete(gameIdToDelete) {
     return http.delete(`${gameIdToDelete}`);
