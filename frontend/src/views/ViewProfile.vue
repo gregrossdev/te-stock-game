@@ -15,6 +15,9 @@
       THE PORTFOLIO PENDING INVITATION LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
       -->
       <portfolio-pending-invitation-list/>
+      
+      <h2>Your Archived Games</h2>
+      <game-archived-list/>
 
     </div>
 
@@ -27,6 +30,14 @@
       -->
       <game-list/>
 
+      <h2>Your Archived Games</h2>
+
+      <!--
+      THE CREATED() LIFECYCLE HOOK WILL SET GAMES (FOR THE CURRENT USER) IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
+      THE GAME LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
+      -->
+      <game-archived-list/>
+
     </div>
 
   </main>
@@ -35,6 +46,7 @@
 
 <script>
 import GameList from "@/components/games/GameList.vue";
+import GameArchivedList from "@/components/games/GameArchivedList.vue";
 import PortfolioPendingInvitationList from "../components/portfolios/PortfolioPendingInvitationList.vue";
 import ServicePortfolios from "../services/ServicePortfolios"
 import ServiceGames from "@/services/ServiceGames";
@@ -46,6 +58,7 @@ export default {
   components: {
     GameList,
     PortfolioPendingInvitationList,
+    GameArchivedList,
   },
   computed: {
     capitalizedUsername() {

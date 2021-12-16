@@ -73,35 +73,22 @@ public class YahooFinanceAPIStockService implements StockService {
     }
 
     public void checkUpdateGameWinner(){
-//        System.out.println("test");
         List<Game> gameListWithouWinnersFromDB = gameDao.gamesWithoutWinnersYet();
         Timestamp currentTempTimestamp = new Timestamp(System.currentTimeMillis());
-//        System.out.println(gameListWithouWinnersFromDB.get(0).getEndTimestamp());
-
-        long gameId = gameListWithouWinnersFromDB.get(1).getGameId();
-
-//        System.out.println(gameListWithouWinnersFromDB.size()-1);
-
-
-        Timestamp endTimestampFromDb = gameListWithouWinnersFromDB.get(0).getEndTimestamp();
-
         for(int z = 0; z <= gameListWithouWinnersFromDB.size()-1; z++){
             System.out.println("Looping through gamesList");
             if(gameListWithouWinnersFromDB.get(z).getEndTimestamp().before(currentTempTimestamp)){
-//            System.out.println("we have a winner do something");
+
                 List<Portfolio> portfolioListById = portfolioDao.getPortfoliosByGameId((long) z);
                 for(int i = 0; i <= portfolioListById.size()-1; i ++){
-//                    BigDecimal highestValue = new BigDecimal(100000);
+
                     BigDecimal highestValue = portfolioListById.get(i).getPortfolioTotalValue();
                     BigDecimal totalValueInForLoopi = portfolioListById.get(i).getPortfolioTotalValue();
 
                     System.out.println("The highest value is:" + highestValue);
                     System.out.println(totalValueInForLoopi);
                     if(totalValueInForLoopi.compareTo(highestValue) == 1 || totalValueInForLoopi.compareTo(highestValue) == 0 ){
-                        System.out.println("we declared a winner");
                         gameDao.updateGameEnd(portfolioListById.get(i).getUserId(),portfolioListById.get(i).getGameId());
-                    } else{
-                        System.out.println("NO winner yet?");
                     }
 //
 //
