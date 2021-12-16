@@ -17,21 +17,21 @@
       </h3>
     </div>
 
-    <div class="h-wrap-2">
+    <div class="h-wrap-2" v-if="this.$store.state.portfolioStocks.length > 0">
       <h3>Your Investments</h3>
+      <portfolio-stock-list></portfolio-stock-list>
     </div>
 
     <!--    TODO: Make sure portfolioStocks are displaying correctly, and that they update when stocks update.-->
 
-    <portfolio-stock-list></portfolio-stock-list>
 
-    <div class="h-wrap-2">
+    <div class="h-wrap-2" v-if="this.$store.state.transactions.length > 0">
       <h3>Your Transaction History</h3>
+      <transaction-table></transaction-table>
+      <!--    TODO: Make sure transaction history displays correctly. Perhaps make it a dropdown show/hide section?-->
     </div>
 
-<!--    TODO: Make sure transaction history displays correctly. Perhaps make it a dropdown show/hide section?-->
 
-    <transaction-table></transaction-table>
 
   </div>
 </template>
@@ -41,8 +41,9 @@ import TransactionTable from "@/components/transactions/TransactionTable";
 // import TransactionList from "@/components/transactions/TransactionList";
 // import StockList from "@/components/stocks/StockList";
 import serviceGames from "@/services/ServiceGames";
-import servicePortfolios from "@/services/ServicePortfolios";
 import PortfolioStockList from "@/components/portfolio.stocks/PortfolioStockList";
+import ServicePortfolios from "@/services/ServicePortfolios";
+import ServiceTransactions from "@/services/ServiceTransactions";
 
 export default {
   name: "PortfolioDetails",
@@ -74,7 +75,7 @@ export default {
           this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
         }
       });
-    servicePortfolios
+    ServicePortfolios
       .getPortfolioByUserIdAndGameId(
         this.$store.state.user.id,
         this.$route.params.gameId
@@ -87,11 +88,18 @@ export default {
           this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
         }
       });
-    servicePortfolios
+    ServicePortfolios
     .getPortfoliosByGameId()
     .then(response => {
       this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
     });
+    ServicePortfolios.getPortfolioStocksByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
+      this.$store.commit("SET_ACTIVE_PORTFOLIO_STOCKS", response.data);
+    });
+    ServiceTransactions.getTransactionsByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
+      this.$store.commit("SET_TRANSACTIONS", response.data);
+    });
+
   },
   // components: {StockList, TransactionList}
 };
