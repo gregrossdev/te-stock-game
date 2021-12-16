@@ -8,6 +8,8 @@ public interface GameDao {
 
     List<Game> getGames();
 
+    List<Game> gamesWithoutWinnersYet();
+
     Game getGameByGameId(Long gameId);
 
     List<Game> getGamesByUserId(Long userId);

@@ -5,12 +5,9 @@
       <h2>Welcome to the Virtual Stock Market, {{ capitalizedUsername }}!</h2>
     </div>
 
-    <div class="h-wrap-1" v-if="this.$store.state.pendingPortfolios.length > 0">
+    <div v-if="this.$store.state.pendingPortfolios.length > 0" class="h-wrap-1">
       <h2>Your Pending Game Invitations</h2>
-      <!--
-      THE CREATED() LIFECYCLE HOOK WILL SET PENDING PORTFOLIOS IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
-      THE PORTFOLIO PENDING INVITATION LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
-      -->
+
       <portfolio-pending-invitation-list/>
     </div>
 
@@ -18,21 +15,19 @@
     <div class="h-wrap-1">
       <h2>Your Active Games</h2>
     </div>
+    <game-list/>
 
-      <!--
-      THE CREATED() LIFECYCLE HOOK WILL SET GAMES (FOR THE CURRENT USER) IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
-      THE GAME LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
-      -->
-      <game-list/>
-
-
-
+    <div class="h-wrap-1">
+      <h2>Your Archived Games</h2>
+    </div>
+    <game-archived-list/>
   </main>
 </template>
 
 
 <script>
 import GameList from "@/components/games/GameList.vue";
+import GameArchivedList from "@/components/games/GameArchivedList.vue";
 import PortfolioPendingInvitationList from "../components/portfolios/PortfolioPendingInvitationList.vue";
 import ServicePortfolios from "../services/ServicePortfolios"
 import ServiceGames from "@/services/ServiceGames";
@@ -44,6 +39,7 @@ export default {
   components: {
     GameList,
     PortfolioPendingInvitationList,
+    GameArchivedList,
   },
   computed: {
     capitalizedUsername() {
