@@ -5,47 +5,22 @@
       <h2>Welcome to the Virtual Stock Market, {{ capitalizedUsername }}!</h2>
     </div>
 
-    <div class="h-wrap-1" v-if="this.$store.state.pendingPortfolios.length > 0">
+    <div v-if="this.$store.state.pendingPortfolios.length > 0" class="h-wrap-1">
       <h2>Your Pending Game Invitations</h2>
-      <!--
-      THE CREATED() LIFECYCLE HOOK WILL SET PENDING PORTFOLIOS IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
-      THE PORTFOLIO PENDING INVITATION LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
-      -->
-      <portfolio-pending-invitation-list/>
-<<<<<<< HEAD
-      
-      <h2>Your Archived Games</h2>
-      <game-archived-list/>
 
-=======
->>>>>>> 9f372dc21b50c416f49f7ee7978fd2fc44e7ce32
+      <portfolio-pending-invitation-list/>
     </div>
 
 
     <div class="h-wrap-1">
       <h2>Your Active Games</h2>
     </div>
+    <game-list/>
 
-      <!--
-      THE CREATED() LIFECYCLE HOOK WILL SET GAMES (FOR THE CURRENT USER) IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
-      THE GAME LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
-      -->
-      <game-list/>
-
-<<<<<<< HEAD
+    <div class="h-wrap-1">
       <h2>Your Archived Games</h2>
-
-      <!--
-      THE CREATED() LIFECYCLE HOOK WILL SET GAMES (FOR THE CURRENT USER) IN THE STORE WHEN THIS VIEW PROFILE COMPONENT IS RENDERED.
-      THE GAME LIST WILL THEN DRAW ITS DATA DIRECTLY FROM THE STORE.
-      -->
-      <game-archived-list/>
-
     </div>
-=======
-
->>>>>>> 9f372dc21b50c416f49f7ee7978fd2fc44e7ce32
-
+    <game-archived-list/>
   </main>
 </template>
 
