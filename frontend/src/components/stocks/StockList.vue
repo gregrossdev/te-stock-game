@@ -2,8 +2,8 @@
   <section>
 
 <!--    TODO: Add some way to FILTER and SORT the StockList. Perhaps just use StockTable with some added functionality/styling if StockCards prove too difficult to filter and sort?-->
-
-    <input type="text" v-model="filterStock" />
+    <label for="stock-search">Filter the Stock List by Name </label>
+    <input type="search" v-model="filterStock" />
     <div class="stock-list">
       <stock-card
         v-for="stock in filterStocks"
