@@ -192,7 +192,7 @@ form label {
   margin-bottom: 0.25em;
 }
 
-form input {
+form input, form select {
   font-size: 1rem;
   border-radius: 4px;
   box-shadow: var(--dark-shadow);
