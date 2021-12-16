@@ -27,7 +27,6 @@ export default new Vuex.Store({
         users: [],
 
         // USE: Stores all games, BOTH ACTIVE AND PENDING INVITES, that the CURRENT USER is a participant in.
-        // TODO: FILTER GAMES[] TO SHOW ONLY ACTIVE GAMES FOR GAMES LIST AND TO SHOW PENDING GAMES IN PENDING INVITATION LIST.
         games: [],
 
         // USE: Stores all portfolios that a user is a part of, across games.
@@ -63,6 +62,18 @@ export default new Vuex.Store({
             portfolioStocksValue: 0,
             portfolioTotalValue: 0,
             portfolioStatus: ""
+        }
+    },
+    getters: {
+        inactiveGameIds: state => {
+            let inactiveGameIdsArray = [];
+            state.pendingPortfolios.forEach(portfolio => {
+                inactiveGameIdsArray.push(portfolio.gameId);
+            })
+            return inactiveGameIdsArray;
+        },
+        activeGames: (state, getters) => {
+            return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)));
         }
     },
     mutations: {

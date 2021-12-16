@@ -50,7 +50,7 @@ export default {
     capitalizedUsername() {
       let username = this.$store.state.user.username;
       return username.trim().replace(/^\w/, (c) => c.toUpperCase());
-    },
+    }
   },
   methods: {
     getPendingPortfoliosForCurrentUser() {
