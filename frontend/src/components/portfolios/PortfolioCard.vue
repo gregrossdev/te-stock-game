@@ -1,9 +1,9 @@
 <template>
   <article class="card">
-    <h4>{{ usernameCapitalized }}</h4>
-    <p>Portfolio #{{ this.portfolio.portfolioId }}</p>
+    <h2>{{ usernameCapitalized }}</h2>
     <h3>Total Value: {{ formatPrice(this.portfolio.portfolioTotalValue) }}</h3>
     <h3>Available Cash: {{ formatPrice(this.portfolio.portfolioCash) }}</h3>
+    <p>Portfolio #{{ this.portfolio.portfolioId }}</p>
   </article>
 </template>
 
@@ -39,8 +39,11 @@ export default {
 
 <style scoped>
 article {
-  width: 300px;
-  padding: 2em;
+  width: 14rem;
+  padding: 1em;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
 }
 
 article h2,
@@ -56,5 +59,15 @@ article h2 {
 
 article h3 {
   font-size: 1.25rem;
+}
+
+article p {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  margin-left: auto;
+  padding: 0; 
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--clr-grey-10);
 }
 </style>

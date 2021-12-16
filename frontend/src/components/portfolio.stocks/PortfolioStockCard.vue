@@ -66,7 +66,7 @@ p {
 }
 
 .stock-card {
-  max-width: 15rem;
+  max-width: 14rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
@@ -79,15 +79,15 @@ p {
 
 .stock-card h3 {
   border-bottom: 2px solid var(--clr-green);
-  margin-bottom: 1em;
+  margin-bottom: 0.25em;
   margin-top: 0.25em;
   font-size: 1.5rem;
   font-weight: 900;
 }
 .stock-card h4 {
-  margin-bottom: 0.75em;
+  margin-bottom: 0.25em;
   padding-bottom: 0.25em;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 900;
   border-bottom: 1px solid var(--clr-pri-40);
   width: fit-content;
@@ -95,7 +95,7 @@ p {
 
 .stock-symbol {
   font-family: "Limelight", cursive;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--clr-grey-10);
   margin-bottom: 0.25em;
 }

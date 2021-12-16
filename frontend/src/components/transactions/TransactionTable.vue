@@ -98,6 +98,7 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
   border: 3px solid var(--clr-yellow);
+  margin-bottom: 1em;
 }
 
 .well {
