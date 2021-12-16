@@ -158,6 +158,10 @@ Site Styles
 ===============
 */
 
+#router-view {
+  background-color: var(--clr-yellow);
+}
+
 
 #login,
 #register {
@@ -271,14 +275,13 @@ main {
   margin-top: -0.5rem;
 }
 
+
+
 /*
 =============== 
 Games
 ===============
 */
-
-
-
 
 .games-grid {
   display: grid;
