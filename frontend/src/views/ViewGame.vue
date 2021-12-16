@@ -64,7 +64,7 @@ export default {
     },
     getGamePortfolios() {
       ServicePortfolios
-          .getPortfoliosByGameId()
+          .getPortfoliosByGameId(this.$route.params.gameId)
           .then(response => {
             this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
           });
