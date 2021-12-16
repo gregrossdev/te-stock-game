@@ -97,6 +97,17 @@ public class JdbcGameDao implements GameDao {
                 gameToUpdate.getGameId()) == 1;
     }
 
+    //update when a game ends
+
+    @Override
+    public boolean updateGameEnd(Long winnerId, Long gameId) {
+        String sql = "UPDATE games SET game_winner = ?, game_status = 'ARCHIVED' WHERE game_id = ?;";
+        jdbcTemplate.update(sql, winnerId, gameId);
+
+        sql = "UPDATE portfolios SET portfolio_status = ARCHIVED WHERE game_id = ?;";
+        return jdbcTemplate.update(sql, gameId) == 1;
+    }
+
     @Override
     public boolean delete(Long gameIdToDelete) {
         String sql = "DELETE FROM games WHERE game_id = ?;";
