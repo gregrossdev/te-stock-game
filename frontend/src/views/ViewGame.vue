@@ -53,6 +53,8 @@ export default {
           )
           .then((response) => {
             this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
+            this.getActivePortfolioStocks();
+            this.getActivePortfolioTransactions();
           })
           .catch((error) => {
             if (error.response.status === 404) {
@@ -82,8 +84,8 @@ export default {
     this.getActiveGame();
     this.getActivePortfolio();
     this.getGamePortfolios();
-    this.getActivePortfolioStocks();
-    this.getActivePortfolioTransactions();
+    // this.getActivePortfolioStocks();
+    // this.getActivePortfolioTransactions();
   },
 };
 </script>
