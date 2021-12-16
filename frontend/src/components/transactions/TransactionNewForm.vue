@@ -1,19 +1,13 @@
 <template>
   <div>
-       <form class="transaction-form" v-on:submit="saveTransaction" autocomplete="off">
-      <!-- <select v-model="transaction.transactionType" list="transactionType" name="transactionType"/>
+    <form class="transaction-form" v-on:submit="saveTransaction">
+      <input v-model="transaction.transactionType" list="transactionType" name="transactionType"/>
       <datalist id="transactionType" autocomplete="off">
         <option value="BUY"></option>
         <option value="SELL"></option>
-      </datalist> -->
-
-  <select v-model="transaction.transactionType" name="transactionType" id="transactionType">
-    <option value="BUY">BUY</option>
-    <option value="SELL">SELL</option>
-  </select>
+      </datalist>
       <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
-      <!-- <button>Save</button> -->
-      <input type="submit" value="Submit">
+      <button>Save</button>
     </form>
   </div>
 </template>
@@ -72,12 +66,3 @@ export default {
   display: none;
 }
 </style>
-
-
-
-      <!--      TODO: Allow user to select either number of shares OR total dollar amount, if transaction is a BUY.-->
-      <!--      TODO: Only allow user to select POSITIVE numbers for dollar amount and number of shares.-->
-      <!--      TODO: For BUY, check that the user has enough money before submitting form.-->
-      <!--      TODO: Only allow user to SELL a stock if they already have shares of that stock.-->
-      <!--      TODO: For SELL, check that the user has that many shares available to sell.-->
-      <!--      TODO: Implement some kind of error message/alert for invalid input, or if the server throws an error.-->
