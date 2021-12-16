@@ -1,9 +1,13 @@
 <template>
   <div class="portfolio-details">
     <div class="h-wrap-1 active">
-      <h2>Your user ID is: {{ this.$store.state.user.id }}.</h2>
-      <h2>You're playing Game #: {{ this.$store.state.activeGame.gameId }}.</h2>
-      <h2>Your portfolio # is: {{ this.$store.state.activePortfolio.portfolioId }}.</h2>
+      <h2>Cash Remaining: {{formatPrice(this.$store.state.activePortfolio.portfolioCash)}}</h2>
+      <ul>
+        <li>Your user ID is: {{ this.$store.state.user.id }}.</li>
+        <li>You're playing Game #: {{ this.$store.state.activeGame.gameId }}.</li>
+        <li>Your portfolio # is: {{ this.$store.state.activePortfolio.portfolioId }}.</li>
+      </ul>
+
     </div>
 
     <div class="h-wrap-2">
@@ -83,6 +87,11 @@ export default {
           this.$router.push("/"); // TODO: EITHER ADD CUSTOM ERROR MESSAGE ("GAME NOT FOUND") HERE, OR CREATE A CUSTOM 404 PAGE TO REDIRECT TO
         }
       });
+    servicePortfolios
+    .getPortfoliosByGameId()
+    .then(response => {
+      this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
+    });
   },
   // components: {StockList, TransactionList}
 };

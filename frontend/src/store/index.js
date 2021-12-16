@@ -44,6 +44,8 @@ export default new Vuex.Store({
 
         transactions: [],
 
+        pendingPortfolios: [],
+
         activeGame: {
             gameId: 0,
             gameOrganizer: 0,
@@ -125,6 +127,11 @@ export default new Vuex.Store({
         SET_TRANSACTIONS(state, data) {
             state.transactions = data;
         },
-
+        /*
+         * Pending Portfolios
+         */
+        SET_PENDING_PORTFOLIOS(state, data) {
+            state.pendingPortfolios = data;
+        }
     },
 });

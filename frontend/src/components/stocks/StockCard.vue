@@ -2,20 +2,20 @@
   <article class="stock-card">
     <h5>{{ this.stock.stockSymbol }} | {{ formatPrice(this.stock.sharePrice) }}</h5>
     <p>{{this.stock.stockName}}</p>
-    <transaction-new-form v-bind:sharePrice="this.stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>
+    <router-link v-bind:to="{ name: 'ViewNewTransaction', params: { stock: this.stock } }" tag="button">Buy/Sell</router-link>
+<!--    <transaction-new-form v-bind:sharePrice="this.stock.sharePrice" v-bind:stockSymbol="stock.stockSymbol"/>-->
   </article>
 </template>
 
 <script>
-import TransactionNewForm from "@/components/transactions/TransactionNewForm";
-
+// import TransactionNewForm from "@/components/transactions/TransactionNewForm";
 export default {
   name: "stock-card",
   props: {
     stock: Object
   },
   components: {
-    TransactionNewForm
+    // TransactionNewForm
   },
   methods: {
     formatPrice(value) {
