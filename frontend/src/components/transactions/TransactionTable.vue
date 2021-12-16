@@ -4,11 +4,7 @@
 <!--    TODO: EDIT this table so that it can be used to display the CURRENT USER'S TRANSACTION HISTORY.-->
 
     <div class="transactions">
-      <table
-        class="transaction"
-        v-for="transaction in this.$store.state.transactions"
-        v-bind:key="transaction.transactionId"
-      >
+      <table>
       <thead>
           <tr>
             <th>transactionId</th>
@@ -24,7 +20,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+        <tr class="transaction"
+            v-for="transaction in this.portfolioTransactions"
+            v-bind:key="transaction.transactionId"
+        >
             <td>{{transaction.transactionId}}</td>
             <td>{{transaction.portfolioId}}</td>
             <td>{{transaction.stockSymbol}}</td>
@@ -48,6 +47,12 @@ import requestTransactions from "@/services/ServiceTransactions";
 
 export default {
   name: "stock-list",
+  computed: {
+    portfolioTransactions() {
+      return this.$store.state.transactions.filter(transaction =>
+        transaction.portfolioId === this.$store.state.activePortfolio.portfolioId);
+    }
+  },
   methods: {
     getTransactions() {
       requestTransactions.getTransactionsByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {

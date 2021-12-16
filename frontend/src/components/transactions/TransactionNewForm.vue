@@ -2,12 +2,11 @@
   <div>
     <form autocomplete="off" class="transaction-form" v-on:submit.prevent>
 
-      <label for="transaction-type">Buy or Sell?</label>
-      <select id="transaction-type" v-model="transaction.transactionType" name="transactionType">
+      <select id="transaction-type" v-model="this.transaction.transactionType">
         <option value="BUY">BUY</option>
         <option value="SELL">SELL</option>
       </select>
-      <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
+      <input v-model="this.transaction.transactionShares" placeholder="Number of Shares" type="number"/>
       <button type="submit" v-on:click="saveTransaction()">Save</button>
     </form>
   </div>
@@ -15,6 +14,7 @@
 
 <script>
 import serviceTransactions from "@/services/ServiceTransactions";
+import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "transaction-new-form",
@@ -30,7 +30,7 @@ export default {
         transactionType: "",
         transactionAmount: null,
         transactionShares: null,
-        sharePrice: this.sharePrice,
+        sharePrice: this.sharePrice
       }
     }
   },
@@ -44,15 +44,35 @@ export default {
       }
       serviceTransactions.create(this.transaction).then((response) => {
         if (response && response.status === 201) {
-          this.getTransactions();
-          this.$router.push({name: 'ViewGame', params: {gameId: this.$route.params.gameId}});
+          this.getPortfolios();
+          this.resetTransaction();
         }
       });
     },
-    getTransactions() {
-      serviceTransactions.list().then((response) => {
-        this.$store.commit("SET_TRANSACTIONS", response.data);
-      });
+    getPortfolios() {
+      servicePortfolios
+          .getPortfolioByUserIdAndGameId(
+              this.$store.state.user.id,
+              this.$route.params.gameId
+          )
+          .then((response) => {
+            this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
+          });
+      servicePortfolios
+          .getPortfoliosByGameId(this.$store.state.activeGame.gameId)
+          .then((response) => {
+            this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
+          });
+    },
+    resetTransaction() {
+      this.transaction = {
+        portfolioId: this.$store.state.activePortfolio.portfolioId,
+        stockSymbol: this.stockSymbol,
+        transactionType: "",
+        transactionAmount: null,
+        transactionShares: null,
+        sharePrice: this.sharePrice,
+      }
     }
   }
 };
