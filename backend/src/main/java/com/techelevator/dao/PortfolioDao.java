@@ -34,4 +34,6 @@ public interface PortfolioDao {
 
     boolean delete(Long portfolioIdToDelete);
 
+    List<Portfolio> getPendingPortfoliosByUserId(Long userId);
+
 }
