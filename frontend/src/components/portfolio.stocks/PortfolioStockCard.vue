@@ -1,16 +1,17 @@
 <template>
   <div class="stock-card">
 
-    <h5>Stock: {{ this.portfolioStock.stockSymbol }} | Shares: {{ this.portfolioStock.totalShares }}</h5>
-
-<!--    TODO: Figure out why share price isn't displaying.-->
-<!--    TODO: Display total value of investment (totalShares X sharePrice).-->
-
-    <p>Share Price: ${{ sharePrice }}</p>
+    <h5>Stock: {{ stock.stockSymbol }}</h5>
+    <p>Name: {{ stock.stockName }}</p>
+    <p>Shares: {{portfolioStock.totalShares}}</p>
+    <p>Share Price: {{ formatPrice(sharePrice) }}</p>
+    <p>Investment Value: {{formatPrice(investmentValue)}}</p>
   </div>
 </template>
 
 <script>
+
+import ServiceStocks from "@/services/ServiceStocks";
 
 export default {
   name: "stock-card",
@@ -18,12 +19,18 @@ export default {
     portfolioStock: Object
   },
   computed: {
-
-    // TODO: Figure out why this doesn't seem to be working.
+    stock () {
+      return this.$store.state.stocks.find(item => item.stockSymbol === this.portfolioStock.stockSymbol)
+    },
     sharePrice () {
-      const stockToLookUp = this.$store.state.portfolioStocks.find(portfolioStock => portfolioStock.stockSymbol === this.portfolioStock.stockSymbol);
-      return stockToLookUp.sharePrice;
-    }
+      return this.stock.sharePrice;
+    },
+    investmentValue () {
+      return (this.sharePrice * this.portfolioStock.totalShares);
+    },
+    // stockName () {
+    //   return this.stock.stockName;
+    // }
   },
   methods: {
     formatPrice(value) {
@@ -38,6 +45,11 @@ export default {
       return formatter.format(value);
     }
   },
+  created() {
+    ServiceStocks.list().then(response => {
+      this.$store.commit("SET_STOCKS", response.data);
+    })
+  }
 };
 </script>
 

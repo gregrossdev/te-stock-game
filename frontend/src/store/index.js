@@ -21,30 +21,42 @@ export default new Vuex.Store({
         token: currentToken || "",
 
         // USE: this.$store.state.user.id is the CURRENT USER'S USERID.
+        // Set upon user logging in successfully.
         user: currentUser || {},
 
         // USE: Stores all users so that a user can select which users to invite to a game.
+        // Set when View Profile renders after login.
         users: [],
 
-        // USE: Stores all games, BOTH ACTIVE AND PENDING INVITES, that the CURRENT USER is a participant in.
+        // USE: Stores all games, ACTIVE, with PENDING INVITES, and ARCHIVED that the CURRENT USER is a participant in.
+        // Set when View Profile renders after login.
         games: [],
 
-        // USE: Stores all portfolios that a user is a part of, across games.
-        userPortfolios: [],
+        // USE: NEVER USED? Stores all portfolios that a user is a part of, across games.
+        // userPortfolios: [],
+
+        // USE: Stores all pending portfolios, representing GAMES that a USER has been INVITED TO.
+        // Set when View Profile renders after login.
+        pendingPortfolios: [],
 
         // USE: Stores all user/portfolios for a particular game, so that LEADERBOARD can be displayed.
+        // Set when View Game renders after clicking on a Game Card.
         gamePortfolios: [],
 
         // USE: Stores most recent stock prices from the database.
+        // Set when View Profile renders after login.
         stocks: [],
 
         // USE: Stores all stocks, as well as total shares, that a particular portfolio is invested in.
+        // Set when View Game renders after clicking on a Game Card.
         portfolioStocks: [],
 
+        // USE: Displays transaction history for active user in a particular portfolio/game.
+        // Set when View Game renders after clicking on a Game Card.
         transactions: [],
 
-        pendingPortfolios: [],
-
+        // USE: Keeps track of active game in order to correctly populate View Game and its child components.
+        // Set when View Game renders after clicking on a Game Card.
         activeGame: {
             gameId: 0,
             gameOrganizer: 0,
@@ -54,6 +66,8 @@ export default new Vuex.Store({
             gameStatus: ""
         },
 
+        // USE: Keeps track of active user's active portfolio for a particular game, so that View Game and its child components render correctly.
+        // Set when View Game renders after clicking on a Game Card.
         activePortfolio: {
             portfolioId: 0,
             userId: 0,
@@ -65,6 +79,7 @@ export default new Vuex.Store({
         }
     },
     getters: {
+        // USE: Keeps track of which games in games[] above are still PENDING invites.
         inactiveGameIds: state => {
             let inactiveGameIdsArray = [];
             state.pendingPortfolios.forEach(portfolio => {
@@ -72,8 +87,13 @@ export default new Vuex.Store({
             })
             return inactiveGameIdsArray;
         },
+        // USE: Filters games[] for Games List so that only ACTIVE games are shown.
         activeGames: (state, getters) => {
-            return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)));
+            return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)) && item.gameStatus === "ACTIVE");
+        },
+        // USE: Filters gamePortfolios[] in reverse order by total portfolio value, to correctly populate Leaderboard in ViewGame.
+        gamePortfoliosSortedByLeader: (state) => {
+            return state.gamePortfolios.sort((a, b) => b.portfolioTotalValue - a.portfolioTotalValue);
         }
     },
     mutations: {
@@ -120,9 +140,9 @@ export default new Vuex.Store({
         /*
          * Portfolios
          */
-        SET_USER_PORTFOLIOS(state, data) {
-            state.userPortfolios = data;
-        },
+        // SET_USER_PORTFOLIOS(state, data) {
+        //     state.userPortfolios = data;
+        // },
         SET_GAME_PORTFOLIOS(state, data) {
             state.gamePortfolios = data;
         },

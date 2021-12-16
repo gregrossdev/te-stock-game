@@ -1,23 +1,20 @@
 <template>
   <div class="transaction-new-form">
     <form class="form-onboard" v-on:submit.prevent>
-      <h3>{{this.stock.stockSymbol}}</h3>
+      <h3>{{this.stock.stockSymbol}} | {{this.stock.stockName}}</h3>
       <h3>Buy or Sell?</h3>
-
-<!--      <input type="radio" id="buy" name="buy-sell" value="BUY" checked v-model="this.transaction.transactionType">-->
-<!--      <label for="buy">BUY</label>-->
-<!--      <input type="radio" id="sell" name="buy-sell" value="SELL" v-model="this.transaction.transactionType">-->
-<!--      <label for="sell">SELL</label>-->
 
       <select v-model="transaction.transactionType">
         <option>BUY</option>
         <option>SELL</option>
       </select>
 
-      <label for="share">Shares</label>
-      <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number" min="0"/>
-      <label for="dollars">Total Money</label>
-      <input readonly :value="dollarValue()" placeholder="$" type="number" class="money"/>
+      <h3>How Many Shares?</h3>
+      <input type="number" step="any" v-model="shares" @change="updateTotal">
+
+      <h3>Total Amount?</h3>
+      <input type="number" step="any" v-model="totalAmount" @change="updateShares">
+
       <button type="submit" v-on:click="saveTransaction()">Save</button>
     </form>
   </div>
@@ -25,25 +22,17 @@
 
 <script>
 import serviceTransactions from "@/services/ServiceTransactions";
-// import servicePortfolios from "@/services/ServicePortfolios";
 
 export default {
   name: "transaction-new-form",
   props: {
     stock: Object
-    // stockSymbol: String,
-    // sharePrice: Number,
   },
-  // computed: {
-  //   calculatedTransactionAmount() {
-  //     return (this.stock.sharePrice * this.transaction.transactionShares);
-  //   },
-  //   calculatedTransactionShares() {
-  //     return (this.transaction.transactionAmount / this.stock.sharePrice);
-  //   }
-  // },
+
   data() {
     return {
+      shares: 0,
+      totalAmount: 0,
       transaction: {
         portfolioId: this.$store.state.activePortfolio.portfolioId,
         stockSymbol: this.stock.stockSymbol,
@@ -56,38 +45,22 @@ export default {
   },
 
   methods: {
+    updateShares() {
+      this.shares = this.totalAmount / this.stock.sharePrice;
+    },
+    updateTotal() {
+      this.totalAmount = this.shares * this.stock.sharePrice;
+    },
     saveTransaction() {
-      if (this.transaction.transactionAmount === 0) {
-        this.transaction.transactionAmount = this.transaction.transactionShares * this.transaction.sharePrice;
-      } else if (this.transactionShares === 0) {
-        this.transaction.transactionShares = this.transaction.transactionAmount / this.transaction.sharePrice;
-      }
+      this.transaction.transactionShares = this.shares;
+      this.transaction.transactionAmount = this.totalAmount;
       serviceTransactions.create(this.transaction).then((response) => {
         if (response && response.status === 201) {
-          // this.getPortfolios();
           this.resetTransaction();
           this.$router.push({ name: 'ViewGame', params: { gameId: this.$store.state.activePortfolio.gameId }});
         }
       });
     },
-    dollarValue() {
-      return this.transaction.transactionAmount = this.transaction.transactionShares * this.transaction.sharePrice; 
-    },
-    // getPortfolios() {
-    //   servicePortfolios
-    //       .getPortfolioByUserIdAndGameId(
-    //           this.$store.state.user.id,
-    //           this.$route.params.gameId
-    //       )
-    //       .then((response) => {
-    //         this.$store.commit("SET_ACTIVE_PORTFOLIO", response.data);
-    //       });
-    //   servicePortfolios
-    //       .getPortfoliosByGameId(this.$store.state.activeGame.gameId)
-    //       .then((response) => {
-    //         this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
-    //       });
-    // },
     resetTransaction() {
       this.transaction = {
         portfolioId: this.$store.state.activePortfolio.portfolioId,

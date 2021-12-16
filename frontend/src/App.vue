@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="nav" v-if="$store.state.token !== ''">
       <nav class="nav-profile" >
         <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
@@ -7,11 +8,16 @@
         <router-link v-bind:to="{ name: 'logout' }">Logout</router-link>
       </nav>
     </div>
-    <router-view/>
+
+    <div id = "router-view">
+      <router-view/>
+    </div>
+
     <footer>
       <router-link v-bind:to="{ name: 'ViewWinner' }">Game Winners</router-link>
       <h2>Made with ☕ && ❤️ by Stonks Dev Team</h2>
     </footer>
+
   </div>
 </template>
 
