@@ -6,7 +6,7 @@
         <option value="BUY"></option>
         <option value="SELL"></option>
       </datalist>
-      <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
+      <input min="0" v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
       <button>Save</button>
     </form>
   </div>
