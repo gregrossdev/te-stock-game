@@ -182,6 +182,18 @@ public class JdbcPortfolioDao implements PortfolioDao {
         return jdbcTemplate.update(sql, portfolioIdToDelete) == 1;
     }
 
+    @Override
+    public List<Portfolio> getPendingPortfoliosByUserId(Long userId){
+        List<Portfolio> returnedPendingPortfoliosFromUserId = new ArrayList<>();
+        String sql = "SELECT * FROM portfolios WHERE (user_id = ? AND portfolio_status = 'PENDING');";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while(results.next()){
+            returnedPendingPortfoliosFromUserId.add(mapRowToPortfolio(results));
+        }
+        return returnedPendingPortfoliosFromUserId;
+    }
+
     private Portfolio mapRowToPortfolio(SqlRowSet results) {
         Portfolio portfolio = new Portfolio();
         portfolio.setPortfolioId(results.getLong("portfolio_id"));
