@@ -1,19 +1,14 @@
 <template>
   <div>
-       <form class="transaction-form" v-on:submit="saveTransaction" autocomplete="off">
-      <!-- <select v-model="transaction.transactionType" list="transactionType" name="transactionType"/>
-      <datalist id="transactionType" autocomplete="off">
-        <option value="BUY"></option>
-        <option value="SELL"></option>
-      </datalist> -->
+    <form autocomplete="off" class="transaction-form" v-on:submit.prevent>
 
-  <select v-model="transaction.transactionType" name="transactionType" id="transactionType">
-    <option value="BUY">BUY</option>
-    <option value="SELL">SELL</option>
-  </select>
+      <label for="transaction-type">Buy or Sell?</label>
+      <select id="transaction-type" v-model="transaction.transactionType" name="transactionType">
+        <option value="BUY">BUY</option>
+        <option value="SELL">SELL</option>
+      </select>
       <input v-model="transaction.transactionShares" placeholder="Number of Shares" type="number"/>
-      <!-- <button>Save</button> -->
-      <input type="submit" value="Submit">
+      <button type="submit" v-on:click="saveTransaction()">Save</button>
     </form>
   </div>
 </template>
@@ -49,8 +44,14 @@ export default {
       }
       serviceTransactions.create(this.transaction).then((response) => {
         if (response && response.status === 201) {
-          this.$router.push('/');
+          this.getTransactions();
+          this.$router.push({name: 'ViewGame', params: {gameId: this.$route.params.gameId}});
         }
+      });
+    },
+    getTransactions() {
+      serviceTransactions.list().then((response) => {
+        this.$store.commit("SET_TRANSACTIONS", response.data);
       });
     }
   }
@@ -74,10 +75,9 @@ export default {
 </style>
 
 
-
-      <!--      TODO: Allow user to select either number of shares OR total dollar amount, if transaction is a BUY.-->
-      <!--      TODO: Only allow user to select POSITIVE numbers for dollar amount and number of shares.-->
-      <!--      TODO: For BUY, check that the user has enough money before submitting form.-->
-      <!--      TODO: Only allow user to SELL a stock if they already have shares of that stock.-->
-      <!--      TODO: For SELL, check that the user has that many shares available to sell.-->
-      <!--      TODO: Implement some kind of error message/alert for invalid input, or if the server throws an error.-->
+<!--      TODO: Allow user to select either number of shares OR total dollar amount, if transaction is a BUY.-->
+<!--      TODO: Only allow user to select POSITIVE numbers for dollar amount and number of shares.-->
+<!--      TODO: For BUY, check that the user has enough money before submitting form.-->
+<!--      TODO: Only allow user to SELL a stock if they already have shares of that stock.-->
+<!--      TODO: For SELL, check that the user has that many shares available to sell.-->
+<!--      TODO: Implement some kind of error message/alert for invalid input, or if the server throws an error.-->
