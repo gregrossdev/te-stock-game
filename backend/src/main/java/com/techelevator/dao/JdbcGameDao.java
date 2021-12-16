@@ -30,6 +30,18 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
+    public List<Game> gamesWithoutWinnersYet(){
+        List<Game> gameListWithoutWinners = new ArrayList<>();
+        String sql = "SELECT * FROM games WHERE game_winner IS null;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Game tempGame = mapRowToGame(results);
+            gameListWithoutWinners.add(tempGame);
+        }
+        return gameListWithoutWinners;
+    }
+
+    @Override
     public Game getGameByGameId(Long gameId) {
         String sql = "SELECT * FROM games WHERE game_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
@@ -104,7 +116,7 @@ public class JdbcGameDao implements GameDao {
         String sql = "UPDATE games SET game_winner = ?, game_status = 'ARCHIVED' WHERE game_id = ?;";
         jdbcTemplate.update(sql, winnerId, gameId);
 
-        sql = "UPDATE portfolios SET portfolio_status = ARCHIVED WHERE game_id = ?;";
+        sql = "UPDATE portfolios SET portfolio_status = 'ARCHIVED' WHERE game_id = ?;";
         return jdbcTemplate.update(sql, gameId) == 1;
     }
 
