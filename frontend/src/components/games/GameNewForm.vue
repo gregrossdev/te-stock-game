@@ -106,13 +106,24 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  width: 50%;
   height: 100%;
+  width: 80%;
   margin: 1.5rem auto;
   border: 4px solid var(--clr-pri-90);
   padding: 2em;
 }
 
+@media only screen and (min-width: 576px) {
+  form {
+    width: 60%;
+  }
+}
+
+form .date {
+  padding: 1em;
+  width: 100%;
+  background-color: #fff;
+}
 
 .checkbox {
   display: flex;
@@ -127,8 +138,5 @@ form {
    padding: 10em; 
 }
 
-.date {
-  padding: 1.25em 0.25em;
-}
 
 </style>

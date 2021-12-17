@@ -160,6 +160,7 @@ Site Styles
 
 #router-view {
   background-color: var(--clr-yellow);
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 
