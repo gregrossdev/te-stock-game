@@ -81,7 +81,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public List<PortfolioStock> getPortfolioStocksByPortfolioId(Long portfolioId) {
-        List<PortfolioStock> portfolioStocksByPortfolioId = new ArrayList<PortfolioStock>();
+        List<PortfolioStock> portfolioStocksByPortfolioId = new ArrayList<>();
         String sql = "SELECT * FROM portfolios_stocks WHERE portfolio_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId);
         while (results.next()) {
@@ -92,7 +92,6 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public PortfolioStock getPortfolioStockByPortfolioIdAndStockSymbol(Long portfolioId, String stockSymbol) {
-        PortfolioStock portfolioStock = new PortfolioStock();
 
         String sql = "SELECT * FROM portfolios_stocks WHERE portfolio_id = ? AND stock_symbol = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId, stockSymbol);
@@ -162,6 +161,20 @@ public class JdbcPortfolioDao implements PortfolioDao {
                     "WHERE portfolio_id = ?;";
             jdbcTemplate.update(updateSql, portfolioStocksValue, portfolioStocksValue, portfolioId);
         }
+
+        String archiveOldGamesSql = "UPDATE games " +
+                "SET game_status = 'ARCHIVED', " +
+                "game_winner = (SELECT user_id FROM portfolios WHERE games.game_id = portfolios.game_id ORDER BY portfolios.portfolio_total_value DESC LIMIT 1) " +
+                "FROM portfolios " +
+                "WHERE games.game_id = portfolios.game_id AND games.end_timestamp < CURRENT_TIMESTAMP;";
+        jdbcTemplate.update(archiveOldGamesSql);
+
+        String archiveOldPortfoliosSql = "UPDATE portfolios " +
+                "SET portfolio_status = 'ARCHIVED' " +
+                "FROM games " +
+                "WHERE portfolios.game_id = games.game_id AND games.game_status = 'ARCHIVED';";
+        jdbcTemplate.update(archiveOldPortfoliosSql);
+
     }
 
     @Override
