@@ -17,10 +17,12 @@
     </div>
     <game-list/>
 
-    <div class="h-wrap-1">
-      <h2>Your Archived Games</h2>
+    <div class="archived-games" v-show="this.setExpiredGamesToArchived()">
+      <div class="h-wrap-1">
+        <h2>Your Archived Games</h2>
+      </div>
+      <game-archived-list/>
     </div>
-    <game-archived-list/>
   </main>
 </template>
 
@@ -66,8 +68,24 @@ export default {
           .getGamesByUserId(this.$store.state.user.id)
           .then((response) => {
             this.$store.commit("SET_GAMES", response.data);
+            this.setExpiredGamesToArchived();
           });
+      ServiceGames
+      .getGamesByUserId(this.$store.state.user.id)
+      .then((response) => {
+        this.$store.commit("SET_GAMES", response.data);
+      });
     },
+
+    setExpiredGamesToArchived() {
+      this.$store.state.games.forEach(item => {
+        if (Date.parse(item.endTimestamp) < Date()) {
+          item.gameStatus = "ARCHIVED";
+          ServiceGames.update(item);
+        }
+      });
+    },
+
     getAllUsers() {
       ServiceUsers.list().then((response) => {
         this.$store.commit("SET_USERS", response.data);
