@@ -84,8 +84,6 @@ export default {
     this.getActiveGame();
     this.getActivePortfolio();
     this.getGamePortfolios();
-    // this.getActivePortfolioStocks();
-    // this.getActivePortfolioTransactions();
   },
 };
 </script>

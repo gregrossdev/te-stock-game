@@ -58,7 +58,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     @Override
     public List<Portfolio> getPortfoliosByGameId(Long gameId) {
         List<Portfolio> portfolios = new ArrayList<>();
-        String sql = "SELECT * FROM portfolios WHERE game_id = ?;";
+        String sql = "SELECT * FROM portfolios WHERE game_id = ? ORDER BY portfolio_total_value DESC;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
         while (results.next()) {
             portfolios.add(mapRowToPortfolio(results));
@@ -81,7 +81,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public List<PortfolioStock> getPortfolioStocksByPortfolioId(Long portfolioId) {
-        List<PortfolioStock> portfolioStocksByPortfolioId = new ArrayList<PortfolioStock>();
+        List<PortfolioStock> portfolioStocksByPortfolioId = new ArrayList<>();
         String sql = "SELECT * FROM portfolios_stocks WHERE portfolio_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId);
         while (results.next()) {
@@ -92,7 +92,6 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public PortfolioStock getPortfolioStockByPortfolioIdAndStockSymbol(Long portfolioId, String stockSymbol) {
-        PortfolioStock portfolioStock = new PortfolioStock();
 
         String sql = "SELECT * FROM portfolios_stocks WHERE portfolio_id = ? AND stock_symbol = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, portfolioId, stockSymbol);
@@ -125,14 +124,16 @@ public class JdbcPortfolioDao implements PortfolioDao {
     // EXPERIMENTAL METHOD BELOW! DEEP SQL MAGIC! STILL NEED TO TEST!
     @Override
     public void updatePortfolioTotalValues() {
-
+        
         String sql = "SELECT portfolios.portfolio_id, portfolios.portfolio_cash, portfolios.portfolio_stocks_value, " +
                 "portfolios.portfolio_total_value, portfolios_stocks.stock_symbol, portfolios_stocks.total_shares, " +
                 "stocks.share_price " +
                 "FROM portfolios_stocks " +
                 "JOIN portfolios ON portfolios_stocks.portfolio_id = portfolios.portfolio_id " +
                 "JOIN stocks ON portfolios_stocks.stock_symbol = stocks.stock_symbol " +
+//              "JOIN games ON portfolios.game_id = games.game_id " +
                 "WHERE portfolios.portfolio_status = 'ACTIVE';";
+//              "WHERE portfolios.portfolio_status = 'ACTIVE' AND games.end_timestamp > CURRENT_TIMESTAMP;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         Map<Long, BigDecimal> portfolioStocksValueMap = new HashMap<>();
@@ -160,6 +161,20 @@ public class JdbcPortfolioDao implements PortfolioDao {
                     "WHERE portfolio_id = ?;";
             jdbcTemplate.update(updateSql, portfolioStocksValue, portfolioStocksValue, portfolioId);
         }
+
+        String archiveOldGamesSql = "UPDATE games " +
+                "SET game_status = 'ARCHIVED', " +
+                "game_winner = (SELECT user_id FROM portfolios WHERE games.game_id = portfolios.game_id ORDER BY portfolios.portfolio_total_value DESC LIMIT 1) " +
+                "FROM portfolios " +
+                "WHERE games.game_id = portfolios.game_id AND games.end_timestamp < CURRENT_TIMESTAMP;";
+        jdbcTemplate.update(archiveOldGamesSql);
+
+        String archiveOldPortfoliosSql = "UPDATE portfolios " +
+                "SET portfolio_status = 'ARCHIVED' " +
+                "FROM games " +
+                "WHERE portfolios.game_id = games.game_id AND games.game_status = 'ARCHIVED';";
+        jdbcTemplate.update(archiveOldPortfoliosSql);
+
     }
 
     @Override

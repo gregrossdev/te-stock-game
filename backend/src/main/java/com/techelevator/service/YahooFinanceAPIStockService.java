@@ -65,47 +65,47 @@ public class YahooFinanceAPIStockService implements StockService {
 //                System.out.println("Stocks should be updating");
 //                Thread.sleep(30000); //30000 is 30 seconds
 
-                Thread.sleep(900000); //900000 is 15 minutes
+                Thread.sleep(300000); //900000 is 15 minutes
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-
-    public void checkUpdateGameWinner(){
-        List<Game> gameListWithouWinnersFromDB = gameDao.gamesWithoutWinnersYet();
-        Timestamp currentTempTimestamp = new Timestamp(System.currentTimeMillis());
-        for(int z = 0; z <= gameListWithouWinnersFromDB.size()-1; z++){
-            System.out.println("Looping through gamesList");
-            if(gameListWithouWinnersFromDB.get(z).getEndTimestamp().before(currentTempTimestamp)){
-
-                List<Portfolio> portfolioListById = portfolioDao.getPortfoliosByGameId((long) z);
-                for(int i = 0; i <= portfolioListById.size()-1; i ++){
-
-                    BigDecimal highestValue = portfolioListById.get(i).getPortfolioTotalValue();
-                    BigDecimal totalValueInForLoopi = portfolioListById.get(i).getPortfolioTotalValue();
-
-                    System.out.println("The highest value is:" + highestValue);
-                    System.out.println(totalValueInForLoopi);
-                    if(totalValueInForLoopi.compareTo(highestValue) == 1 || totalValueInForLoopi.compareTo(highestValue) == 0 ){
-                        gameDao.updateGameEnd(portfolioListById.get(i).getUserId(),portfolioListById.get(i).getGameId());
-                    }
+//
+//    public void checkUpdateGameWinner(){
+//        List<Game> gameListWithouWinnersFromDB = gameDao.gamesWithoutWinnersYet();
+//        Timestamp currentTempTimestamp = new Timestamp(System.currentTimeMillis());
+//        for(int z = 0; z <= gameListWithouWinnersFromDB.size()-1; z++){
+//            System.out.println("Looping through gamesList");
+//            if(gameListWithouWinnersFromDB.get(z).getEndTimestamp().before(currentTempTimestamp)){
+//
+//                List<Portfolio> portfolioListById = portfolioDao.getPortfoliosByGameId((long) z);
+//                for(int i = 0; i <= portfolioListById.size()-1; i ++){
+//
+//                    BigDecimal highestValue = portfolioListById.get(i).getPortfolioTotalValue();
+//                    BigDecimal totalValueInForLoopi = portfolioListById.get(i).getPortfolioTotalValue();
+//
+//                    System.out.println("The highest value is:" + highestValue);
+//                    System.out.println(totalValueInForLoopi);
+//                    if(totalValueInForLoopi.compareTo(highestValue) == 1 || totalValueInForLoopi.compareTo(highestValue) == 0 ){
+//                        gameDao.updateGameEnd(portfolioListById.get(i).getUserId(),portfolioListById.get(i).getGameId());
+//                    }
+////
+////
+//                }
+//        }
 //
 //
-                }
-        }
-
-
-
-
-
-
-//            gameDao.updateGameEnd(gameListWithouWinnersFromDB.get(0).getGameId(),gameListWithouWinnersFromDB.get(0).getGameOrganizer());
-//            System.out.println("For now the winner is defaulted to game organizer" + gameListWithouWinnersFromDB.get(0).getGameOrganizer());
-
-
-        };
-
-
-    }
+//
+//
+//
+//
+////            gameDao.updateGameEnd(gameListWithouWinnersFromDB.get(0).getGameId(),gameListWithouWinnersFromDB.get(0).getGameOrganizer());
+////            System.out.println("For now the winner is defaulted to game organizer" + gameListWithouWinnersFromDB.get(0).getGameOrganizer());
+//
+//
+//        };
+//
+//
+//    }
 }

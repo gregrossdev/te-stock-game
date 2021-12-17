@@ -138,6 +138,15 @@ VALUES ('STONKS DEMO GAME', 1, '2021-12-15 12:00:00', '2021-12-16 17:00:00', 'AC
        ('GREG the Bug-Crusher', 6, '2021-12-15 12:00:00', '2021-12-17 12:30:00', 'ACTIVE'),
        ('Not JOSHing Around', 7, '2021-12-15 12:00:00', '2021-12-17 12:45:00', 'ACTIVE');
 
+-- INSERT INTO games (game_name, game_organizer, start_timestamp, end_timestamp, game_status)
+-- VALUES ('STONKS DEMO GAME', 1, '2021-12-15 12:00:00', '2021-12-16 12:00:00', 'ARCHIVED'),
+--        ('USER gonna Win', 2, '2021-12-15 12:00:00', '2021-12-16 12:00:00', 'ARCHIVED'),
+--        ('ALEX for the W', 3, '2021-12-15 12:00:00', '2021-12-17 10:00:00', 'ACTIVE'),
+--        ('AUBREY is Golden', 4, '2021-12-15 12:00:00', '2021-12-17 11:00:00', 'ACTIVE'),
+--        ('It is DENNY Time!', 5, '2021-12-15 12:00:00', '2021-12-17 12:00:00', 'ACTIVE'),
+--        ('GREG the Bug-Crusher', 6, '2021-12-15 12:00:00', '2021-12-17 12:15:00', 'ACTIVE'),
+--        ('Not JOSHing Around', 7, '2021-12-15 12:00:00', '2021-12-17 12:30:00', 'ACTIVE');
+
 INSERT INTO portfolios (user_id, game_id, portfolio_status)
 VALUES (1, 1, 'ACTIVE'),
        (2, 1, 'ACTIVE'),

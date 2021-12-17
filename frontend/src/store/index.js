@@ -77,7 +77,7 @@ export default new Vuex.Store({
             portfolioTotalValue: 0,
             portfolioStatus: ""
         },
-        arhivedPortfolio: {
+        archivedPortfolio: {
             portfolioId: 0,
             userId: 0,
             gameId: 0,
@@ -103,6 +103,12 @@ export default new Vuex.Store({
         },
         archivedGames: (state, getters) => {
             return state.games.filter(item => !(getters.inactiveGameIds.includes(item.gameId)) && item.gameStatus === "ARCHIVED");
+        },
+        expiredGames: (state) => {
+            return state.games.filter(item => Date.parse(item.endTimestamp) < Date());
+        },
+        gamesUserHasWon: (state) => {
+            return state.games.filter(item => item.gameWinner === this.state.user.id);
         },
         // USE: Filters gamePortfolios[] in reverse order by total portfolio value, to correctly populate Leaderboard in ViewGame.
         gamePortfoliosSortedByLeader: (state) => {
