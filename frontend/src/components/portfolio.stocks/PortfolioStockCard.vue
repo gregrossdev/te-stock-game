@@ -1,6 +1,6 @@
 <template>
   <div class="stock-card">
-    <h3><span class="stock-symbol">Stock:</span> {{ stock.stockSymbol }}</h3>
+    <h3><span class="stock-symbol">{{ stock.stockSymbol }} </span></h3>
     <p class="stock-symbol">Name: </p>
     <h4>{{ stock.stockName }}</h4>
     <p class="stock-symbol">Shares:</p>
@@ -58,32 +58,27 @@ export default {
 </script>
 
 <style scoped>
-/*TODO:Improve styling for PortfolioStockCard.*/
-
-p {
-  color: white;
-  font-size: 1em;
-}
 
 .stock-card {
-  max-width: 14rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
-  padding: 1em;
+  padding: 0.25em;
   background-color: var(--clr-yellow);
   border: 4px solid var(--clr-green);
   border-radius: 0.25rem;
   color: var(--clr-grey-10);
+  justify-content: space-between;
 }
 
 .stock-card h3 {
   border-bottom: 2px solid var(--clr-green);
   margin-bottom: 0.25em;
   margin-top: 0.25em;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 900;
 }
+
 .stock-card h4 {
   margin-bottom: 0.25em;
   padding-bottom: 0.25em;
@@ -95,8 +90,13 @@ p {
 
 .stock-symbol {
   font-family: "Limelight", cursive;
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--clr-grey-10);
   margin-bottom: 0.25em;
 }
+
+h3 .stock-symbol {
+  font-size: 1.5rem;
+}
+
 </style>

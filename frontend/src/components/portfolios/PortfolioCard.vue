@@ -39,7 +39,6 @@ export default {
 
 <style scoped>
 article {
-  width: 14rem;
   padding: 1em;
   border-radius: 0.5em;
   display: flex;

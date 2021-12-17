@@ -20,9 +20,7 @@ export default {
     PortfolioStockCard,
   },
   created() {
-
     // TODO: Check why this doesn't seem to always work. Make sure that portfolioStocks are being correctly set in the store.
-
     // ServicePortfolios.getPortfolioStocksByPortfolioId(this.$store.state.activePortfolio.portfolioId).then((response) => {
     //   this.$store.commit("SET_ACTIVE_PORTFOLIO_STOCKS", response.data);
     // });
@@ -31,13 +29,25 @@ export default {
 </script>
 
 <style scoped>
-
 /*TODO improve styling for the PortfolioStockList.*/
 
 .stock-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
 }
 
+@media only screen and (min-width: 576px) {
+  .stock-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .stock-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
 </style>
