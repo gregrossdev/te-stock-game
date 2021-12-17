@@ -8,17 +8,17 @@
       </h2>
       <div class="active-id">
         <div class="wrap-id">
-          <h3>Your user ID is: {{ this.$store.state.user.id }}.</h3>
+          <h3> User ID  {{ this.$store.state.user.id }}</h3>
         </div>
         <div class="wrap-id">
           <h3>
-            Your portfolio # is:
-            {{ this.$store.state.activePortfolio.portfolioId }}.
+             Portfolio 
+            {{ this.$store.state.activePortfolio.portfolioId }}
           </h3>
         </div>
         <div class="wrap-id">
           <h3>
-            You're playing Game #: {{ this.$store.state.activeGame.gameId }}.
+             Game {{ this.$store.state.activeGame.gameId }}
           </h3>
         </div>
       </div>
@@ -26,20 +26,20 @@
 
     <div class="h-wrap-2 portfolio-value">
       <h3>
-        Current Portfolio Value:
+        Portfolio Value:
         {{ formatPrice(this.$store.state.activePortfolio.portfolioTotalValue) }}
       </h3>
     </div>
 
     <div v-show="this.$store.state.portfolioStocks.length > 0" class="h-wrap-2 portfolio-investments">
-      <h3>Your Investments</h3>
+      <h3>Investments</h3>
       <portfolio-stock-list></portfolio-stock-list>
     </div>
 
     <!--    TODO: Make sure portfolioStocks are displaying correctly, and that they update when stocks update.-->
 
     <div v-if="this.$store.state.transactions.length > 0" class="h-wrap-2 transaction-history">
-      <h3>Your Transaction History</h3>
+      <h3>Transaction History</h3>
       <transaction-table></transaction-table>
       <!--    TODO: Make sure transaction history displays correctly. Perhaps make it a dropdown show/hide section?-->
     </div>
@@ -115,7 +115,9 @@ span {
 }
 
 .active-id {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
   text-shadow: 1px 1px var(--clr-pri);
   box-shadow: var(--light-shadow);
   margin-left: -0.75em;
@@ -124,6 +126,8 @@ span {
 }
 
 .wrap-id {
+  display: flex;
+  justify-content: center;
   padding: 1em;
 }
 
@@ -135,13 +139,13 @@ span {
 }
 
 .portfolio-value h3 {
-  font-size: 2.25rem;
+  font-size: 2rem;
   padding: 0.5em 0;
   text-shadow: 1px 1px var(--clr-green);
 }
 
 .portfolio-investments h3, .transaction-history h3  {
-  font-size: 2.25rem;
+  font-size: 2rem;
   padding: 0.5em 0;
   text-shadow: 1px 1px var(--clr-grey-70);
 }

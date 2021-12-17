@@ -317,11 +317,24 @@ Portfolio
 */
 
 .portfolios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem; 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
   padding: 1.5rem 1rem; 
 }
 
+@media only screen and (min-width: 576px) {
+  .portfolios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* @media only screen and (min-width: 768px) {
+  .portfolios {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+} */
 
 

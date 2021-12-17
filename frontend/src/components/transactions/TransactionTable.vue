@@ -95,28 +95,41 @@ export default {
 <style scoped>
 .transaction {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   border: 3px solid var(--clr-yellow);
   margin-bottom: 1em;
 }
 
+@media only screen and (min-width: 576px) {
+  .transaction {
+    grid-template-columns: repeat(3, 1fr);
+    border: 3px solid var(--clr-yellow);
+    margin-bottom: 1em;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .transaction {
+    grid-template-columns: repeat(4, 1fr);
+    border: 3px solid var(--clr-yellow);
+    margin-bottom: 1em;
+  }
+}
+
 .well {
-  background-color: var(--clr-green); 
+  background-color: var(--clr-green);
   padding: 0.35em 0.5em;
 }
 .well h3 {
   font-weight: 900;
   color: var(--clr-grey-20);
-  border-bottom: 1px solid var(--clr-grey-50); 
-  width: fit-content; 
+  border-bottom: 1px solid var(--clr-grey-50);
+  width: fit-content;
 }
 
 .well p {
   font-weight: 700;
   color: var(--clr-grey-10);
 }
-
 </style>
 
 
