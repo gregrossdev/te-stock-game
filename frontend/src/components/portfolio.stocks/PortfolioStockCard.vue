@@ -1,32 +1,36 @@
 <template>
   <div class="stock-card">
-
-    <h5>Stock: {{ stock.stockSymbol }}</h5>
-    <p>Name: {{ stock.stockName }}</p>
-    <p>Shares: {{portfolioStock.totalShares}}</p>
-    <p>Share Price: {{ formatPrice(sharePrice) }}</p>
-    <p>Investment Value: {{formatPrice(investmentValue)}}</p>
+    <h3><span class="stock-symbol">Stock:</span> {{ stock.stockSymbol }}</h3>
+    <p class="stock-symbol">Name: </p>
+    <h4>{{ stock.stockName }}</h4>
+    <p class="stock-symbol">Shares:</p>
+    <h4>{{ portfolioStock.totalShares }}</h4>
+    <p class="stock-symbol">Share Price:</p>
+    <h4>{{ formatPrice(sharePrice) }}</h4>
+    <p class="stock-symbol">Investment Value:</p>
+    <h4>{{ formatPrice(investmentValue) }}</h4>
   </div>
 </template>
 
 <script>
-
 import ServiceStocks from "@/services/ServiceStocks";
 
 export default {
   name: "stock-card",
   props: {
-    portfolioStock: Object
+    portfolioStock: Object,
   },
   computed: {
-    stock () {
-      return this.$store.state.stocks.find(item => item.stockSymbol === this.portfolioStock.stockSymbol)
+    stock() {
+      return this.$store.state.stocks.find(
+        (item) => item.stockSymbol === this.portfolioStock.stockSymbol
+      );
     },
-    sharePrice () {
+    sharePrice() {
       return this.stock.sharePrice;
     },
-    investmentValue () {
-      return (this.sharePrice * this.portfolioStock.totalShares);
+    investmentValue() {
+      return this.sharePrice * this.portfolioStock.totalShares;
     },
     // stockName () {
     //   return this.stock.stockName;
@@ -37,24 +41,23 @@ export default {
       if (typeof value !== "number") {
         return value;
       }
-      const formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2
+      const formatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
       });
       return formatter.format(value);
-    }
+    },
   },
   created() {
-    ServiceStocks.list().then(response => {
+    ServiceStocks.list().then((response) => {
       this.$store.commit("SET_STOCKS", response.data);
-    })
-  }
+    });
+  },
 };
 </script>
 
 <style scoped>
-
 /*TODO:Improve styling for PortfolioStockCard.*/
 
 p {
@@ -63,14 +66,37 @@ p {
 }
 
 .stock-card {
-  color: white;
-  border: 1px solid var(--clr-grey-70);
-  margin-bottom: 1em;
-  border-radius: 0.25rem;
-  padding: 0.5em;
-  width: 10rem;
+  max-width: 14rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1em;
+  padding: 1em;
+  background-color: var(--clr-yellow);
+  border: 4px solid var(--clr-green);
+  border-radius: 0.25rem;
+  color: var(--clr-grey-10);
 }
 
+.stock-card h3 {
+  border-bottom: 2px solid var(--clr-green);
+  margin-bottom: 0.25em;
+  margin-top: 0.25em;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.stock-card h4 {
+  margin-bottom: 0.25em;
+  padding-bottom: 0.25em;
+  font-size: 1rem;
+  font-weight: 900;
+  border-bottom: 1px solid var(--clr-pri-40);
+  width: fit-content;
+}
+
+.stock-symbol {
+  font-family: "Limelight", cursive;
+  font-size: 1.25rem;
+  color: var(--clr-grey-10);
+  margin-bottom: 0.25em;
+}
 </style>

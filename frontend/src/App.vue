@@ -31,6 +31,7 @@
   max-width: 980px;
   margin-top: 2em;
   padding: 1em; 
+  box-shadow: var(--light-shadow);
 }
 
 #nav {

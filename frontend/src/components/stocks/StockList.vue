@@ -1,9 +1,7 @@
 <template>
   <section>
 
-<!--    TODO: Add some way to FILTER and SORT the StockList. Perhaps just use StockTable with some added functionality/styling if StockCards prove too difficult to filter and sort?-->
-    <label for="stock-search">Filter the Stock List by Name </label>
-    <input type="search" v-model="filterStock" />
+    <input type="text" v-model="filterStock" class="stock-search" placeholder="Search Stock Names"/>
     <div class="stock-list">
       <stock-card
         v-for="stock in filterStocks"
@@ -56,4 +54,30 @@ export default {
   justify-content: center;
   gap: 1rem;
 }
+
+
+.stock-search {
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  
+  border-radius: 4px;
+  box-shadow: var(--dark-shadow);
+  margin-bottom: 0.75em;
+  padding: 0.5em 0.5em;
+  font-family: "Jost", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background-color: var(--clr-pri);
+  width: 80%;  
+  color: var(--clr-yellow); 
+}
+
+::placeholder { 
+ color: var(--clr-yellow); 
+  opacity: 1; 
+} 
+
+
 </style>
