@@ -15,12 +15,12 @@
     <div class="h-wrap-1" v-show="this.$store.getters.activeGames.length >0">
       <h2>Your Active Games</h2>
     </div>
-    <game-list/>
+    <game-list v-show="this.$store.getters.activeGames.length >0" />
 
     <div class="h-wrap-1" v-show="this.$store.getters.archivedGames.length > 0">
       <h2>Your Archived Games</h2>
     </div>
-    <game-archived-list/>
+      <game-archived-list v-show="this.$store.getters.archivedGames.length > 0" /> 
   </main>
 </template>
 
@@ -66,8 +66,24 @@ export default {
           .getGamesByUserId(this.$store.state.user.id)
           .then((response) => {
             this.$store.commit("SET_GAMES", response.data);
+            this.setExpiredGamesToArchived();
           });
+      ServiceGames
+      .getGamesByUserId(this.$store.state.user.id)
+      .then((response) => {
+        this.$store.commit("SET_GAMES", response.data);
+      });
     },
+
+    setExpiredGamesToArchived() {
+      this.$store.state.games.forEach(item => {
+        if (Date.parse(item.endTimestamp) < Date()) {
+          item.gameStatus = "ARCHIVED";
+          ServiceGames.update(item);
+        }
+      });
+    },
+
     getAllUsers() {
       ServiceUsers.list().then((response) => {
         this.$store.commit("SET_USERS", response.data);

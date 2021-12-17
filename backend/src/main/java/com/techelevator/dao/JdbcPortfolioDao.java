@@ -58,7 +58,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     @Override
     public List<Portfolio> getPortfoliosByGameId(Long gameId) {
         List<Portfolio> portfolios = new ArrayList<>();
-        String sql = "SELECT * FROM portfolios WHERE game_id = ?;";
+        String sql = "SELECT * FROM portfolios WHERE game_id = ? ORDER BY portfolio_total_value DESC;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
         while (results.next()) {
             portfolios.add(mapRowToPortfolio(results));
@@ -132,7 +132,8 @@ public class JdbcPortfolioDao implements PortfolioDao {
                 "FROM portfolios_stocks " +
                 "JOIN portfolios ON portfolios_stocks.portfolio_id = portfolios.portfolio_id " +
                 "JOIN stocks ON portfolios_stocks.stock_symbol = stocks.stock_symbol " +
-                "WHERE portfolios.portfolio_status = 'ACTIVE';";
+                "JOIN games ON portfolios.game_id = games.game_id " +
+                "WHERE portfolios.portfolio_status = 'ACTIVE' AND games.end_timestamp > CURRENT_TIMESTAMP;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         Map<Long, BigDecimal> portfolioStocksValueMap = new HashMap<>();
