@@ -125,7 +125,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
     // EXPERIMENTAL METHOD BELOW! DEEP SQL MAGIC! STILL NEED TO TEST!
     @Override
     public void updatePortfolioTotalValues() {
-
+        
         String sql = "SELECT portfolios.portfolio_id, portfolios.portfolio_cash, portfolios.portfolio_stocks_value, " +
                 "portfolios.portfolio_total_value, portfolios_stocks.stock_symbol, portfolios_stocks.total_shares, " +
                 "stocks.share_price " +
