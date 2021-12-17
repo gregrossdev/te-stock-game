@@ -12,12 +12,12 @@
     </div>
 
 
-    <div class="h-wrap-1">
+    <div class="h-wrap-1" v-show="this.$store.getters.activeGames.length >0">
       <h2>Your Active Games</h2>
     </div>
     <game-list/>
 
-    <div class="h-wrap-1">
+    <div class="h-wrap-1" v-show="this.$store.getters.archivedGames.length > 0">
       <h2>Your Archived Games</h2>
     </div>
     <game-archived-list/>
