@@ -1,17 +1,27 @@
 <template>
   <main>
     <div class="h-wrap-1">
-      <h2>Game Winner</h2>
-    </div>
-    <div class="h-wrap-2">
-      <h1>Ellen</h1>
-    </div>
-    <section class="finale">
+      <h2>Game Winners</h2>
+      <section class="finale">
       <figure>
         <img :src="stonksImg(url)" alt="" />
         <figcaption>Game Prize</figcaption>
       </figure>
     </section>
+    </div>
+    <div class="h-wrap-2">
+      <h1>Game 1:</h1>
+      <h2>Denny</h2>
+       <h1>Game 2:</h1>
+      <h2>Alex</h2>
+       <h1>Game 3:</h1>
+      <h2>Josh</h2>
+       <h1>Game 4:</h1>
+      <h2>Aubrey &amp; Josh</h2>
+       <h1>Game 5:</h1>
+      <h2>Everyone Wins</h2>
+    </div>
+    
   </main>
 </template>
 
