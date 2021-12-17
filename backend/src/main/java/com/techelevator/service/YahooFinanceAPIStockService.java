@@ -65,7 +65,7 @@ public class YahooFinanceAPIStockService implements StockService {
 //                System.out.println("Stocks should be updating");
 //                Thread.sleep(30000); //30000 is 30 seconds
 
-                Thread.sleep(900000); //900000 is 15 minutes
+                Thread.sleep(300000); //900000 is 15 minutes
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

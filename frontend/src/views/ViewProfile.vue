@@ -36,6 +36,11 @@ import ServiceStocks from "@/services/ServiceStocks";
 
 export default {
   name: "profile",
+  data () {
+    return {
+      placeholderData: ""
+    }
+  },
   components: {
     GameList,
     PortfolioPendingInvitationList,
@@ -61,28 +66,43 @@ export default {
             this.$store.commit("SET_PENDING_PORTFOLIOS", response.data)
           });
     },
+
     getGamesForCurrentUser() {
       ServiceGames
           .getGamesByUserId(this.$store.state.user.id)
           .then((response) => {
             this.$store.commit("SET_GAMES", response.data);
-            this.setExpiredGamesToArchived();
+            // this.setExpiredGamesToArchived();
           });
-      ServiceGames
-      .getGamesByUserId(this.$store.state.user.id)
-      .then((response) => {
-        this.$store.commit("SET_GAMES", response.data);
-      });
     },
 
-    setExpiredGamesToArchived() {
-      this.$store.state.games.forEach(item => {
-        if (Date.parse(item.endTimestamp) < Date()) {
-          item.gameStatus = "ARCHIVED";
-          ServiceGames.update(item);
-        }
-      });
-    },
+    // setExpiredGamesToArchived() {
+    //   this.$store.getters.expiredGames.forEach(item => {
+    //     item.gameStatus = "ARCHIVED";
+    //     ServiceGames.update(item).then(response => this.placeholderData = response.data);
+    //   });
+    // },
+
+    // setExpiredGamesToArchived() {
+    //   this.$store.state.games.forEach(item => {
+    //     if (Date.parse(item.endTimestamp) < Date()) {
+    //       item.gameStatus = "ARCHIVED";
+    //       ServiceGames.update(item).then(response => this.placeholderData = response.data);
+    //     }
+    //   });
+    // },
+    //
+    // setArchivedGameWinners() {
+    //   this.$store.getters.archivedGames.forEach(item => {
+    //     ServicePortfolios
+    //         .getPortfoliosByGameId(item.gameId)
+    //         .then(response => {
+    //           this.$store.commit("SET_GAME_PORTFOLIOS", response.data);
+    //           item.gameWinner = this.$store.state.gamePortfolios[0].userId;
+    //           ServiceGames.update(item).then(response => this.placeholderData = response.data);
+    //         });
+    //   });
+    // },
 
     getAllUsers() {
       ServiceUsers.list().then((response) => {
